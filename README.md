@@ -10,7 +10,7 @@ All you need is your student account information to login and you can download a
 
 #### GitFlow cheatsheet
  This is a nifty refrence to gitflow commands [here](http://danielkummer.github.io/git-flow-cheatsheet/).
-Since we're building this with the agile methodology we need to maintain working code at all times for when Chang wants to see the progress.
+Since we're building this with the agile methodology we need to maintain working code at all times for when Dr. Chang wants to see the progress.
 Whenever you begin working on a feature, make sure to create a new branch with develop as the base. 
 The master branch will maintain a working version for us at all times.
 When you have finished working on a feature make a pull request for everyone to review the changes before merging. 
