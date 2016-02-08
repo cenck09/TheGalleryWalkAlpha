@@ -1,6 +1,10 @@
 # The Gallery Walk
 A web service for small art gallerys to share their love of art
 
+#### CloudKit Web Services 
+Documentation on CloudKit found [here](https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/CloutKitWebServicesReference/SettingUpWebServices/SettingUpWebServices.html#//apple_ref/doc/uid/TP40015240-CH24-SW1)
+
+
 #### ASP .NET Resources
 A list of .NET development resources is available [here](http://www.asp.net/mvc/mvc4).
 
