@@ -1,8 +1,15 @@
 # The Gallery Walk
 A web service for small art gallerys to share their love of art
 
+#### paletton color scheme designer
+[here](http://paletton.com)
+
+#### CloudKit Web Services 
+Documentation on CloudKit found [here](https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/CloutKitWebServicesReference/SettingUpWebServices/SettingUpWebServices.html#//apple_ref/doc/uid/TP40015240-CH24-SW1)
+
+
 #### ASP .NET Resources
-A list of .NET development resources is available [here](http://www.asp.net/mvc/mvc4).
+A list of .NET 5 development resources is available [here](https://docs.asp.net/en/latest/index.html).
 
 ### Visual Studio and Frameworks
 You can download a copy of Visual Studio and the .Net Framework from dreamspark found [here](https://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?ws=54a05d36-e09b-e011-969d-0030487d8897&vsro=8)
