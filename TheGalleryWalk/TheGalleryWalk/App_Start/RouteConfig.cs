@@ -18,6 +18,14 @@ namespace TheGalleryWalk
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
+
+            routes.MapRoute(
+                name: "Demo",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Demo", action = "Index", id = "demoItem" }
+                );
         }
     }
 }
