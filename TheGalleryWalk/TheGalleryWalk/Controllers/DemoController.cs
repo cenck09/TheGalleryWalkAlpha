@@ -10,7 +10,11 @@ namespace TheGalleryWalk.Controllers
     {
         // GET: Demo
      
-   
+   public ActionResult Index()
+        {
+            // This method looks for an html layout in Views/Demo/Index.cshtml
+            return View();
+        }
     public ActionResult Demo()
     {
         ViewBag.Message = "A Demo page.";
