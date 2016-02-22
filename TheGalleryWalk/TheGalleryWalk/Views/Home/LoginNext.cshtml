@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "LoginNext";
+    string username = "";
+    if (IsPost)
+    {
+        username = Request["username"];
+    }
+    else {
+        Response.Redirect(Url.Action("Login",null,null));
+    }
+}
+
+<div class="GalleryContent">
+    <h1 style="margin:10px;padding:10px;">
+        Enter Password Page
+    </h1>
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    <text>Username: </text>
+                </td>
+                <td>
+                    <input type="text" value="@username" disabled />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <text>Password: </text>
+                </td>
+                <td>
+                    <input type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><input type="button" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -26,5 +26,17 @@ namespace TheGalleryWalk.Controllers
 
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult Signup()
+        {
+            return View();
+        }
+        public ActionResult LoginNext()
+        {
+            return View();
+        }
     }
 }
