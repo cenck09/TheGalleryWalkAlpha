@@ -3,9 +3,10 @@
 <head>
 
     <!-- The next 2 lines load text fonts from photoshop-->
-    <script src="https://use.typekit.net/wrs6bwk.js"></script>
+    <!--<script src="https://use.typekit.net/wrs6bwk.js"></script> -->
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - The Gallery Walk</title>
@@ -31,9 +32,6 @@
                     <li class="menuItem">@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <!-- This is adding a button in the bar called demo, it's action is AnAction of controller Demo-->
-                    <li>@Html.ActionLink("Demo", "Demo", "Demo")</li>
-                    <li>@Html.ActionLink("DemoIndex", "Index", "Demo")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="@Url.Action("Signup")"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
