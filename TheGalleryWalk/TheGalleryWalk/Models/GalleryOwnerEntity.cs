@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace TheGalleryWalk.Models
 {
-    public class RegisterData
+    public class GalleryOwnerEntity
     {
         [Key]
         public int ID { get; set; }

@@ -143,9 +143,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GalleryOwnerSession.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
-    <Compile Include="Models\RegisterData.cs" />
+    <Compile Include="Models\GalleryOwnerEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\GalleryOwnerSession\" />
     <Folder Include="Views\LoginDataPrecheck\" />
     <Folder Include="Views\LoginData\" />
   </ItemGroup>

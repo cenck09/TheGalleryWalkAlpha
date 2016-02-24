@@ -55,7 +55,7 @@ namespace TheGalleryWalk.Controllers
         }
 
         [HttpPost]
-        public ActionResult Signup(string donateForm, RegisterData registerData,FormCollection variables)
+        public ActionResult Signup(string donateForm, GalleryOwnerEntity registerData,FormCollection variables)
         {
             if (ModelState.IsValid)
             {
