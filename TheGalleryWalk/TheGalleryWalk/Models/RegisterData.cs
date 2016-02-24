@@ -8,9 +8,6 @@ using System.Web.Mvc;
 
 namespace TheGalleryWalk.Models
 {
-
- 
-
     public class RegisterData
     {
         [Key]

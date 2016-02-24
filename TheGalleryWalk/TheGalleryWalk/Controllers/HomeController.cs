@@ -32,6 +32,21 @@ namespace TheGalleryWalk.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Login(string donateForm, LoginDataPrecheck loginData, FormCollection variables)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("The Model is valid!");
+                ViewBag.Message = loginData.EmailAddress;
+                return View("LoginNext");
+            }
+            else
+            {
+                return View("Login");
+            }
+        }
+
         public ActionResult Signup()
         {
 
@@ -55,5 +70,21 @@ namespace TheGalleryWalk.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult LoginNext(string donateForm, LoginData loginData, FormCollection variables)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("The Model is valid!");
+                ViewBag.Message = loginData.EmailAddress;
+                return View("CompletedLogin");
+            }
+            else
+            {
+                return View("LoginNext");
+            }
+        }
+
     }
 }
