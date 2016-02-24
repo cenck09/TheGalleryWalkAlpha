@@ -44,8 +44,8 @@ namespace TheGalleryWalk.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 Console.WriteLine("The Model is valid!");
+                return View("CompletedSignUp");
             }// end if ModelState.IsValid
 
 
