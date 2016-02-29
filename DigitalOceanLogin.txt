@@ -1,0 +1,19 @@
+
+connect to DB with
+ssh root@162.243.202.76
+
+password:
+chrisenckgallerywalk
+
+
+
+Parse server at:
+http://162.243.202.76:9999/parse
+
+Call cloud code with:
+http://162.243.202.76:9999/parse/functions/hello
+
+
+## Calls
+- First navigate to the folder with index.js
+- nam start // Starts the node process with index.js
