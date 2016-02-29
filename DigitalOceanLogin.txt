@@ -5,15 +5,17 @@ ssh root@162.243.202.76
 password:
 chrisenckgallerywalk
 
-
+APP_ID = gallerywalk
 
 Parse server at:
-http://162.243.202.76:9999/parse
+http://162.243.202.76:1337/parse
 
 Call cloud code with:
-http://162.243.202.76:9999/parse/functions/hello
+http://162.243.202.76:1337/parse/functions/hello
 
 
 ## Calls
 - First navigate to the folder with index.js
 - nam start // Starts the node process with index.js
+
+
