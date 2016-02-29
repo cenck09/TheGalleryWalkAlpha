@@ -77,14 +77,12 @@ namespace TheGalleryWalk.Controllers
             if (ModelState.IsValid)
             {
                 Console.WriteLine("The Model is valid!");
-                ViewBag.Message = loginData.EmailAddress;
                 return View("CompletedLogin");
             }
             else
-            {
+
+                ViewBag.Message = loginData.EmailAddress;
                 return View("LoginNext");
             }
         }
-
-    }
 }
