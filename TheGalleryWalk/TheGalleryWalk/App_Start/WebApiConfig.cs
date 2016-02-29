@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Parse;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+
 
 namespace TheGalleryWalk
 {
@@ -19,6 +21,14 @@ namespace TheGalleryWalk
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+
+
+            ParseClient.Initialize(new ParseClient.Configuration {
+                ApplicationId = "UJAycM2x57UYodKONBQlhXu2Kcdk6jOfZv0Q2t7x",
+                Server = "http://162.243.202.76:1337/parse"
+            });
+
         }
     }
 }

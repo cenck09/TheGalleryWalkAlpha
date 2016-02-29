@@ -57,8 +57,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Parse, Version=1.7.0.0, Culture=neutral, PublicKeyToken=ba48c3a442de616e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Parse.1.7.0\lib\net45\Parse.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Parse.Api, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Parse.Api.2.0.0.0\lib\portable-win+net40+sl40+wp71\Parse.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Parse.NetFx45, Version=1.7.0.0, Culture=neutral, PublicKeyToken=ba48c3a442de616e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Parse.1.7.0\lib\net45\Parse.NetFx45.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

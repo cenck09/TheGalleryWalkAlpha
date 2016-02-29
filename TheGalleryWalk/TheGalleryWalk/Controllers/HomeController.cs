@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Parse.Api.Models;
+using System;
 using System.Web.Mvc;
 using TheGalleryWalk.Models;
+
+
+
 
 namespace TheGalleryWalk.Controllers
 {
@@ -54,18 +55,38 @@ namespace TheGalleryWalk.Controllers
             return View();
         }
 
+
+
         [HttpPost]
         public ActionResult Signup(string donateForm, GalleryOwnerEntity registerData,FormCollection variables)
         {
             if (ModelState.IsValid)
             {
                 Console.WriteLine("The Model is valid!");
+
+                var user = new ParseUser()
+                {
+                    Username = registerData.EmailAddress,
+                    Password = registerData.Password,
+                    Email = registerData.EmailAddress
+                };
+
+                //     user["phone"] = "415-392-0202";
+
+                try
+                {
+
+                }
+                catch( Exception ex){
+                    Console.WriteLine("Error: " + ex);
+                }
                 return View("CompletedSignUp");
             }// end if ModelState.IsValid
 
 
             return View();
         }
+
         public ActionResult LoginNext()
         {
             return View();
