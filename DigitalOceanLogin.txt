@@ -5,7 +5,9 @@ ssh root@162.243.202.76
 password:
 chrisenckgallerywalk
 
-APP_ID = gallerywalk
+
+// These were reset to the defaults, changing them causes an unauthorized error
+APP_ID = myAppId
 
 Parse server at:
 http://162.243.202.76:1337/parse
