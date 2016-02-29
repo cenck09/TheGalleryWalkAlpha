@@ -23,10 +23,11 @@ namespace TheGalleryWalk
             );
 
 
-
+           
             ParseClient.Initialize(new ParseClient.Configuration {
                 ApplicationId = "UJAycM2x57UYodKONBQlhXu2Kcdk6jOfZv0Q2t7x",
-                Server = "http://162.243.202.76:1337/parse"
+                Server = "http://162.243.202.76:1337/parse",
+                WindowsKey = "do4VAbLlguxl3SA9VYnBbFl4R92pEKchXutTGdBA"
             });
 
         }

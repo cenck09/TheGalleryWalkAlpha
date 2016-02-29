@@ -1,0 +1,88 @@
+﻿@model TheGalleryWalk.Models.GalleryOwnerEntity
+    <!--
+        
+    -->
+
+@{
+    ViewBag.Title = "Registration View";
+}
+
+<div class="GalleryContent" style="padding-top:50px;">
+   
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id ="SignUpForm" }))
+{
+    <fieldset class="RegisterForm">
+        <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
+            Sign up
+        </h3>
+
+        <ol class="formField">
+            @Html.LabelFor(model => model.Name, new { @class = "formFieldTitle" })
+            @Html.TextBoxFor(model => model.Name, String.Empty, new { @class = "formFieldInput"})
+            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "errorMessage" })
+        </ol>
+        <ol class="formField">
+            @Html.LabelFor(model => model.EmailAddress, new { @class = "formFieldTitle" })
+            @Html.TextBoxFor(model => model.EmailAddress, String.Empty, new { @class = "formFieldInput" })
+            @Html.ValidationMessageFor(model => model.EmailAddress, String.Empty, new { @class = "errorMessage" })
+        </ol>
+        <ol class="formField">
+            @Html.LabelFor(model => model.Password, new { @class = "formFieldTitle" })
+            @Html.PasswordFor(model => model.Password, new { @class = "formFieldInput" })
+            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "errorMessage" })
+         </ol>
+        <ol class="formField">
+            @Html.LabelFor(model => model.PasswordCheck, new { @class = "formFieldTitle" })
+            @Html.PasswordFor(model => model.PasswordCheck, new { @class = "formFieldInput" })
+            @Html.ValidationMessageFor(model => model.PasswordCheck, String.Empty, new { @class = "errorMessage" })
+        </ol>
+        <ol class="formField">
+            @Html.LabelFor(model => model.phoneNumber, new { @class = "formFieldTitle" })
+            @Html.TextBoxFor(model => model.phoneNumber, String.Empty, new { @class = "formFieldInput" })
+            @Html.ValidationMessageFor(model => model.phoneNumber, String.Empty, new { @class="errorMessage"} )
+        </ol>
+        <ol class="formField">
+            @Html.LabelFor(model => model.Address, new { @class = "formFieldTitle" })
+            @Html.TextBoxFor(model => model.Address, String.Empty, new { @class = "formFieldInput" })
+            @Html.ValidationMessageFor(model => model.Address, String.Empty, new { @class = "errorMessage" })
+        </ol>
+     
+   
+        <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
+            <button id="buttonText" name="submitForm" style=" background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button>
+        </div>
+
+     </fieldset>
+
+
+}
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#submitButton').mouseenter(function(){
+                $(this).css({ "background-color": "white" });
+                $(this).find('#buttonText').css({ "color": "deepskyblue" });
+            }).mouseleave(function () {
+                $(this).css({ "background-color": "deepskyblue" });
+                $(this).find('#buttonText').css({ "color": "white" });
+
+            });
+
+            /*
+            $('#submitButton').click(function () {
+                $(this).css({ "background-color": "black", "color": "white" }, 50);
+                $(this).text = "Clicked!";
+                $("#SignUpForm").submit(function () {
+                    if ($('#SignUpForm').valid()) {
+                        showPopup("Processing...");
+                    }
+                });
+            });*/
+            
+        });
+
+    </script>
+
+</div>

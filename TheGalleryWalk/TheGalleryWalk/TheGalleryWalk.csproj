@@ -61,10 +61,6 @@
       <HintPath>..\packages\Parse.1.7.0\lib\net45\Parse.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Parse.Api, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Parse.Api.2.0.0.0\lib\portable-win+net40+sl40+wp71\Parse.Api.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Parse.NetFx45, Version=1.7.0.0, Culture=neutral, PublicKeyToken=ba48c3a442de616e, processorArchitecture=MSIL">
       <HintPath>..\packages\Parse.1.7.0\lib\net45\Parse.NetFx45.dll</HintPath>
       <Private>True</Private>
@@ -150,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Async_SignUpController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,9 +199,9 @@
     <Content Include="Views\Demo\Demo.cshtml" />
     <Content Include="Views\Demo\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Signup.cshtml" />
+    <Content Include="Views\Async_SignUp\Signup.cshtml" />
     <Content Include="Views\Home\LoginNext.cshtml" />
-    <Content Include="Views\Home\CompletedSignUp.cshtml" />
+    <Content Include="Views\Async_SignUp\CompletedSignUp.cshtml" />
     <Content Include="Views\Home\CompletedLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
