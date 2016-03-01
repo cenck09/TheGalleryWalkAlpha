@@ -7,6 +7,7 @@ using TheGalleryWalk.Models;
 using Parse;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Collections;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -20,6 +21,8 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> Signup(GalleryOwnerEntity registerData)
         {
+
+       
             if (ModelState.IsValid)
             {
               

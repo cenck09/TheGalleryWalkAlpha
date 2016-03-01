@@ -1,6 +1,7 @@
 ﻿using Parse;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
 
@@ -23,13 +24,17 @@ namespace TheGalleryWalk
             );
 
 
-           
-            ParseClient.Initialize(new ParseClient.Configuration {
-                ApplicationId = "UJAycM2x57UYodKONBQlhXu2Kcdk6jOfZv0Q2t7x",
-                Server = "http://162.243.202.76:1337/parse",
-                WindowsKey = "do4VAbLlguxl3SA9VYnBbFl4R92pEKchXutTGdBA"
-            });
+           try {
+                ParseClient.Initialize(new ParseClient.Configuration {
+                    ApplicationId = "gallerywalk",
+                    Server = "http://162.243.202.76:1337/parse/",
+                });
+                Debug.WriteLine("Initalized Parse Client");
 
+            }catch(Exception ex)
+            {
+                Debug.WriteLine("ERROR FOR PARSE CLIENT INIT"+ex);
+            }
         }
     }
 }
