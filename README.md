@@ -4,8 +4,8 @@ A web service for small art gallerys to share their love of art
 #### paletton color scheme designer
 [here](http://paletton.com)
 
-#### BaasBox Web Services 
-We'll use the js library, everything is found [here](http://www.baasbox.com)
+#### Back to Parse Open Source
+[A nice guide to the Parse .NET API](https://parse.com/docs/dotnet/guide)
 
 
 #### ASP .NET Resources
