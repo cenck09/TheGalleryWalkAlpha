@@ -1,0 +1,23 @@
+
+connect to DB with
+ssh root@162.243.202.76
+
+password:
+chrisenckgallerywalk
+
+
+// These were reset to the defaults, changing them causes an unauthorized error
+APP_ID = gallerywalk
+
+Parse server at:
+http://162.243.202.76:1337/parse/
+
+Call cloud code with:
+http://162.243.202.76:1337/parse/functions/hello
+
+
+## Calls
+- First navigate to the folder with index.js
+- npm start // Starts the node process with index.js
+
+

@@ -4,8 +4,8 @@ A web service for small art gallerys to share their love of art
 #### paletton color scheme designer
 [here](http://paletton.com)
 
-#### CloudKit Web Services 
-Documentation on CloudKit found [here](https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/CloutKitWebServicesReference/SettingUpWebServices/SettingUpWebServices.html#//apple_ref/doc/uid/TP40015240-CH24-SW1)
+#### Back to Parse Open Source
+[A nice guide to the Parse .NET API](https://parse.com/docs/dotnet/guide)
 
 
 #### ASP .NET Resources
