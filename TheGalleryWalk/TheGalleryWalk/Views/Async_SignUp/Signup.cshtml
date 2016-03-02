@@ -41,12 +41,6 @@
             @Html.TextBoxFor(model => model.phoneNumber, String.Empty, new { @class = "formFieldInput" })
             @Html.ValidationMessageFor(model => model.phoneNumber, String.Empty, new { @class="errorMessage"} )
         </ol>
-        <ol class="formField">
-            @Html.LabelFor(model => model.Address, new { @class = "formFieldTitle" })
-            @Html.TextBoxFor(model => model.Address, String.Empty, new { @class = "formFieldInput" })
-            @Html.ValidationMessageFor(model => model.Address, String.Empty, new { @class = "errorMessage" })
-        </ol>
-     
    
         <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
             <button id="buttonText" name="submitForm" style=" background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button>
