@@ -41,7 +41,8 @@ namespace TheGalleryWalk.Controllers
                    // ViewBag.EmailAddress = user.Email;
                     var ownerData = new GalleryOwnerData();
                     ownerData.EmailAddress = user.Email;
-                   
+                  //  ownerData.Name = user.Get<string>("Name");
+                  //  ownerData.PhoneNumber = user.Get<string>("PhoneNumber");
                    // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
                     //   ViewBag.Name = user.Get<String>("Name");
                     return View("OwnedGalleries", ownerData);
