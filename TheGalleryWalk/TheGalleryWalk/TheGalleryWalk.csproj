@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -198,11 +199,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Demo\Demo.cshtml" />
     <Content Include="Views\Demo\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Async_SignIn\Login.cshtml" />
     <Content Include="Views\Async_SignUp\Signup.cshtml" />
-    <Content Include="Views\Home\LoginNext.cshtml" />
+    <Content Include="Views\Async_SignIn\LoginNext.cshtml" />
     <Content Include="Views\Async_SignUp\CompletedSignUp.cshtml" />
-    <Content Include="Views\Home\CompletedLogin.cshtml" />
+    <Content Include="Views\Async_SignIn\CompletedLogin.cshtml" />
+    <Content Include="Views\Async_SignIn\OwnedGalleries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

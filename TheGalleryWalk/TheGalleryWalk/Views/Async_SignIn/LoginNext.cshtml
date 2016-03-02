@@ -15,7 +15,7 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "loginForm" }))
+    @using (Html.BeginForm("LoginNext", "Async_SignIn", FormMethod.Post, new { id = "loginForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
