@@ -35,6 +35,10 @@ namespace TheGalleryWalk.Controllers
                     Email = registerData.EmailAddress
                 };
 
+                user["Name"] = registerData.Name;
+                user["PhoneNumber"] = registerData.phoneNumber;
+                user["Enabled"] = 0;
+
                 Debug.WriteLine("Creating user: "+user.Username);
                 Debug.WriteLine("On Server: " + ParseClient.CurrentConfiguration.Server);
                 Debug.WriteLine("On AppId: " + ParseClient.CurrentConfiguration.ApplicationId);
@@ -51,6 +55,7 @@ namespace TheGalleryWalk.Controllers
                 catch ( Exception ex)
                 {
                     Debug.WriteLine("There was an error "+ ex);
+                    return View("ErrorSignUp");
                 }
             
                }// end if ModelState.IsValid
