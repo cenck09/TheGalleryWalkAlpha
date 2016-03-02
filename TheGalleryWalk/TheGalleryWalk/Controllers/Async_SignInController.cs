@@ -31,11 +31,22 @@ namespace TheGalleryWalk.Controllers
                 // other fields can be set just like with ParseObject
                 try
                 {   
-                    Debug.WriteLine("Before User Create");
+                    Debug.WriteLine("Before User Login");
                     await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
-                    Debug.WriteLine("Post Sign up user");
-                    return View("CompletedLogin");
+                    Debug.WriteLine("Post login user");
 
+                    var user = ParseUser.CurrentUser;
+                    //   Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
+                    //   Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
+                   // ViewBag.EmailAddress = user.Email;
+                    var ownerData = new GalleryOwnerData();
+                    ownerData.EmailAddress = user.Email;
+                   
+                   // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
+                    //   ViewBag.Name = user.Get<String>("Name");
+                    return View("OwnedGalleries", ownerData);
+                    
+                    //return View("OwnedGalleries");
                 }
                 catch (Exception ex)
                 {
@@ -54,17 +65,21 @@ namespace TheGalleryWalk.Controllers
             return View();
         }
 
-        public async Task<ActionResult> OwnedGalleries()
+        public ActionResult OwnedGalleries()
         {
-
-            if(ParseUser.CurrentUser != null)
+            Debug.WriteLine("Called load owned Galleries ");
+            if (ParseUser.CurrentUser != null)
             {
-                var user = ParseUser.CurrentUser;
-                Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
-                Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
+              var user = ParseUser.CurrentUser;
+                //   Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
+                //   Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
+                Debug.WriteLine(user.ToString());
+                ViewBag.EmailAddress = user.Email;
+             //   ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
+             //   ViewBag.Name = user.Get<String>("Name");
+                return View();
             }
-         
-
+            Debug.WriteLine("Parse user Is not valid");
             return View();
         }
 

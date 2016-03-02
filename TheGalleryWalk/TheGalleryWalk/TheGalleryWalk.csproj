@@ -153,6 +153,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GalleryOwnerData.cs" />
     <Compile Include="Models\GalleryOwnerSession.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
@@ -210,6 +211,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
+    <Folder Include="Views\GalleryOwnerData\" />
     <Folder Include="Views\GalleryOwnerSession\" />
     <Folder Include="Views\LoginDataPrecheck\" />
     <Folder Include="Views\LoginData\" />

@@ -1,4 +1,4 @@
-﻿@model TheGalleryWalk.Models.GalleryOwnerEntity
+﻿@model TheGalleryWalk.Models.GalleryOwnerData
 
 @{
     ViewBag.Title = "OwnedGalleries";
@@ -22,15 +22,20 @@
 }
 
 
+#tileAttributes{
+    background-color:aliceblue;
+    padding: 10px;
+}
+
 </style>
 </head>
 <body>
 
 <ul id="barElement">
-  <li id="listElement">Name: </li>
-    <li id="listElement">Email: </li>
-    <li id="listElement">Phone: </li>
-  
+  <li id="listElement">Name: @Model.EmailAddress</li>
+   <!-- <li id="listElement">Email: @ViewBag.EmailAddress</li>
+    <li id="listElement">Phone: @ViewBag.phoneNumber</li>
+  -->
 </ul>
 
 </body>
@@ -38,5 +43,12 @@
 
 <h2>OwnedGalleries</h2>
 
-<img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; height:auto;" />
+
+
+
+<div style="padding:10px; padding-bottom:0px; background-color:#0289FF; width:220px">
+    <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; height:auto;" />
+    <p style="color:whitesmoke">MoMA: Philadelphia, PA</p>
+
+</div>
 
