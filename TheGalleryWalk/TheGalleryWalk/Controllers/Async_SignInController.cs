@@ -51,6 +51,7 @@ namespace TheGalleryWalk.Controllers
                 catch (Exception ex)
                 {
                     Debug.WriteLine("There was an error " + ex);
+                    return View("ErrorSignIn");
                 }
 
             }// end if ModelState.IsValid
