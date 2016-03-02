@@ -6,7 +6,7 @@
 <html>
 <head>
 <style>
-ul {
+#barElement {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -14,34 +14,29 @@ ul {
     background-color: #333;
 }
 
-li {
+#listElement {
     float: left;
+    color:whitesmoke;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-li a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
 
-li a:hover {
-    background-color: #111;
-}
 </style>
 </head>
 <body>
 
-<ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+<ul id="barElement">
+  <li id="listElement">Name: </li>
+    <li id="listElement">Email: </li>
+    <li id="listElement">Phone: </li>
+  
 </ul>
 
 </body>
 </html>
 
 <h2>OwnedGalleries</h2>
+
+<img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; height:auto;" />
 
