@@ -26,5 +26,7 @@ namespace TheGalleryWalk.Controllers
 
             return View();
         }
+
+
     }
 }

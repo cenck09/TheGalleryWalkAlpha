@@ -54,6 +54,20 @@ namespace TheGalleryWalk.Controllers
             return View();
         }
 
+        public async Task<ActionResult> OwnedGalleries()
+        {
+
+            if(ParseUser.CurrentUser != null)
+            {
+                var user = ParseUser.CurrentUser;
+                Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
+                Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
+            }
+         
+
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(string donateForm, LoginDataPrecheck loginData, FormCollection variables)
         {
