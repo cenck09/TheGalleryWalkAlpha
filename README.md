@@ -7,6 +7,7 @@ A web service for small art gallerys to share their love of art
 #### Back to Parse Open Source
 [A nice guide to the Parse .NET API](https://parse.com/docs/dotnet/guide)
 
+[The API Ref](http://parse.com/docs/dotnet/api/Index.html)
 
 #### ASP .NET Resources
 A list of .NET 5 development resources is available [here](https://docs.asp.net/en/latest/index.html).
