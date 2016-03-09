@@ -153,6 +153,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GalleryOwnerData.cs" />
     <Compile Include="Models\GalleryOwnerSession.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
@@ -205,10 +206,12 @@
     <Content Include="Views\Async_SignUp\CompletedSignUp.cshtml" />
     <Content Include="Views\Async_SignIn\CompletedLogin.cshtml" />
     <Content Include="Views\Async_SignIn\OwnedGalleries.cshtml" />
+    <Content Include="Views\Async_SignUp\ErrorSignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
+    <Folder Include="Views\GalleryOwnerData\" />
     <Folder Include="Views\GalleryOwnerSession\" />
     <Folder Include="Views\LoginDataPrecheck\" />
     <Folder Include="Views\LoginData\" />

@@ -13,6 +13,7 @@ namespace TheGalleryWalk.Controllers
 {
     public class Async_SignUpController : AsyncController
     {
+
         public ActionResult Signup()
         {
             return View();
