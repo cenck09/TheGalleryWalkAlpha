@@ -45,7 +45,7 @@ namespace TheGalleryWalk.Controllers
                   //  ownerData.PhoneNumber = user.Get<string>("PhoneNumber");
                    // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
                     //   ViewBag.Name = user.Get<String>("Name");
-                    return View("OwnedGalleries", ownerData);
+                    return View("../OwnedGalleries/OwnedGalleries", ownerData);
                     
                     //return View("OwnedGalleries");
                 }
