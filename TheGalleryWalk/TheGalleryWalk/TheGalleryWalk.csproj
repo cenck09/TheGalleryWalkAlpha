@@ -146,10 +146,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddGalleryController.cs" />
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
+    <Compile Include="Controllers\OwnedGalleriesPartialViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +207,8 @@
     <Content Include="Views\Async_SignIn\CompletedLogin.cshtml" />
     <Content Include="Views\OwnedGalleries\OwnedGalleries.cshtml" />
     <Content Include="Views\Async_SignUp\ErrorSignUp.cshtml" />
+    <Content Include="Views\AddGallery\Index.cshtml" />
+    <Content Include="Views\OwnedGalleries\OwnedGalleriesPartialView.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

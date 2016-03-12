@@ -2,10 +2,12 @@
 <html>
 <head>
 
-    <!-- The next 2 lines load text fonts from photoshop-->
-    <!--<script src="https://use.typekit.net/wrs6bwk.js"></script> -->
+    <script src="https://use.typekit.net/wrs6bwk.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+    <!-- The next 2 lines load text fonts from photoshop-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,23 +18,23 @@
    
 </head>
 <body style="background-color: whitesmoke">
-    <div class="navbar navbar-inverse navbar-fixed-top menuGrade">
+    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade">
         <div class="container">
             <div class="navbar-header">
                 <!-- This button is the hamburger icon -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar" style="background-color:deepskyblue"></span>
+                    <span class="icon-bar" style="background-color:deepskyblue"></span>
+                    <span class="icon-bar" style="background-color:deepskyblue"></span>
                 </button>
-                @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand btn-menuItem" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="menuItem">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                <ul class="nav GalleryNavBar navbar-nav">
+                    <li>  @Html.ActionLink("Home", "Index", "Home", new { @class = "btn-menuItem menu-item-buffer" })</li>
+                    <li>  @Html.ActionLink("About", "About", "Home", new { @class = "btn-menuItem menu-item-buffer" })</li>
+                    <li>  @Html.ActionLink("Contact", "Contact", "Home", new { @class = "btn-menuItem menu-item-buffer" })</li>
+        </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="@Url.Action("Signup","Async_SignUp")"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="@Url.Action("Login" , "Async_SignIn")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -41,6 +43,8 @@
         </div>
     </div>
     <div class="container body-content">
+        <h1 class="titleText">Test of fonts</h1>
+        <h1 style="font-family: \"brush-script-std\",sans-serif;">Test of fonts</h1>
         @RenderBody()
         <hr />
         <footer>
@@ -51,5 +55,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
 </body>
 </html>
