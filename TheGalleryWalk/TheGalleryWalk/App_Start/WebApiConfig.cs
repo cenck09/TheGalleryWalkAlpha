@@ -27,7 +27,7 @@ namespace TheGalleryWalk
            try {
                 ParseClient.Initialize(new ParseClient.Configuration {
                     ApplicationId = "gallerywalk",
-                    Server = "http://162.243.202.76:1337/parse/",
+                    Server = "http://104.131.127.70:1337/parse/",
                 });
                 Debug.WriteLine("Initalized Parse Client");
 
