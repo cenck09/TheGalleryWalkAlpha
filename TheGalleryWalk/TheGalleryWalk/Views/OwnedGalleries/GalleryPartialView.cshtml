@@ -1,11 +1,16 @@
-﻿
-@foreach (var item in @Model)
+﻿@using Parse;
+
+<head>
+    <link rel="stylesheet" href="~/Content/GalleryWalkStyles.css">
+
+</head>
+@if (Model != null)
 {
-    <div style="margin:10px">
-        @item.Name
-
-        This is a test for enum
-    </div>
+    foreach (var item in @Model)
+    {
+       <div class="GalleryInfoWindow" style="margin:10px">
+                <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; height:auto;" />
+                <p style="margin-top:8px;">MoMA: Philadelphia, PA</p>
+       </div>
+    }
 }
-
-

@@ -2,11 +2,7 @@
 <html>
 <head>
 
-    <script src="https://use.typekit.net/wrs6bwk.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
-
-    <!-- The next 2 lines load text fonts from photoshop-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
 
     <meta charset="utf-8" />
@@ -18,41 +14,46 @@
    
 </head>
 <body style="background-color: whitesmoke">
-    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade">
+    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center">
         <div class="container">
             <div class="navbar-header">
                 <!-- This button is the hamburger icon -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar" style="background-color:deepskyblue"></span>
-                    <span class="icon-bar" style="background-color:deepskyblue"></span>
-                    <span class="icon-bar" style="background-color:deepskyblue"></span>
+                <button type="button" class="navbar-toggle menuItem" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar" style="background-color:white"></span>
+                    <span class="icon-bar" style="background-color:white"></span>
+                    <span class="icon-bar" style="background-color:white"></span>
                 </button>
-                @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand btn-menuItem" })
+                    @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand menuTitle"})
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav GalleryNavBar navbar-nav">
-                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                    <li><a href="@Url.Action("About","Home")">About</a></li>
-                    <li><a href="@Url.Action("Contact","Home")">Contact</a></li>       
+                <ul class="nav GalleryNavBar menuItem navbar-nav">
+                    <li><a class="menuItem" href="@Url.Action("Index","Home")">Home</a></li>
+                    <li><a class="menuItem" href="@Url.Action("About","Home")">About</a></li>
+                    <li><a class="menuItem" href="@Url.Action("Contact","Home")">Contact</a></li>       
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("Signup","Async_SignUp")"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="@Url.Action("Login" , "Async_SignIn")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <ul class="nav navbar-nav menuItem navbar-right">
+                    <li><a class="menuItem" href="@Url.Action("Signup","Async_SignUp")"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a  class="menuItem" href="@Url.Action("Login" , "Async_SignIn")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
-         @RenderBody()
+        <div>
+            @RenderBody()
+        </div>
         <hr />
-        <footer>
+      
+    </div>
+    <div class="container body-content">
+
+        <footer style="display:block">
             <p>&copy; @DateTime.Now.Year - The Gallery Walk</p>
         </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 
 
 </body>
