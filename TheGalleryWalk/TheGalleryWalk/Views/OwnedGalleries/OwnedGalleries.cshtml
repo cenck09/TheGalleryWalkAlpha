@@ -41,7 +41,15 @@
         -->
   
 </ul>
+    @if (@Model.galleries != null)
+    {
+        @Html.Partial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", @Model.galleries.ToList())
 
+    }
+    else
+    {
+        <div> You currently have no galleries</div>
+    }
 
 </body>
 </html>
