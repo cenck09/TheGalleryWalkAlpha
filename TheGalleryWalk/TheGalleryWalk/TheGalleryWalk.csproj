@@ -209,6 +209,7 @@
     <Content Include="Views\Async_SignUp\ErrorSignUp.cshtml" />
     <Content Include="Views\AddGallery\Index.cshtml" />
     <Content Include="Views\OwnedGalleries\OwnedGalleriesPartialView.aspx" />
+    <Content Include="Views\Shared\_LayoutLoggedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

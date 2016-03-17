@@ -15,7 +15,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/GalleryWalkStyles.css">
-   
+
 </head>
 <body style="background-color: whitesmoke">
     <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade">
@@ -31,19 +31,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav GalleryNavBar navbar-nav">
-                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                    <li><a href="@Url.Action("About","Home")">About</a></li>
-                    <li><a href="@Url.Action("Contact","Home")">Contact</a></li>       
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("About","Home")">About</a></li>
+                        <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li><a href="@Url.Action("OwnedGalleries", "OwnedGalleries", null, null,null)">Owned Galleries</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("Signup","Async_SignUp")"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="@Url.Action("Login" , "Async_SignIn")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="@Url.Action("Login" , "Async_SignIn")"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
-         @RenderBody()
+        @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - The Gallery Walk</p>

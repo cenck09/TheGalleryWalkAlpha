@@ -41,11 +41,11 @@ namespace TheGalleryWalk.Controllers
                    // ViewBag.EmailAddress = user.Email;
                     var ownerData = new GalleryOwnerData();
                     ownerData.EmailAddress = user.Email;
-                  //  ownerData.Name = user.Get<string>("Name");
-                  //  ownerData.PhoneNumber = user.Get<string>("PhoneNumber");
-                   // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
+                    //  ownerData.Name = user.Get<string>("Name");
+                    //  ownerData.PhoneNumber = user.Get<string>("PhoneNumber");
+                    // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
                     //   ViewBag.Name = user.Get<String>("Name");
-                    return View("../OwnedGalleries/OwnedGalleries", ownerData);
+                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", ownerData);
                     
                     //return View("OwnedGalleries");
                 }

@@ -4,23 +4,32 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Parse;
+using TheGalleryWalk.Models;
 
 namespace TheGalleryWalk.Controllers
 {
     public class OwnedGalleriesController : AsyncController
     {
-        protected void Page_Init(object sender, EventArgs e)
-        {
-
-            Debug.WriteLine("Page Init Called");
-
-        }
+      
 
         // GET: OwnedGalleries
         public ActionResult OwnedGalleries()
         {
-            Debug.WriteLine("Loading Owned Galleries View");
-            return View();
+            var user = ParseUser.CurrentUser;
+            if (user == null)
+            {
+                return View("../Home/Index", "_Layout");
+            }else if (user.IsAuthenticated)
+            {
+                var ownerData = new GalleryOwnerData();
+                ownerData.EmailAddress = user.Email;
+                return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", ownerData);
+            }
+            else
+            {
+                return View("../Home/Index", "_Layout");
+            }
         }
     }
 }
