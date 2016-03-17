@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
+using System.Threading.Tasks;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -47,5 +48,19 @@ namespace TheGalleryWalk.Controllers
                 return View("../Home/Index", "_Layout");
             }
         }
+
+        public ActionResult AddGallery()
+        {
+            Debug.WriteLine("Add gallery function called");
+            return PartialView("~/Views/AddGallery/Index.cshtml");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddGallery(GalleryOwnerEntity registerData)
+        {
+    
+            return PartialView("SearchResults");
+        }
+
     }
 }
