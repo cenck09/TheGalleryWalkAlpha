@@ -11,8 +11,7 @@ namespace TheGalleryWalk.Controllers
 {
     public class OwnedGalleriesController : AsyncController
     {
-      
-
+     
         // GET: OwnedGalleries
         public ActionResult OwnedGalleries()
         {
