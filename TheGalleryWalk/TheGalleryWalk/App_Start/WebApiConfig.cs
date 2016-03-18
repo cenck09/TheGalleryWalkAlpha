@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
-
+using TheGalleryWalk.Models;
 
 namespace TheGalleryWalk
 {
@@ -25,11 +25,15 @@ namespace TheGalleryWalk
 
 
            try {
+
+                ParseObject.RegisterSubclass<GalleryOwnerParseUser>();
+                ParseObject.RegisterSubclass<GalleryParseObject>();
+
                 ParseClient.Initialize(new ParseClient.Configuration {
                     ApplicationId = "gallerywalk",
                     Server = "http://104.131.127.70:1337/parse/",
                 });
-                Debug.WriteLine("Initalized Parse Client");
+               Debug.WriteLine("Initalized Parse Client");
 
             }catch(Exception ex)
             {

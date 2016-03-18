@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,36 +13,57 @@ namespace TheGalleryWalk.Controllers
 {
     public class OwnedGalleriesController : AsyncController
     {
-     
+
         // GET: OwnedGalleries
-        public ActionResult OwnedGalleries()
+        public async Task<ActionResult> OwnedGalleries()
         {
             var user = ParseUser.CurrentUser;
             if (user == null)
             {
                 return View("../Home/Index", "_Layout");
-            }else if (user.IsAuthenticated)
+            }
+            else if (user.IsAuthenticated)
             {
-                var ownerData = new GalleryOwnerData();
-                ownerData.EmailAddress = user.Email;
+                List<string> galleryIds;// = user.Get<List<string>>("Galleries");
 
-                ownerData.galleries = new GalleryEntity[5];
-                ownerData.galleries[0] = new GalleryEntity();
-                ownerData.galleries[0].Name = "G0";
+                try
+                {
+                    galleryIds = user.Get<List<string>>("Galleries");
+                    Debug.WriteLine("Post load galleries id array");
+                    Debug.WriteLine(galleryIds);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    galleryIds = new List<string>();
+                    Debug.WriteLine("Failed to load a list of Id's");
+                }
 
-                ownerData.galleries[1] = new GalleryEntity();
-                ownerData.galleries[1].Name = "G1";
+                IEnumerable<ParseObject> GalleryEntities;
 
-                ownerData.galleries[2] = new GalleryEntity();
-                ownerData.galleries[2].Name = "G2";
+                var galleryQuery = ParseObject.GetQuery("Gallery");
+                if (galleryIds.Count > 0)
+                {
+                   
+                    Debug.WriteLine("Proc ID ", galleryIds.ToString());
+                    galleryQuery = galleryQuery.WhereContainedIn("ObjectId", galleryIds);
+                    
+                    GalleryEntities = await galleryQuery.FindAsync();
+                    var GE = GalleryEntities.ToArray<ParseObject>();
 
-                ownerData.galleries[3] = new GalleryEntity();
-                ownerData.galleries[3].Name = "G3";
 
-                ownerData.galleries[4] = new GalleryEntity();
-                ownerData.galleries[4].Name = "G4";
+                    for(var i = 0; i < GalleryEntities.Count(); i++)
+                    {
+                       
+                    }
+                    GalleryOwnerEntity owner = new GalleryOwnerEntity();
+                    Debug.WriteLine("Before loading page with entities");
+                    ViewBag.Data = GalleryEntities;
 
-                return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", ownerData);
+                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
+                }
+
+                return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
             }
             else
             {
@@ -58,9 +80,46 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> AddGallery(GalleryOwnerEntity registerData)
         {
-    
-            return PartialView("SearchResults");
-        }
+            var galleryEntity = new ParseObject("Gallery");
+            galleryEntity.Add("Name", registerData.Name);
+            galleryEntity.Add("Email", registerData.EmailAddress);
+            galleryEntity.Add("Address", registerData.Address);
 
+            // other fields can be set just like with ParseObject
+            try
+            {
+                await galleryEntity.SaveAsync();
+                var user = ParseUser.CurrentUser;
+
+                IList<string> galleryIds;// = user.Get<List<string>>("Galleries");
+
+                try
+                {
+                    galleryIds = user.Get<List<string>>("Galleries");
+
+                }
+                catch (Exception ex)
+                {
+
+                    galleryIds = new List<string>();
+                }
+
+
+                galleryIds.Add(galleryEntity.ObjectId);
+                Debug.WriteLine(galleryIds.ToString());
+                user["Galleries"] = galleryIds;
+              //  user.Add("Galleries", galleryIds);
+                await user.SaveAsync();
+
+                Debug.WriteLine("Post add gallery");
+                return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml");
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("There was an error " + ex);
+                return View("~/Views/AddGallery/Index.cshtml");
+            }
+        }
     }
 }

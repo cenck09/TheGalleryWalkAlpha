@@ -16,7 +16,7 @@ namespace TheGalleryWalk.Models
       public string PhoneNumber { get; set; }
       public string EmailAddress { get; set; }
 
-      public GalleryEntity[] galleries { get; set; }
+      public IList<string> Galleries { get; set; }
 
     }
 }

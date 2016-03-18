@@ -1,5 +1,6 @@
 ﻿using Parse;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -34,37 +35,37 @@ namespace TheGalleryWalk.Controllers
                     Debug.WriteLine("Before User Login");
                     await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
                     Debug.WriteLine("Post login user");
+                    IList<string> galleryIds;
 
                     var user = ParseUser.CurrentUser;
-                    //   Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
-                    //   Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
-                   // ViewBag.EmailAddress = user.Email;
-                    var ownerData = new GalleryOwnerData();
-                    ownerData.EmailAddress = user.Email;
-                    ownerData.galleries = new GalleryEntity[5];
-                    ownerData.galleries[0] = new GalleryEntity();
-                    ownerData.galleries[0].Name = "G0";
+                    try
+                    {
+                        galleryIds = user.Get<IList<string>>("Galleries");
 
-                    ownerData.galleries[1] = new GalleryEntity();
-                    ownerData.galleries[1].Name = "G1";
-
-                    ownerData.galleries[2] = new GalleryEntity();
-                    ownerData.galleries[2].Name = "G2";
-
-                    ownerData.galleries[3] = new GalleryEntity();
-                    ownerData.galleries[3].Name = "G3";
-
-                    ownerData.galleries[4] = new GalleryEntity();
-                    ownerData.galleries[4].Name = "G4";
-
-
-                    //  ownerData.Name = user.Get<string>("Name");
-                    //  ownerData.PhoneNumber = user.Get<string>("PhoneNumber");
-                    // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
-                    //   ViewBag.Name = user.Get<String>("Name");
-                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", ownerData);
                     
-                    //return View("OwnedGalleries");
+
+                        Debug.WriteLine("Post get Id's", galleryIds.ToString());
+                        IEnumerable<ParseObject> GalleryEntities;
+
+                        var galleryQuery = ParseObject.GetQuery("Gallery");
+                        if (galleryIds.Count > 0)
+                        {
+                            for (var i = 0; i < galleryIds.Count; i++)
+                            {
+                                galleryQuery = galleryQuery.WhereEqualTo("ObjectId", galleryIds[i].ToString());
+                            }
+                            GalleryEntities = await galleryQuery.FindAsync();
+                            Debug.WriteLine("Post Gallery Query");
+                            ViewBag.Data = GalleryEntities;
+
+                            return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex);
+                    }                   
+                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
                 }
                 catch (Exception ex)
                 {

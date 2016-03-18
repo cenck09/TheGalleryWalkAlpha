@@ -146,7 +146,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AddGalleryController.cs" />
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
@@ -157,7 +156,9 @@
     </Compile>
     <Compile Include="Models\GalleryEntity.cs" />
     <Compile Include="Models\GalleryOwnerData.cs" />
+    <Compile Include="Models\GalleryOwnerParseUser.cs" />
     <Compile Include="Models\GalleryOwnerSession.cs" />
+    <Compile Include="Models\GalleryParseObject.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
     <Compile Include="Models\GalleryOwnerEntity.cs" />
@@ -211,6 +212,8 @@
     <Content Include="Views\AddGallery\Index.cshtml" />
     <Content Include="Views\OwnedGalleries\GalleryPartialView.cshtml" />
     <Content Include="Views\Shared\_LayoutLoggedIn.cshtml" />
+    <Content Include="Views\AddGallery\FailedAddGallery.cshtml" />
+    <Content Include="Views\AddGallery\CompletedAddGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

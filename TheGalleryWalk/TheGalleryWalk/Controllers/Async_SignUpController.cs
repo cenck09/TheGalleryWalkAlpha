@@ -22,25 +22,25 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> Signup(GalleryOwnerEntity registerData)
         {
-
-       
             if (ModelState.IsValid)
             {
               
                 Debug.WriteLine("The Model is valid!");
 
-                var user = new ParseUser()
+                var user = new GalleryOwnerParseUser()
                 {
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
-                    Email = registerData.EmailAddress
-                };
+                    Email = registerData.EmailAddress,
+                    Name = registerData.Name,
+                    PhoneNumber = registerData.phoneNumber,
+                    Enabled = false,
+                    Galleries = new List<string>()
+            };
 
-                user["Name"] = registerData.Name;
-                user["PhoneNumber"] = registerData.phoneNumber;
-                user["Enabled"] = 0;
+             
 
-                Debug.WriteLine("Creating user: "+user.Username);
+                Debug.WriteLine("Creating user: "+user.Name);
                 Debug.WriteLine("On Server: " + ParseClient.CurrentConfiguration.Server);
                 Debug.WriteLine("On AppId: " + ParseClient.CurrentConfiguration.ApplicationId);
                
