@@ -14,8 +14,6 @@ namespace TheGalleryWalk.Controllers
     public class OwnedGalleriesController : AsyncController
     {
 
-
-
         public async Task<ActionResult> OwnedGalleries()
         {
             ViewBag.showForm = 0;
@@ -65,6 +63,7 @@ namespace TheGalleryWalk.Controllers
         }
 
 
+
         public ActionResult AddGallery()
         {
             Debug.WriteLine("Add gallery function called");
@@ -97,10 +96,17 @@ namespace TheGalleryWalk.Controllers
             }
 
 
-            IEnumerable<ParseObject> GalleryEntities;
+            IEnumerable<ParseObject> GalleryEntities = new List<ParseObject>();
 
             GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
+
+            if (registerData == null)
+            {
+                Debug.WriteLine("Register Data is null");
+            }
+
             G_Owner.GalleryAdd = registerData;
+            G_Owner.GalleryEntities = GalleryEntities;
 
             if (ModelState.IsValid)
             {
@@ -124,7 +130,7 @@ namespace TheGalleryWalk.Controllers
 
                     ViewBag.showForm = 0;
 
-                    return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner );
+                    return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
 
                 }
                 catch (Exception ex)

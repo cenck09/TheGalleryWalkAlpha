@@ -149,6 +149,7 @@
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -219,6 +220,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
     <Folder Include="Views\Async_SignOut\" />
+    <Folder Include="Views\Gallery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
