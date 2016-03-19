@@ -1,5 +1,5 @@
 ﻿@using Parse;
-@model IEnumerable<ParseObject>
+@model TheGalleryWalk.Models.GalleryOwnerEntity
 
 
 @{
@@ -27,14 +27,15 @@
         @using System.Diagnostics;
         @try
         {
-            @Html.Partial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", @Model)
+            Debug.WriteLine(""+(Model.GalleryEntities as IEnumerable<ParseObject>).Count());
+            Html.RenderPartial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", (Model.GalleryEntities as IEnumerable<ParseObject>));
 
-        }
-        catch (Exception ex)
-        {
+            }
+            catch (Exception ex)
+            {
             Debug.WriteLine("There was an error ::    "+ex);
-        }
-    </div>
+            }
+</div>
     <div>
         <div class="add-btn" id="addGalleryBtn" >
             <h4>+ Gallery  </h4>
@@ -42,7 +43,9 @@
         <div class="add-btn" id="rmvGalleryBtn" style="display:none;">
             <h4>- Gallery  </h4>
         </div>
-         <div id="addGalleryForm">
+         <div id="addGalleryForm" style="display:none">
+           
+             @Html.Partial("~/Views/AddGallery/Index.cshtml", Model.GalleryAdd);
 
          </div>
     </div>
@@ -52,24 +55,39 @@
 
 
 <script type="text/javascript">
-    var url = '@Url.Action("AddGallery", "OwnedGalleries")';
+   
 
     $(document).ready(function () {
         document.getElementById("addGalleryBtn").onclick = function () { addGalleryForm() };
         document.getElementById("rmvGalleryBtn").onclick = function () { removeGalleryForm() };
 
+        var showFormValue = @(ViewBag.showForm);
+
+        var url = '@Url.Action("AddGallery", "OwnedGalleries")';
+        if(!showFormValue){
+            removeGalleryForm();   
+        }else{
+            addGalleryForm();
+        }
+
         function removeGalleryForm() {
-            $('#addGalleryForm').empty();
+            $('#addGalleryForm').hide();
             $("#addGalleryBtn").show();
             $("#rmvGalleryBtn").hide();
         }
 
         function addGalleryForm() {
-            $('#addGalleryForm').load(url);
+          //  $('#addGalleryForm').load(url);
+            $("#addGalleryForm").show();
             $("#addGalleryBtn").hide();
             $("#rmvGalleryBtn").show();
         }
+
+
+
     })
+
+   
 
 </script>
 

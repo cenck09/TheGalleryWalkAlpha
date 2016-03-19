@@ -11,7 +11,7 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AddGalleryForm" }))
+    @using (Html.BeginForm("OwnedGalleries", "OwnedGalleries", FormMethod.Post, new { id = "AddGalleryForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
@@ -35,7 +35,8 @@
             </ol>
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
-                <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button>
+               <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
+                 
             </div>
 
         </fieldset>

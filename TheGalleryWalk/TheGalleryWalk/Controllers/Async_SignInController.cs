@@ -24,56 +24,43 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> LoginNext(LoginData loginData, FormCollection data)
         {
-            Debug.WriteLine("Username " + loginData.EmailAddress);
-            Debug.WriteLine("Password " + loginData.Password);
-
+          
             if (ModelState.IsValid)
             { 
-                // other fields can be set just like with ParseObject
                 try
                 {   
-                    Debug.WriteLine("Before User Login");
                     await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
-                    Debug.WriteLine("Post login user");
+
                     IList<string> galleryIds;
+                    IEnumerable<ParseObject> GalleryEntities;
+
+                    GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
+                    G_Owner.GalleryAdd = new GalleryEntity();
 
                     var user = ParseUser.CurrentUser;
                     try
                     {
                         galleryIds = user.Get<IList<string>>("Galleries");
+                    }
+                    catch
+                    {
+                        galleryIds = new List<string>();
+                        
+                    }
 
-                    
-
-                        Debug.WriteLine("Post get Id's: ");
-                        Debug.WriteLine(galleryIds.Count);
-
-                        for(var i = 0; i< galleryIds.Count; i++)
-                        {
-                            Debug.WriteLine(galleryIds[i].ToString());
-                        }
-                        IEnumerable<ParseObject> GalleryEntities;
-
-                        var galleryQuery = ParseObject.GetQuery("Gallery");
+                    var galleryQuery = ParseObject.GetQuery("Gallery");
                         if (galleryIds.Count > 0)
                         {
-
                             galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
 
                             GalleryEntities = await galleryQuery.FindAsync();
-                         
-                          
-                           
-                            Debug.WriteLine("Before loading page with entities + Count = " + GalleryEntities.Count());
-
-                            return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", GalleryEntities);
+                        
+                            G_Owner.GalleryEntities = GalleryEntities;
+                        ViewBag.showForm = 0;
+                            return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
                         }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex);
-                    }                   
-                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
+                                 
+                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", G_Owner);
                 }
                 catch (Exception ex)
                 {

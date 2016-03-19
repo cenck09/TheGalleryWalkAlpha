@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Parse;
 
 namespace TheGalleryWalk.Models
 {
@@ -46,7 +47,8 @@ namespace TheGalleryWalk.Models
         public string Address { get; set; }
 
         public IList<string> Galleries { get; set; }
-        public IList<GalleryEntity> GalleryEntities;
+        public IEnumerable<ParseObject> GalleryEntities { get; set; }
+        public GalleryEntity GalleryAdd { get; set; }
 
     }
 
