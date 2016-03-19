@@ -31,13 +31,9 @@ namespace TheGalleryWalk.Controllers
                 {   
                     await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
 
-                    IList<string> galleryIds;
-                    IEnumerable<ParseObject> GalleryEntities;
-
-                    GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
-                    G_Owner.GalleryAdd = new GalleryEntity();
-
                     var user = ParseUser.CurrentUser;
+
+                    IList<string> galleryIds; // = user.Get<IList<string>>("Galleries");
                     try
                     {
                         galleryIds = user.Get<IList<string>>("Galleries");
@@ -45,22 +41,28 @@ namespace TheGalleryWalk.Controllers
                     catch
                     {
                         galleryIds = new List<string>();
-                        
+                        user["Galleries"] = galleryIds;
+                        await user.SaveAsync();
                     }
 
+                    IEnumerable<ParseObject> GalleryEntities;
                     var galleryQuery = ParseObject.GetQuery("Gallery");
-                        if (galleryIds.Count > 0)
-                        {
-                            galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
+                    GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
+                    G_Owner.GalleryAdd = new GalleryEntity();
 
-                            GalleryEntities = await galleryQuery.FindAsync();
-                        
-                            G_Owner.GalleryEntities = GalleryEntities;
-                        ViewBag.showForm = 0;
-                            return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
-                        }
-                                 
-                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", G_Owner);
+                    if (galleryIds.Count > 0)
+                    {
+                        galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
+
+                        GalleryEntities = await galleryQuery.FindAsync();
+
+                        G_Owner.GalleryEntities = GalleryEntities;
+
+                        return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
+                    }
+
+                    return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
+
                 }
                 catch (Exception ex)
                 {
@@ -77,24 +79,6 @@ namespace TheGalleryWalk.Controllers
 
         public ActionResult Login()
         {
-            return View();
-        }
-
-        public ActionResult OwnedGalleries()
-        {
-            Debug.WriteLine("Called load owned Galleries ");
-            if (ParseUser.CurrentUser != null)
-            {
-              var user = ParseUser.CurrentUser;
-                //   Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
-                //   Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
-                Debug.WriteLine(user.ToString());
-                ViewBag.EmailAddress = user.Email;
-             //   ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
-             //   ViewBag.Name = user.Get<String>("Name");
-                return View();
-            }
-            Debug.WriteLine("Parse user Is not valid");
             return View();
         }
 

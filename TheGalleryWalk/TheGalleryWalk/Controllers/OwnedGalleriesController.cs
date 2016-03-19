@@ -56,7 +56,7 @@ namespace TheGalleryWalk.Controllers
                     return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
                 }
 
-                return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
+                return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", G_Owner);
             }
             else
             {
