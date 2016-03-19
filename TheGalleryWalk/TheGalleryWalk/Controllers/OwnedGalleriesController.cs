@@ -24,11 +24,11 @@ namespace TheGalleryWalk.Controllers
             }
             else if (user.IsAuthenticated)
             {
-                List<string> galleryIds;// = user.Get<List<string>>("Galleries");
+                IList<string> galleryIds;// = user.Get<List<string>>("Galleries");
 
                 try
                 {
-                    galleryIds = user.Get<List<string>>("Galleries");
+                    galleryIds = user.Get<IList<string>>("Galleries");
                     Debug.WriteLine("Post load galleries id array");
                     Debug.WriteLine(galleryIds);
                 }
@@ -40,27 +40,19 @@ namespace TheGalleryWalk.Controllers
                 }
 
                 IEnumerable<ParseObject> GalleryEntities;
-
+                
                 var galleryQuery = ParseObject.GetQuery("Gallery");
                 if (galleryIds.Count > 0)
                 {
                    
                     Debug.WriteLine("Proc ID ", galleryIds.ToString());
-                    galleryQuery = galleryQuery.WhereContainedIn("ObjectId", galleryIds);
+                    galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
                     
                     GalleryEntities = await galleryQuery.FindAsync();
-                    var GE = GalleryEntities.ToArray<ParseObject>();
+                  
+                    Debug.WriteLine("Before loading page with entities + Count = " + GalleryEntities.Count());
 
-
-                    for(var i = 0; i < GalleryEntities.Count(); i++)
-                    {
-                       
-                    }
-                    GalleryOwnerEntity owner = new GalleryOwnerEntity();
-                    Debug.WriteLine("Before loading page with entities");
-                    ViewBag.Data = GalleryEntities;
-
-                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
+                    return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", GalleryEntities);
                 }
 
                 return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
@@ -100,8 +92,7 @@ namespace TheGalleryWalk.Controllers
                 }
                 catch (Exception ex)
                 {
-
-                    galleryIds = new List<string>();
+                    NSLog("Oh No, there was a problem");
                 }
 
 

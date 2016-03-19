@@ -44,22 +44,30 @@ namespace TheGalleryWalk.Controllers
 
                     
 
-                        Debug.WriteLine("Post get Id's", galleryIds.ToString());
+                        Debug.WriteLine("Post get Id's: ");
+                        Debug.WriteLine(galleryIds.Count);
+
+                        for(var i = 0; i< galleryIds.Count; i++)
+                        {
+                            Debug.WriteLine(galleryIds[i].ToString());
+                        }
                         IEnumerable<ParseObject> GalleryEntities;
 
                         var galleryQuery = ParseObject.GetQuery("Gallery");
                         if (galleryIds.Count > 0)
                         {
-                            for (var i = 0; i < galleryIds.Count; i++)
-                            {
-                                galleryQuery = galleryQuery.WhereEqualTo("ObjectId", galleryIds[i].ToString());
-                            }
-                            GalleryEntities = await galleryQuery.FindAsync();
-                            Debug.WriteLine("Post Gallery Query");
-                            ViewBag.Data = GalleryEntities;
 
-                            return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
+                            galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
+
+                            GalleryEntities = await galleryQuery.FindAsync();
+                         
+                          
+                           
+                            Debug.WriteLine("Before loading page with entities + Count = " + GalleryEntities.Count());
+
+                            return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", GalleryEntities);
                         }
+
                     }
                     catch (Exception ex)
                     {

@@ -46,6 +46,7 @@ namespace TheGalleryWalk.Models
         public string Address { get; set; }
 
         public IList<string> Galleries { get; set; }
+        public IList<GalleryEntity> GalleryEntities;
 
     }
 

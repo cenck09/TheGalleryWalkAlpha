@@ -1,4 +1,5 @@
-﻿@model TheGalleryWalk.Models.GalleryOwnerEntity
+﻿@using Parse;
+@model IEnumerable<ParseObject>
 
 
 @{
@@ -23,14 +24,15 @@
     </div> 
    
     <div style="text-align:center;">
+        @using System.Diagnostics;
         @try
         {
-            @Html.Partial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", @Model.Galleries)
+            @Html.Partial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", @Model)
 
         }
         catch (Exception ex)
         {
-
+            Debug.WriteLine("There was an error ::    "+ex);
         }
     </div>
     <div>

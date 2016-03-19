@@ -1,5 +1,6 @@
-﻿
-@using Parse;
+﻿@using Parse;
+@model IEnumerable<ParseObject>
+
 @using System.Diagnostics;
 
 
@@ -7,14 +8,14 @@
     <link rel="stylesheet" href="~/Content/GalleryWalkStyles.css">
 
 </head>
-@if (ViewBag.Data != null)
+@if (Model != null)
 {
-    Debug.WriteLine("Data is not null");
-    foreach (var item in ViewBag.Data)
+    Debug.WriteLine("Data is not null " + Model);
+    foreach (var item in Model)
     {
-       <div class="GalleryInfoWindow" style="margin:10px">
-                <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
-                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@item.Name</p>
-       </div>
-    }
-}
+        <div class="GalleryInfoWindow" style="margin:10px">
+            <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+            <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(item.Get<string>("Name"));</p>
+        </div>
+        }
+  }
