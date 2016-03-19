@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Parse;
 
 namespace TheGalleryWalk.Models
 {
@@ -44,6 +45,10 @@ namespace TheGalleryWalk.Models
         [StringLength(200, ErrorMessage = "Please enter a valid address.")]
         [DisplayName("Address")]
         public string Address { get; set; }
+
+        public IList<string> Galleries { get; set; }
+        public IEnumerable<ParseObject> GalleryEntities { get; set; }
+        public GalleryEntity GalleryAdd { get; set; }
 
     }
 

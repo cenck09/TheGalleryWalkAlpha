@@ -1,5 +1,6 @@
 ﻿using Parse;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,31 +24,43 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> LoginNext(LoginData loginData, FormCollection data)
         {
-            Debug.WriteLine("Username " + loginData.EmailAddress);
-            Debug.WriteLine("Password " + loginData.Password);
-
+          
             if (ModelState.IsValid)
             { 
-                // other fields can be set just like with ParseObject
                 try
                 {   
-                    Debug.WriteLine("Before User Login");
                     await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
-                    Debug.WriteLine("Post login user");
+
+                    IList<string> galleryIds;
+                    IEnumerable<ParseObject> GalleryEntities;
+
+                    GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
+                    G_Owner.GalleryAdd = new GalleryEntity();
 
                     var user = ParseUser.CurrentUser;
-                    //   Debug.WriteLine("Parse user Name: " + user.Get<String>("Username"));
-                    //   Debug.WriteLine("Parse user: " + user.Get<String>("Email"));
-                   // ViewBag.EmailAddress = user.Email;
-                    var ownerData = new GalleryOwnerData();
-                    ownerData.EmailAddress = user.Email;
-                  //  ownerData.Name = user.Get<string>("Name");
-                  //  ownerData.PhoneNumber = user.Get<string>("PhoneNumber");
-                   // ViewBag.phoneNumber = user.Get<String>("PhoneNumber");
-                    //   ViewBag.Name = user.Get<String>("Name");
-                    return View("OwnedGalleries", ownerData);
-                    
-                    //return View("OwnedGalleries");
+                    try
+                    {
+                        galleryIds = user.Get<IList<string>>("Galleries");
+                    }
+                    catch
+                    {
+                        galleryIds = new List<string>();
+                        
+                    }
+
+                    var galleryQuery = ParseObject.GetQuery("Gallery");
+                        if (galleryIds.Count > 0)
+                        {
+                            galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
+
+                            GalleryEntities = await galleryQuery.FindAsync();
+                        
+                            G_Owner.GalleryEntities = GalleryEntities;
+                        ViewBag.showForm = 0;
+                            return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
+                        }
+                                 
+                    return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn", G_Owner);
                 }
                 catch (Exception ex)
                 {
