@@ -12,6 +12,12 @@ namespace TheGalleryWalk
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            /*
+            routes.MapRoute(
+               name: "Gallery",
+               url: "Gallery/GalleryView/{id}",
+               defaults: new { controller = "Gallery", action = "GalleryView", id = UrlParameter.Optional }
+           );*/
 
             routes.MapRoute(
                 name: "OwnedGalleries",
