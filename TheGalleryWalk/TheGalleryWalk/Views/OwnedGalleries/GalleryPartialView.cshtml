@@ -22,6 +22,7 @@
         gallery.phoneNumber = item.Get<string>("PhoneNumber");
         gallery.Artists = item.Get<IList<string>>("Artists");
         gallery.Artworks = item.Get<IList<string>>("Artworks");
+        gallery.ArtworkAdd = new ArtworkEntity();
 
         name = item.Get<string>("Name");
         <a  href="@Url.Action("GalleryView","Gallery", gallery)">

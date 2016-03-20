@@ -1,4 +1,6 @@
-﻿@using Parse;
+﻿@using System.Diagnostics;
+@using TheGalleryWalk.Models;
+@using Parse;
 @model TheGalleryWalk.Models.GalleryEntity
 
 @{
@@ -17,21 +19,42 @@
 </head>
 
 <body>
+    
+       <div class="EntityInformationWindow" id="EntityInformationWindow">
+
+           <div  class="EntityImage">
+               <img id="EntityImage" src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+           </div>
+           <h3 class="EntityInfo">
+               @Model.Name
+           </h3>
+           <h6 class="EntityInfo">
+               @Model.EmailAddress
+           </h6>
+           <h6 class="EntityInfo">
+               @Model.phoneNumber
+           </h6>
+           <h6 class="EntityInfo">
+               @Model.Address
+           </h6>
+
+       </div>
+
+
+
+    <span class="Divider"></span>
 
     <div class="Info-header">
         <h3>
-            @{string name = Model.Name;}
-            @Html.Raw(name)
+            Displayed Artwork
         </h3>
     </div>
 
-
     <div style="text-align:center;">
-        @using System.Diagnostics;
         @try
         {
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
-
+            Debug.WriteLine("Model Artwork entities :: "+ Model.ArtworkEntities);
+            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", Model.ArtworkEntities );
         }
         catch (Exception ex)
         {
@@ -47,7 +70,20 @@
         </div>
         <div id="addArtworkForm" style="display:none">
 
-           
+          
+                @try
+                {
+                    @Html.Partial("~/Views/AddArtwork/Index.cshtml", Model.ArtworkAdd);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+
+                    ArtworkEntity newArtwork = new ArtworkEntity();
+                    newArtwork.ParentGalleryParseID = Model.parseID;
+                    @Html.Partial("~/Views/AddArtwork/Index.cshtml", newArtwork);
+                }
+            
         </div>
     </div>
 </body>
@@ -58,6 +94,8 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+
+        $("#EntityInformationWindow").height($("#EntityImage").height()+40);
         document.getElementById("addArtworkBtn").onclick = function () { addForm() };
         document.getElementById("rmvArtworkBtn").onclick = function () { removeForm() };
 

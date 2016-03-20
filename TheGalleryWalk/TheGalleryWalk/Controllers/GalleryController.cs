@@ -15,7 +15,7 @@ namespace TheGalleryWalk.Controllers
 
         public async Task<ActionResult> GalleryView(GalleryEntity selectedGallery)
         {
-            ViewBag.showForm = 0;
+             ViewBag.showForm = 0;
 
             var user = ParseUser.CurrentUser;
             if(!verifyUser(user))
@@ -36,25 +36,24 @@ namespace TheGalleryWalk.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddArtwork(GalleryEntity registerData)
+        public async Task<ActionResult> AddArtwork(ArtworkEntity registerData)
         {
+            if (!verifyUser(ParseUser.CurrentUser))
+            {
+                return returnFailedUserView();
+            }
 
             var galleryQuery = ParseObject.GetQuery("Gallery");
-            galleryQuery = galleryQuery.WhereContainedIn("objectId", registerData.parseID);
+            galleryQuery = galleryQuery.WhereEqualTo("objectId", registerData.ParentGalleryParseID);
 
-            GalleryParseObject Gallery = null;
-            IEnumerable<ParseObject> GalleryEntities = await galleryQuery.FindAsync();
+            ParseObject Gallery = null;
             try
             {
-                foreach (var item in GalleryEntities)
-                {
-                    Gallery = (item as GalleryParseObject);
-                }
+                Gallery = await galleryQuery.FirstAsync();
             }
             catch(Exception ex)
             {
                 Debug.WriteLine(ex);
-                return returnFailedUserView();
             }
            
 
@@ -63,16 +62,14 @@ namespace TheGalleryWalk.Controllers
 
             ViewBag.showForm = 1;
 
-            var user = ParseUser.CurrentUser;
-            var Query = ParseObject.GetQuery("Artwork");
-
             IList<string> Ids;
             try
             {
-                Ids = Gallery.Get<IList<string>>("Galleries");
+                Ids = Gallery.Get<IList<string>>("Artworks");
             }
-            catch
+            catch(Exception ex)
             {
+                Debug.WriteLine(ex);
                 Ids = new List<string>();
             }
 
@@ -82,20 +79,37 @@ namespace TheGalleryWalk.Controllers
             {
                 try
                 {
-                    IEnumerable<ParseObject> Entities = new List<ParseObject>();
                     await Entity.SaveAsync();
 
                     Ids.Add(Entity.ObjectId);
-                    user["Galleries"] = Ids;
+                    Gallery["Artworks"] = Ids;
                 
-                    await user.SaveAsync();
+                    await Gallery.SaveAsync();
+                    ViewBag.showForm = 0;
+
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
                 }
             }
-            return await baseView(user, registerData);
+            GalleryEntity galleryToReturn = new GalleryEntity();
+            galleryToReturn.Name = Gallery.Get<string>("Name");
+            galleryToReturn.EmailAddress = Gallery.Get<string>("Email");
+            galleryToReturn.phoneNumber = Gallery.Get<string>("PhoneNumber");
+            try
+            {
+                galleryToReturn.Address = Gallery.Get<string>("Address");
+            }catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            galleryToReturn.parseID = Gallery.ObjectId;
+            galleryToReturn.Artworks = Ids;
+            galleryToReturn.ArtworkAdd = registerData;
+
+            return await baseView(ParseUser.CurrentUser, galleryToReturn);
         }
 
 
@@ -106,16 +120,28 @@ namespace TheGalleryWalk.Controllers
 
         public async Task<ActionResult> baseView(ParseUser user, GalleryEntity selectedGallery)
         {
-           
+            var galleryQuery = ParseObject.GetQuery("Gallery");
+            galleryQuery = galleryQuery.WhereEqualTo("objectId", selectedGallery.parseID);
+
+            ParseObject Gallery = null;
+            try
+            {
+                Gallery = await galleryQuery.FirstAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
             IList<string> artworkIds; // = user.Get<IList<string>>("Galleries");
             try
             {
-                artworkIds = user.Get<IList<string>>("Artwork");
+                artworkIds = Gallery.Get<IList<string>>("Artworks");
             }
-            catch
+            catch(Exception ex)
             {
                 artworkIds = new List<string>();
-                selectedGallery.Artworks = artworkIds;
+                Debug.WriteLine(ex);
             }
 
             IEnumerable<ParseObject> ArtworkEntities;

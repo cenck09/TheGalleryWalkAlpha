@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Diagnostics;
 
 @model TheGalleryWalk.Models.ArtworkEntity
 <!--
@@ -15,8 +15,12 @@
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
-                Add Gallery
+                Add Artwork
             </h3>
+
+            <ol class="formField" style="display:none">
+                @Html.TextBoxFor(model => model.ParentGalleryParseID, new { @Value = Model.ParentGalleryParseID, @class = "formFieldInput" })
+            </ol>
 
             <ol class="formField">
                 @Html.LabelFor(model => model.Artist, new { @class = "formFieldTitle" })
