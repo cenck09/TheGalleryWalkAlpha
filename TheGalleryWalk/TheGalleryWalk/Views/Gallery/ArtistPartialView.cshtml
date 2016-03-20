@@ -11,8 +11,9 @@
 </head>
 @if (Model != null)
 {
-    string name;
+    Debug.WriteLine("Artist partial called with non null model");
     Debug.WriteLine("Data is not null " + Model.Count());
+    string name;
     foreach (var item in Model)
     {
         name = item.Get<string>("Name");

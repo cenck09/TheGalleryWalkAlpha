@@ -44,7 +44,7 @@ namespace TheGalleryWalk.Models
 
         public IList<string> Artists { get; set; }
         public IEnumerable<ParseObject> ArtistEntities { get; set; }
-        public ArtworkEntity ArtistAdd { get; set; }
+        public ArtistEntity ArtistAdd { get; set; }
 
 
     }

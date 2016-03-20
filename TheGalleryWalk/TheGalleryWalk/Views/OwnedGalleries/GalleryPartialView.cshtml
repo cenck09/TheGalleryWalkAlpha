@@ -20,8 +20,26 @@
         gallery.Name = item.Get<string>("Name");
         gallery.EmailAddress = item.Get<string>("Email");
         gallery.phoneNumber = item.Get<string>("PhoneNumber");
-        gallery.Artists = item.Get<IList<string>>("Artists");
-        gallery.Artworks = item.Get<IList<string>>("Artworks");
+        try
+        {
+            gallery.Artists = item.Get<IList<string>>("Artists");
+        }
+        catch (Exception ex)
+        {
+            gallery.Artists = new List<string>();
+            Debug.WriteLine(ex);
+        }
+
+        try
+        {
+            gallery.Artworks = item.Get<IList<string>>("Artworks");
+        }
+        catch (Exception ex)
+        {
+            gallery.Artworks = new List<string>();
+            Debug.WriteLine(ex);
+        }
+        gallery.ArtistAdd = new ArtistEntity();
         gallery.ArtworkAdd = new ArtworkEntity();
 
         name = item.Get<string>("Name");

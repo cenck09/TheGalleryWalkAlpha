@@ -53,14 +53,14 @@
     <div style="text-align:center;">
         @try
         {
-            Debug.WriteLine("Model Artwork entities :: "+ Model.ArtworkEntities);
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", Model.ArtworkEntities );
-        }
-        catch (Exception ex)
-        {
+            Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
+            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
+            }
+            catch (Exception ex)
+            {
             Debug.WriteLine("There was an error ::    " + ex);
-        }
-    </div>
+            }
+</div>
     <div>
         <div class="add-btn" id="addArtworkBtn">
             <h4>+ Artwork  </h4>
@@ -71,19 +71,61 @@
         <div id="addArtworkForm" style="display:none">
 
           
-                @try
-                {
-                    @Html.Partial("~/Views/AddArtwork/Index.cshtml", Model.ArtworkAdd);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-
-                    ArtworkEntity newArtwork = new ArtworkEntity();
-                    newArtwork.ParentGalleryParseID = Model.parseID;
-                    @Html.Partial("~/Views/AddArtwork/Index.cshtml", newArtwork);
-                }
+            @if (Model.ArtworkAdd == null)
+            {
+                ArtworkEntity newArtwork = new ArtworkEntity();
+                newArtwork.ParentGalleryParseID = Model.parseID;
+                @Html.Partial("~/Views/AddArtwork/Index.cshtml", model: newArtwork);
+            }
+            else
+            {
+                @Html.Partial("~/Views/AddArtwork/Index.cshtml", Model.ArtworkAdd);
+            }
+               
             
+        </div>
+    </div>
+
+
+    <span class="Divider"></span>
+
+    <div class="Info-header">
+        <h3>
+            Displayed Artists
+        </h3>
+    </div>
+
+    <div style="text-align:center;">
+        @try
+        {
+            IEnumerable<ParseObject> artists = Model.ArtistEntities;
+            Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", artists);
+            }
+            catch (Exception ex)
+            {
+            Debug.WriteLine("There was an error ::    " + ex);
+            }
+</div>
+    <div>
+        <div class="add-btn" id="addArtistBtn">
+            <h4>+ Artist  </h4>
+        </div>
+        <div class="add-btn" id="rmvArtistBtn" style="display:none;">
+            <h4>- Artist  </h4>
+        </div>
+        <div id="addArtistForm" style="display:none">
+
+            @if (Model.ArtistAdd == null)
+            {
+                ArtistEntity newArtist = new ArtistEntity();
+                newArtist.ParentGalleryParseID = Model.parseID;
+                @Html.Partial("~/Views/AddArtist/Index.cshtml", model: newArtist);
+            }
+            else
+            {
+                @Html.Partial("~/Views/AddArtist/Index.cshtml", model: Model.ArtistAdd);
+            }
+
         </div>
     </div>
 </body>
@@ -96,30 +138,47 @@
     $(document).ready(function () {
 
         $("#EntityInformationWindow").height($("#EntityImage").height()+40);
-        document.getElementById("addArtworkBtn").onclick = function () { addForm() };
-        document.getElementById("rmvArtworkBtn").onclick = function () { removeForm() };
+        document.getElementById("addArtworkBtn").onclick = function () { addArtworkForm() };
+        document.getElementById("rmvArtworkBtn").onclick = function () { removeArtworkForm() };
+
+        document.getElementById("addArtistBtn").onclick = function () { addArtistForm() };
+        document.getElementById("rmvArtistBtn").onclick = function () { removeArtistForm() };
 
         var showFormValue = @(ViewBag.showForm);
 
         var url = '@Url.Action("AddArtwork", "Gallery")';
-        if(!showFormValue){
-            removeForm();
-        }else{
-            addForm();
+        if(showFormValue == 1){
+            addArtworkForm();   
+        }else if (showFormValue == -1){
+            addArtistForm();
         }
 
-        function removeForm() {
+        function removeArtworkForm() {
             $('#addArtworkForm').hide();
             $("#addArtworkBtn").show();
             $("#rmvArtworkBtn").hide();
         }
 
-        function addForm() {
+        function addArtworkForm() {
           //  $('#addGalleryForm').load(url);
             $("#addArtworkForm").show();
             $("#addArtworkBtn").hide();
             $("#rmvArtworkBtn").show();
             document.getElementById('addArtworkForm').scrollIntoView(true);
+        }
+
+        function removeArtistForm() {
+            $('#addArtistForm').hide();
+            $("#addArtistBtn").show();
+            $("#rmvArtistBtn").hide();
+        }
+
+        function addArtistForm() {
+            //  $('#addGalleryForm').load(url);
+            $("#addArtistForm").show();
+            $("#addArtistBtn").hide();
+            $("#rmvArtistBtn").show();
+            document.getElementById('addArtistForm').scrollIntoView(true);
         }
 
     })

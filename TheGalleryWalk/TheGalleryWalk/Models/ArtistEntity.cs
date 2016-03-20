@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ using Parse;
 
 namespace TheGalleryWalk.Models
 {
-    public class ArtworkEntity
+    public class ArtistEntity
     {
 
         [Key]
@@ -21,19 +22,16 @@ namespace TheGalleryWalk.Models
         [DisplayName("Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter an Artist."),
-             StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
-        [DisplayName("Artist")]
-        public string Artist { get; set; }
+        [DisplayName("Style")]
+        public string Style { get; set; }
 
+        [DisplayName("Description")]
         public string Description { get; set; }
 
 
         public IList<string> Artworks { get; set; }
         public IEnumerable<ParseObject> ArtworkEntities { get; set; }
-        public GalleryEntity ArtworkAdd { get; set; }
         public string ParentGalleryParseID { get; set; }
 
-        public List<SelectListItem> addArtistFormlistItem;
     }
 }

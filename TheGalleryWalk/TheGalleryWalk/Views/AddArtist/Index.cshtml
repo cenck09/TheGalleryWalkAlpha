@@ -1,6 +1,7 @@
-﻿@using System.Diagnostics;
+﻿
+@using System.Diagnostics;
 
-@model TheGalleryWalk.Models.ArtworkEntity
+@model TheGalleryWalk.Models.ArtistEntity
 <!--
     The Partial View that loads a form below the + Artwork buttom
 -->
@@ -11,47 +12,27 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
-   
-
-    @using (Html.BeginForm("AddArtwork", "Gallery", FormMethod.Post, new { id = "AddArtworkForm" }))
+    @using (Html.BeginForm("AddArtist", "Gallery", FormMethod.Post, new { id = "AddArtistForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
-                Add Artwork
+                Add Artist
             </h3>
 
             <ol class="formField" style="display:none">
                 @Html.TextBoxFor(model => model.ParentGalleryParseID, new { @Value = Model.ParentGalleryParseID, @class = "formFieldInput" })
             </ol>
 
-            <ol class="formField">
-                @Html.LabelFor(model => model.Artist, new { @class = "formFieldTitle" })
-               @try
-               {
-                if (Model.addArtistFormlistItem.Count > 0)
-                {
-                       Debug.WriteLine("Add Artwork Artist list item count = " + Model.addArtistFormlistItem.Count);
-
-                    @Html.DropDownListFor(model => model.Artist, Model.addArtistFormlistItem, "-- Select Artist --", new { @class = "formFieldInput" })
-                   }
-                   else
-                   {
-                    <li class="formFieldInput" id="artistAddError"> You need to add an artist first</li>
-                   }
-               }
-               catch (Exception ex)
-               {
-                   Debug.WriteLine("Failed to get Artist List : " + ex);
-                    <li id="artistAddError"> You need to add an artist first</li>
-                }
-                @Html.ValidationMessageFor(model => model.Artist, String.Empty, new { @class = "errorMessage" })
-
-            </ol>
-
+           
             <ol class="formField">
                 @Html.LabelFor(model => model.Name, new { @class = "formFieldTitle" })
                 @Html.TextBoxFor(model => model.Name, String.Empty, new { @class = "formFieldInput" })
                 @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "errorMessage" })
+            </ol>
+            <ol class="formField">
+                @Html.LabelFor(model => model.Style, new { @class = "formFieldTitle" })
+                @Html.TextBoxFor(model => model.Style, String.Empty, new { @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.Style, String.Empty, new { @class = "errorMessage" })
             </ol>
             <ol class="formField">
                 @Html.LabelFor(model => model.Description, new { @class = "formFieldTitle" })
@@ -60,7 +41,7 @@
             </ol>
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
-               <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
+                <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
             </div>
 
         </fieldset>
