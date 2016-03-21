@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Diagnostics;
 
 @model TheGalleryWalk.Models.ArtworkEntity
 <!--
@@ -11,18 +11,43 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
+   
+
     @using (Html.BeginForm("AddArtwork", "Gallery", FormMethod.Post, new { id = "AddArtworkForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
-                Add Gallery
+                Add Artwork
             </h3>
+
+            <ol class="formField" style="display:none">
+                @Html.TextBoxFor(model => model.ParentGalleryParseID, new { @Value = Model.ParentGalleryParseID, @class = "formFieldInput" })
+            </ol>
 
             <ol class="formField">
                 @Html.LabelFor(model => model.Artist, new { @class = "formFieldTitle" })
-                @Html.TextBoxFor(model => model.Artist, String.Empty, new { @class = "formFieldInput" })
+               @try
+               {
+                if (Model.addArtistFormlistItem.Count > 0)
+                {
+                       Debug.WriteLine("Add Artwork Artist list item count = " + Model.addArtistFormlistItem.Count);
+
+                    @Html.DropDownListFor(model => model.Artist, Model.addArtistFormlistItem, "-- Select Artist --", new { @class = "formFieldInput" })
+                   }
+                   else
+                   {
+                    <li class="formFieldInput" id="artistAddError"> You need to add an artist first</li>
+                   }
+               }
+               catch (Exception ex)
+               {
+                   Debug.WriteLine("Failed to get Artist List : " + ex);
+                    <li id="artistAddError"> You need to add an artist first</li>
+                }
                 @Html.ValidationMessageFor(model => model.Artist, String.Empty, new { @class = "errorMessage" })
+
             </ol>
+
             <ol class="formField">
                 @Html.LabelFor(model => model.Name, new { @class = "formFieldTitle" })
                 @Html.TextBoxFor(model => model.Name, String.Empty, new { @class = "formFieldInput" })

@@ -149,11 +149,13 @@
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArtistEntity.cs" />
     <Compile Include="Models\ArtworkEntity.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
     <Compile Include="Models\GalleryOwnerData.cs" />
@@ -218,6 +220,8 @@
     <Content Include="Views\Gallery\GalleryView.cshtml" />
     <Content Include="Views\Gallery\ArtworkPartialView.cshtml" />
     <Content Include="Views\AddArtwork\Index.cshtml" />
+    <Content Include="Views\AddArtist\Index.cshtml" />
+    <Content Include="Views\Gallery\ArtistPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
