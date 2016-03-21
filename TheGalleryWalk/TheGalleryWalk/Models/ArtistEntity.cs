@@ -29,6 +29,12 @@ namespace TheGalleryWalk.Models
         [DisplayName("Description")]
         public string Description { get; set; }
 
+        [DisplayName("Birth")]
+        public string Birth { get; set; }
+
+        [DisplayName("Death")]
+        public string Death { get; set; }
+
 
         public IList<string> Artworks { get; set; }
         public IEnumerable<ParseObject> ArtworkEntities { get; set; }
