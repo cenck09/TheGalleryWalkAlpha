@@ -17,5 +17,7 @@ namespace TheGalleryWalk.Models
 
         public IList<string> Galleries;
 
+        public IList<string> Artists;
+
     }
 }

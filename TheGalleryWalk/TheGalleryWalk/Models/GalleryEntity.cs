@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Parse;
 
 namespace TheGalleryWalk.Models
 {
@@ -18,6 +18,7 @@ namespace TheGalleryWalk.Models
               StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
         [DisplayName("Name")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Please enter your Phone Number."),
                RegularExpression("^[01]?[- .]?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})[- .]?\\d{3}[- .]?\\d{4}$", ErrorMessage = "Please enter the number with the area code ###-###-####")]
         [DisplayName("Phone Number")]
@@ -32,6 +33,19 @@ namespace TheGalleryWalk.Models
         [StringLength(200, ErrorMessage = "Please enter a valid address.")]
         [DisplayName("Address")]
         public string Address { get; set; }
+
+        public string parseID { get; set; }
+
+
+        public IList<string> Artworks { get; set; }
+        public IEnumerable<ParseObject> ArtworkEntities { get; set; }
+        public ArtworkEntity ArtworkAdd { get; set; }
+
+
+        public IList<string> Artists { get; set; }
+        public IEnumerable<ParseObject> ArtistEntities { get; set; }
+        public ArtworkEntity ArtistAdd { get; set; }
+
 
     }
 

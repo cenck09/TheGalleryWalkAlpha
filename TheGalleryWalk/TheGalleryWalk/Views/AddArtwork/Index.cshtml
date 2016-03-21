@@ -1,8 +1,8 @@
 ﻿
 
-@model TheGalleryWalk.Models.GalleryEntity
+@model TheGalleryWalk.Models.ArtworkEntity
 <!--
-    The Partial View that loads a form below the + Gallery buttom
+    The Partial View that loads a form below the + Artwork buttom
 -->
 @{
     ViewBag.Title = "Index";
@@ -11,7 +11,7 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
-    @using (Html.BeginForm("AddGallery", "OwnedGalleries", FormMethod.Post, new { id = "AddGalleryForm" }))
+    @using (Html.BeginForm("AddArtwork", "Gallery", FormMethod.Post, new { id = "AddArtworkForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
@@ -19,29 +19,26 @@
             </h3>
 
             <ol class="formField">
+                @Html.LabelFor(model => model.Artist, new { @class = "formFieldTitle" })
+                @Html.TextBoxFor(model => model.Artist, String.Empty, new { @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.Artist, String.Empty, new { @class = "errorMessage" })
+            </ol>
+            <ol class="formField">
                 @Html.LabelFor(model => model.Name, new { @class = "formFieldTitle" })
                 @Html.TextBoxFor(model => model.Name, String.Empty, new { @class = "formFieldInput" })
                 @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "errorMessage" })
             </ol>
             <ol class="formField">
-                @Html.LabelFor(model => model.EmailAddress, new { @class = "formFieldTitle" })
-                @Html.TextBoxFor(model => model.EmailAddress, String.Empty, new { @class = "formFieldInput" })
-                @Html.ValidationMessageFor(model => model.EmailAddress, String.Empty, new { @class = "errorMessage" })
-            </ol>
-            <ol class="formField">
-                @Html.LabelFor(model => model.phoneNumber, new { @class = "formFieldTitle" })
-                @Html.TextBoxFor(model => model.phoneNumber, String.Empty, new { @class = "formFieldInput" })
-                @Html.ValidationMessageFor(model => model.phoneNumber, String.Empty, new { @class = "errorMessage" })
+                @Html.LabelFor(model => model.Description, new { @class = "formFieldTitle" })
+                @Html.TextBoxFor(model => model.Description, String.Empty, new { @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @class = "errorMessage" })
             </ol>
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
                <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
-                 
             </div>
 
         </fieldset>
-
-
     }
 
     <script type="text/javascript">

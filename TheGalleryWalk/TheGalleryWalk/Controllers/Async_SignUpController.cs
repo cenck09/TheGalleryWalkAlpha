@@ -35,8 +35,9 @@ namespace TheGalleryWalk.Controllers
                     Name = registerData.Name,
                     PhoneNumber = registerData.phoneNumber,
                     Enabled = false,
-                    Galleries = new List<string>()
-            };
+                    Galleries = new List<string>(),
+                    Artists = new List<string>()
+                };
 
              
 

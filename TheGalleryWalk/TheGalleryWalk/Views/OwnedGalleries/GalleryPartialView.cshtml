@@ -1,7 +1,8 @@
 ﻿@using Parse;
-@model IEnumerable<ParseObject>
-
+@using System.Threading;
 @using System.Diagnostics;
+@using TheGalleryWalk.Models;
+@model IEnumerable<ParseObject>
 
 
 <head>
@@ -14,12 +15,20 @@
     Debug.WriteLine("Data is not null " + Model.Count());
     foreach (var item in Model)
     {
-        Debug.WriteLine("Data Item is  " + item.ClassName);
-        name = item.Get<string>("Name");
+        GalleryEntity gallery = new GalleryEntity();
+        gallery.parseID = item.ObjectId;
+        gallery.Name = item.Get<string>("Name");
+        gallery.EmailAddress = item.Get<string>("Email");
+        gallery.phoneNumber = item.Get<string>("PhoneNumber");
+        gallery.Artists = item.Get<IList<string>>("Artists");
+        gallery.Artworks = item.Get<IList<string>>("Artworks");
 
-        <div class="GalleryInfoWindow" style="margin:10px">
-            <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
-            <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(name)</p>
-        </div>
+        name = item.Get<string>("Name");
+        <a  href="@Url.Action("GalleryView","Gallery", gallery)">
+            <div class="GalleryInfoWindow" style="margin:10px">
+                <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(name)</p>
+            </div>
+        </a>
     }
 }
