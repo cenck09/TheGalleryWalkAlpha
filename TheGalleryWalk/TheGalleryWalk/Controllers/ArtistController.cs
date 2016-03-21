@@ -29,6 +29,10 @@ namespace TheGalleryWalk.Controllers
            
         }// EOM
 
+        private Task<ActionResult> baseView(ParseUser user, ArtistEntity selectedArtist)
+        {
+            throw new NotImplementedException();
+        }
 
         public ActionResult AddArtwork()
         {
