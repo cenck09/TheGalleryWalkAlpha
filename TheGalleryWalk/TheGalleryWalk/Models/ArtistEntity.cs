@@ -13,6 +13,7 @@ namespace TheGalleryWalk.Models
 {
     public class ArtistEntity
     {
+        public string parseID { get; set; }
 
         [Key]
         public int ID { get; set; }
