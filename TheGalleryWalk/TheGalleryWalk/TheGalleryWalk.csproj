@@ -149,6 +149,7 @@
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
@@ -222,6 +223,9 @@
     <Content Include="Views\AddArtwork\Index.cshtml" />
     <Content Include="Views\AddArtist\Index.cshtml" />
     <Content Include="Views\Gallery\ArtistPartialView.cshtml" />
+    <Content Include="Views\Artist\ArtistPartialView.cshtml" />
+    <Content Include="Views\Artist\ArtworkPartialView.cshtml" />
+    <Content Include="Views\Artist\ArtistView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
