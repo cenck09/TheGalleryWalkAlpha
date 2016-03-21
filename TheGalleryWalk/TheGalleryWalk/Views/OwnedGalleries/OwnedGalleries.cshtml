@@ -27,7 +27,6 @@
         @using System.Diagnostics;
         @try
         {
-            Debug.WriteLine(""+(Model.GalleryEntities as IEnumerable<ParseObject>).Count());
             Html.RenderPartial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", (Model.GalleryEntities as IEnumerable<ParseObject>));
 
             }
@@ -45,7 +44,14 @@
         </div>
          <div id="addGalleryForm" style="display:none">
            
-             @Html.Partial("~/Views/AddGallery/Index.cshtml", Model.GalleryAdd);
+             @if (Model == null)
+             {
+                @Html.Partial("~/Views/AddGallery/Index.cshtml", new TheGalleryWalk.Models.GalleryEntity());
+             }
+             else
+             {
+                @Html.Partial("~/Views/AddGallery/Index.cshtml", Model.GalleryAdd);
+             }
 
          </div>
     </div>
@@ -81,6 +87,7 @@
             $("#addGalleryForm").show();
             $("#addGalleryBtn").hide();
             $("#rmvGalleryBtn").show();
+            document.getElementById('addGalleryForm').scrollIntoView(true);
         }
 
 

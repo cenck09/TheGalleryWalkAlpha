@@ -17,6 +17,46 @@
 .color-primary-3 { color: #047296 }
 .color-primary-4 { color: #054B62 }
 
+#artistAddError{
+    color:white;
+    text-align:center;
+}
+
+.Divider{
+    background-color:lightblue;
+    height: 0.5px;
+    width:90%;
+    margin:auto;
+    margin-bottom:40px;
+    margin-top:40px;
+    display: block;
+    box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
+}
+
+.EntityInformationWindow{
+    background-color: lightblue;
+    box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
+    text-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
+    border-radius: 5px;
+    max-width: 700px;
+    min-width: 300px;
+    margin:auto;
+    margin-top:50px;
+    padding: 10px;
+}
+
+.EntityImage{
+    border-radius: 5px;
+    float:left;
+    margin:10px;
+}
+.EntityInfo{
+    display:block;
+    color:white;
+    text-align:center;
+    padding:10px;
+    margin:auto;
+}
 
 .GalleryInfoWindow{
     background-color:rgba(73, 223, 189 ,1.0);
