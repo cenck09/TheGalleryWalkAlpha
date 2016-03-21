@@ -224,10 +224,7 @@
     <Content Include="Views\AddArtwork\Index.cshtml" />
     <Content Include="Views\AddArtist\Index.cshtml" />
     <Content Include="Views\Gallery\ArtistPartialView.cshtml" />
-    <Content Include="Views\Artist\ArtistPartialView.cshtml" />
-    <Content Include="Views\Artist\ArtworkPartialView.cshtml" />
     <Content Include="Views\Artist\ArtistView.cshtml" />
-    <Content Include="Views\OwnedArtists\ArtistPartialView.cshtml" />
     <Content Include="Views\OwnedArtists\OwnedArtists.cshtml" />
   </ItemGroup>
   <ItemGroup>

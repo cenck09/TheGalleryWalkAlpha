@@ -95,7 +95,7 @@ namespace TheGalleryWalk.Controllers
 
             IEnumerable<ParseObject> ArtistEntities;
             var artistQuery = ParseObject.GetQuery("Artist");
-            GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
+            GalleryEntity G_Owner = new GalleryEntity();
             G_Owner.ArtistAdd = new ArtistEntity();
 
             if (artistIds.Count > 0)

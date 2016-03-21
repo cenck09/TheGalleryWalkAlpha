@@ -47,11 +47,9 @@ namespace TheGalleryWalk.Models
         public string Address { get; set; }
 
         public IList<string> Galleries { get; set; }
-        public IList<string> Artists { get; set; }
         public IEnumerable<ParseObject> GalleryEntities { get; set; }
-        public IEnumerable<ParseObject> ArtistEntities { get; set; }
         public GalleryEntity GalleryAdd { get; set; }
-        public ArtistEntity ArtistAdd { get; set; }
+        
 
     }
 

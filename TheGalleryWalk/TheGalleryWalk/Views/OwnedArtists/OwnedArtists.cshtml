@@ -1,5 +1,5 @@
 ﻿@using Parse;
-@model TheGalleryWalk.Models.GalleryOwnerEntity
+@model TheGalleryWalk.Models.GalleryEntity
 
 
 @{
@@ -27,7 +27,7 @@
         @using System.Diagnostics;
         @try
         {
-            Html.RenderPartial("~/Views/OwnedArtists/ArtistPartialView.cshtml", (Model.GalleryEntities as IEnumerable<ParseObject>));
+            Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", (Model.ArtistEntities as IEnumerable<ParseObject>));
 
             }
             catch (Exception ex)
