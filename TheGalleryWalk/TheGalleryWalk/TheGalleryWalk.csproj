@@ -153,6 +153,7 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OwnedArtworkController.cs" />
     <Compile Include="Controllers\OwnedArtistsController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -228,6 +229,7 @@
     <Content Include="Views\Artist\ArtistView.cshtml" />
     <Content Include="Views\OwnedArtists\OwnedArtists.cshtml" />
     <Content Include="Views\OwnedArtwork\OwnedArtwork.cshtml" />
+    <Content Include="Views\Artwork\ArtworkView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

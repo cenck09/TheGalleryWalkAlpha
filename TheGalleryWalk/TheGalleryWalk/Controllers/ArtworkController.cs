@@ -37,6 +37,7 @@ namespace TheGalleryWalk.Controllers
         {
             ArtworkEntity artworkToReturn = new ArtworkEntity();
             artworkToReturn.Name = Artwork.Get<string>("Name");
+            artworkToReturn.Artist = Artwork.Get<string>("Artist");
             artworkToReturn.Description = Artwork.Get<string>("Description");
             
 
@@ -54,12 +55,12 @@ namespace TheGalleryWalk.Controllers
             IList<string> userArtworkIds; // = user.Get<IList<string>>("Galleries");
             try
             {
-                userArtworkIds = user.Get<IList<string>>("Artists");
+                userArtworkIds = user.Get<IList<string>>("Artwork");
             }
             catch (Exception ex)
             {
                 userArtworkIds = new List<string>();
-                Debug.WriteLine("Failed to get artist list from user "+ex);
+                Debug.WriteLine("Failed to get artwork list from user "+ex);
             }
             userArtworkQuery = userArtworkQuery.WhereContainedIn("objectId", userArtworkIds);
 
@@ -89,7 +90,7 @@ namespace TheGalleryWalk.Controllers
             IList<string> artworkIds; // = user.Get<IList<string>>("Galleries");
             try
             {
-                artworkIds = Gallery.Get<IList<string>>("Artworks");
+                artworkIds = Gallery.Get<IList<string>>("Artwork");
             }
             catch(Exception ex)
             {

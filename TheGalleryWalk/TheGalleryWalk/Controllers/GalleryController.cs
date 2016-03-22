@@ -59,7 +59,6 @@ namespace TheGalleryWalk.Controllers
 
             var Entity = new ParseObject("Artwork");
             Entity.Add("Name", registerData.Name);
-            Entity.Add("Artist", registerData.Artist);
             Entity.Add("Description", registerData.Description);
 
             Debug.WriteLine("ARTWORK ENTITY ARTIST ID =  " + Entity.Get<string>("Artist"));
@@ -288,7 +287,7 @@ namespace TheGalleryWalk.Controllers
 
             }
 
-            selectedGallery.ArtworkAdd.addArtistFormlistItem = new List<SelectListItem>();
+            selectedGallery.ArtworkAdd.addArtworkFormlistItem = new List<SelectListItem>();
 
             if (userArtistEntities.Count() == 0)
             {
@@ -297,7 +296,7 @@ namespace TheGalleryWalk.Controllers
             foreach (ParseObject item in userArtistEntities)
             {
                 Debug.WriteLine("adding artist to list :: " + item.Get<string>("Name"));
-                selectedGallery.ArtworkAdd.addArtistFormlistItem.Add(new SelectListItem
+                selectedGallery.ArtworkAdd.addArtworkFormlistItem.Add(new SelectListItem
                 {
                     Text = item.Get<string>("Name"),
                     Value = item.ObjectId
