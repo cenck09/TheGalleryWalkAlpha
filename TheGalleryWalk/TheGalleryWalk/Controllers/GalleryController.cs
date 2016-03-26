@@ -97,8 +97,6 @@ namespace TheGalleryWalk.Controllers
                 }
             }
             GalleryEntity galleryToReturn = getGalleryEntityForParseObject(Gallery);
-            galleryToReturn.parseID = Gallery.ObjectId;
-            galleryToReturn.Artworks = Ids;
             galleryToReturn.ArtworkAdd = registerData;
             galleryToReturn.ArtistAdd = new ArtistEntity();
             galleryToReturn.ArtistAdd.ParentGalleryParseID = Gallery.ObjectId;
@@ -200,9 +198,7 @@ namespace TheGalleryWalk.Controllers
                 }
             }
             GalleryEntity galleryToReturn = getGalleryEntityForParseObject(Gallery);
-            galleryToReturn.parseID = Gallery.ObjectId;
-            galleryToReturn.Artists = Ids;
-            galleryToReturn.ArtistAdd = registerData;
+             galleryToReturn.ArtistAdd = registerData;
             galleryToReturn.ArtworkAdd = new ArtworkEntity();
             galleryToReturn.ArtworkAdd.ParentGalleryParseID = Gallery.ObjectId;
 
@@ -217,33 +213,8 @@ namespace TheGalleryWalk.Controllers
             GalleryEntity galleryToReturn = new GalleryEntity();
             galleryToReturn.Name = Gallery.Get<string>("Name");
             galleryToReturn.EmailAddress = Gallery.Get<string>("Email");
-            galleryToReturn.phoneNumber = Gallery.Get<string>("PhoneNumber");
-            try
-            {
-                galleryToReturn.Artists = Gallery.Get<IList<string>>("Artists");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Failed to get artist id list from gallery parse object : " + ex);
-                galleryToReturn.Artists = new List<string>();
-            }
-            try
-            {
-                galleryToReturn.Artworks = Gallery.Get<IList<string>>("Artworks");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Failed to get artist id list from gallery parse object : " + ex);
-                galleryToReturn.Artworks = new List<string>();
-            }
-            try
-            {
-                galleryToReturn.Address = Gallery.Get<string>("Address");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Failed to get address "+ ex);
-            }
+            galleryToReturn.PhoneNumber = Gallery.Get<string>("PhoneNumber");
+          
 
             return galleryToReturn;
         }
@@ -253,7 +224,7 @@ namespace TheGalleryWalk.Controllers
         {
             var galleryQuery = ParseObject.GetQuery("Gallery");
             var userArtistQuery = ParseObject.GetQuery("Artist");
-            galleryQuery = galleryQuery.WhereEqualTo("objectId", selectedGallery.parseID);
+            galleryQuery = galleryQuery.WhereEqualTo("objectId", selectedGallery.ParseID);
 
 
             IList<string> userArtworkIds; // = user.Get<IList<string>>("Galleries");
@@ -283,7 +254,7 @@ namespace TheGalleryWalk.Controllers
               
                 selectedGallery.ArtworkAdd = new ArtworkEntity();
            
-                selectedGallery.ArtworkAdd.ParentGalleryParseID = selectedGallery.parseID;
+                selectedGallery.ArtworkAdd.ParentGalleryParseID = selectedGallery.ParseID;
 
             }
 

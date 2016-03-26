@@ -165,9 +165,7 @@
     <Compile Include="Models\ArtistUserEntity.cs" />
     <Compile Include="Models\ArtworkEntity.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
-    <Compile Include="Models\GalleryOwnerData.cs" />
     <Compile Include="Models\GalleryOwnerParseUser.cs" />
-    <Compile Include="Models\GalleryOwnerSession.cs" />
     <Compile Include="Models\GalleryParseObject.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />

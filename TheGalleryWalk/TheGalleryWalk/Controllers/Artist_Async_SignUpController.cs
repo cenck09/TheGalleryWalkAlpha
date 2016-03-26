@@ -14,12 +14,7 @@ namespace TheGalleryWalk.Controllers
 {
     public class Artist_Async_SignUpController : Controller
     {
-        // GET: Artist_Async_SignUp
-        public ActionResult Index()
-        {
-            return View();
-        }
-  
+     
         public ActionResult Signup()
         {
             return View();
@@ -30,10 +25,7 @@ namespace TheGalleryWalk.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                Debug.WriteLine("The Model is valid!");
-
-                var user = new ArtistUserEntity()
+                var user = new ArtistParseUser()
                 {
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
@@ -41,21 +33,13 @@ namespace TheGalleryWalk.Controllers
                     Name = registerData.Name,
                     PhoneNumber = registerData.phoneNumber,
                     Enabled = false,
-                    Galleries = new List<string>(),
                 };
 
-
-
                 Debug.WriteLine("Creating user: " + user.Name);
-                Debug.WriteLine("On Server: " + ParseClient.CurrentConfiguration.Server);
-                Debug.WriteLine("On AppId: " + ParseClient.CurrentConfiguration.ApplicationId);
 
-                // other fields can be set just like with ParseObject
                 try
                 {
-                    Debug.WriteLine("Before User Create");
                     await user.SignUpAsync();
-                    Debug.WriteLine("Post Sign up user");
                     return View("CompletedSignUp");
 
                 }
@@ -66,8 +50,6 @@ namespace TheGalleryWalk.Controllers
                 }
 
             }// end if ModelState.IsValid
-
-            Debug.WriteLine("ReachedModel NotValid");
 
             return View();
         }

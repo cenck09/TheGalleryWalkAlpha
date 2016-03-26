@@ -11,8 +11,10 @@ namespace TheGalleryWalk.Models
 {
     public class GalleryEntity
     {
-           [Key]
-           public int ID { get; set; }
+        [Key]
+        public int ID { get; set; }
+        public string ParseID { get; set; }
+
 
         [Required(ErrorMessage = "Please enter a name."),
               StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
@@ -22,7 +24,7 @@ namespace TheGalleryWalk.Models
         [Required(ErrorMessage = "Please enter your Phone Number."),
                RegularExpression("^[01]?[- .]?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})[- .]?\\d{3}[- .]?\\d{4}$", ErrorMessage = "Please enter the number with the area code ###-###-####")]
         [DisplayName("Phone Number")]
-        public string phoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter your email address."),
          RegularExpression("^(?(\"\")(\"\".+?\"\"@)|(([0-9a-zA-Z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-zA-Z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,6}))$", ErrorMessage = "Please enter a valid Email Address"),
@@ -34,18 +36,17 @@ namespace TheGalleryWalk.Models
         [DisplayName("Address")]
         public string Address { get; set; }
 
-        public string parseID { get; set; }
+        [StringLength(200, ErrorMessage = "Please enter a valid website.")]
+        [DisplayName("Website")]
+        public string Website { get; set; }
 
+        public string GalleryOwnerID { get; set; }
 
-        public IList<string> Artworks { get; set; }
         public IEnumerable<ParseObject> ArtworkEntities { get; set; }
         public ArtworkEntity ArtworkAdd { get; set; }
 
-
-        public IList<string> Artists { get; set; }
         public IEnumerable<ParseObject> ArtistEntities { get; set; }
         public ArtistEntity ArtistAdd { get; set; }
-
 
     }
 

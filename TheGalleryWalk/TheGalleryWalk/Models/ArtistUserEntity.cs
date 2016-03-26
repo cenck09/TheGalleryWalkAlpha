@@ -44,17 +44,7 @@ namespace TheGalleryWalk.Models
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
 
-        [StringLength(200, ErrorMessage = "Please enter a valid address.")]
-        [DisplayName("Address")]
-        public string Address { get; set; }
-
-        public IList<string> Artworks { get; set; }
-        public IEnumerable<ParseObject> ArtworkEntities { get; set; }
-        public ArtworkEntity ArtworkAdd { get; set; }
-
 
     }
-
-
 }
 
