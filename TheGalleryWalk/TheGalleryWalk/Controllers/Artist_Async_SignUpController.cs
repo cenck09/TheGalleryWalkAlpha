@@ -9,25 +9,31 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Collections;
 
+
 namespace TheGalleryWalk.Controllers
 {
-    public class Async_SignUpController : AsyncController
+    public class Artist_Async_SignUpController : Controller
     {
-
+        // GET: Artist_Async_SignUp
+        public ActionResult Index()
+        {
+            return View();
+        }
+  
         public ActionResult Signup()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Signup(GalleryOwnerEntity registerData)
+        public async Task<ActionResult> Signup(ArtistUserEntity registerData)
         {
             if (ModelState.IsValid)
             {
-              
+
                 Debug.WriteLine("The Model is valid!");
 
-                var user = new GalleryOwnerParseUser()
+                var user = new ArtistUserEntity()
                 {
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
@@ -36,16 +42,14 @@ namespace TheGalleryWalk.Controllers
                     PhoneNumber = registerData.phoneNumber,
                     Enabled = false,
                     Galleries = new List<string>(),
-                    InternalArtists = new List<string>(),
-                    ExternalArtists = new List<string>()
                 };
 
-             
 
-                Debug.WriteLine("Creating user: "+user.Name);
+
+                Debug.WriteLine("Creating user: " + user.Name);
                 Debug.WriteLine("On Server: " + ParseClient.CurrentConfiguration.Server);
                 Debug.WriteLine("On AppId: " + ParseClient.CurrentConfiguration.ApplicationId);
-               
+
                 // other fields can be set just like with ParseObject
                 try
                 {
@@ -55,13 +59,13 @@ namespace TheGalleryWalk.Controllers
                     return View("CompletedSignUp");
 
                 }
-                catch ( Exception ex)
+                catch (Exception ex)
                 {
-                    Debug.WriteLine("There was an error "+ ex);
+                    Debug.WriteLine("There was an error " + ex);
                     return View("ErrorSignUp");
                 }
-            
-               }// end if ModelState.IsValid
+
+            }// end if ModelState.IsValid
 
             Debug.WriteLine("ReachedModel NotValid");
 

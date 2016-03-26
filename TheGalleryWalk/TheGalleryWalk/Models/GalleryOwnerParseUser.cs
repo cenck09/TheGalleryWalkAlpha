@@ -17,7 +17,15 @@ namespace TheGalleryWalk.Models
 
         public IList<string> Galleries;
 
-        public IList<string> Artists;
+        public IList<string> InternalArtists;
 
+        public IList<string> ExternalArtists;
+
+
+        public GalleryOwnerEntity toEntityFromSelf()
+        {
+
+
+        }
     }
 }
