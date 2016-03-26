@@ -146,22 +146,29 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Artist_Async_SignUpController.cs" />
+    <Compile Include="Controllers\ArtworkController.cs" />
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OwnedArtworkController.cs" />
+    <Compile Include="Controllers\OwnedArtistsController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ArtistEntity.cs" />
+    <Compile Include="Models\ArtistParseClass.cs" />
+    <Compile Include="Models\ArtistParseUser.cs" />
+    <Compile Include="Models\ArtistUserEntity.cs" />
     <Compile Include="Models\ArtworkEntity.cs" />
+    <Compile Include="Models\ArtworkParseClass.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
-    <Compile Include="Models\GalleryOwnerData.cs" />
     <Compile Include="Models\GalleryOwnerParseUser.cs" />
-    <Compile Include="Models\GalleryOwnerSession.cs" />
-    <Compile Include="Models\GalleryParseObject.cs" />
+    <Compile Include="Models\GalleryParseClass.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
     <Compile Include="Models\GalleryOwnerEntity.cs" />
@@ -222,10 +229,14 @@
     <Content Include="Views\AddArtwork\Index.cshtml" />
     <Content Include="Views\AddArtist\Index.cshtml" />
     <Content Include="Views\Gallery\ArtistPartialView.cshtml" />
+    <Content Include="Views\Artist\ArtistView.cshtml" />
+    <Content Include="Views\OwnedArtists\OwnedArtists.cshtml" />
+    <Content Include="Views\Artwork\ArtworkView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
+    <Folder Include="Views\Artist_Async_SignUp\" />
     <Folder Include="Views\Async_SignOut\" />
   </ItemGroup>
   <ItemGroup>
