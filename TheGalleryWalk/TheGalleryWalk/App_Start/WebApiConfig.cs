@@ -28,6 +28,8 @@ namespace TheGalleryWalk
 
                 ParseObject.RegisterSubclass<GalleryOwnerParseUser>();
                 ParseObject.RegisterSubclass<GalleryParseClass>();
+                ParseObject.RegisterSubclass<ArtworkParseClass>();
+                ParseObject.RegisterSubclass<ArtistParseClass>();
 
                 ParseClient.Initialize(new ParseClient.Configuration {
                     ApplicationId = "gallerywalk",

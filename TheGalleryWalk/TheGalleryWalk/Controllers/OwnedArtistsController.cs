@@ -104,7 +104,7 @@ namespace TheGalleryWalk.Controllers
 
                 ArtistEntities = await artistQuery.FindAsync();
 
-                G_Owner.ArtistEntities = ArtistEntities;
+               // G_Owner.ArtistEntities = ArtistEntities;
 
                 return View("~/Views/OwnedArtists/OwnedArtists.cshtml", "_LayoutLoggedIn", G_Owner);
             }

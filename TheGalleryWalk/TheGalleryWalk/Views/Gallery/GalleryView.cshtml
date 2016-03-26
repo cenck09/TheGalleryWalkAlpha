@@ -32,7 +32,7 @@
                @Model.EmailAddress
            </h6>
            <h6 class="EntityInfo">
-               @Model.phoneNumber
+               @Model.PhoneNumber
            </h6>
            <h6 class="EntityInfo">
                @Model.Address
@@ -54,7 +54,7 @@
         @try
         {
             Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
+            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", Model.ArtworkEntities);
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@
             @if (Model.ArtworkAdd == null)
             {
                 ArtworkEntity newArtwork = new ArtworkEntity();
-                newArtwork.ParentGalleryParseID = Model.parseID;
+                newArtwork.ParentGalleryParseID = Model.ParseID;
                 @Html.Partial("~/Views/AddArtwork/Index.cshtml", model: newArtwork);
             }
             else
@@ -118,16 +118,17 @@
             @if (Model.ArtistAdd == null)
             {
                 ArtistEntity newArtist = new ArtistEntity();
-                newArtist.ParentGalleryParseID = Model.parseID;
-                @Html.Partial("~/Views/AddArtist/Index.cshtml", model: newArtist);
+                newArtist.ParentGalleryParseID = Model.ParseID;
+            //    @Html.Partial("~/Views/AddArtist/Index.cshtml", model: newArtist);
             }
             else
             {
-                @Html.Partial("~/Views/AddArtist/Index.cshtml", model: Model.ArtistAdd);
+             //   @Html.Partial("~/Views/AddArtist/Index.cshtml", model: Model.ArtistAdd);
             }
 
         </div>
     </div>
+
 </body>
 
 </html>

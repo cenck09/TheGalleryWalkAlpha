@@ -161,12 +161,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ArtistEntity.cs" />
+    <Compile Include="Models\ArtistParseClass.cs" />
     <Compile Include="Models\ArtistParseUser.cs" />
     <Compile Include="Models\ArtistUserEntity.cs" />
     <Compile Include="Models\ArtworkEntity.cs" />
+    <Compile Include="Models\ArtworkParseClass.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
     <Compile Include="Models\GalleryOwnerParseUser.cs" />
-    <Compile Include="Models\GalleryParseObject.cs" />
+    <Compile Include="Models\GalleryParseClass.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
     <Compile Include="Models\GalleryOwnerEntity.cs" />
@@ -229,7 +231,6 @@
     <Content Include="Views\Gallery\ArtistPartialView.cshtml" />
     <Content Include="Views\Artist\ArtistView.cshtml" />
     <Content Include="Views\OwnedArtists\OwnedArtists.cshtml" />
-    <Content Include="Views\OwnedArtwork\OwnedArtwork.cshtml" />
     <Content Include="Views\Artwork\ArtworkView.cshtml" />
   </ItemGroup>
   <ItemGroup>
