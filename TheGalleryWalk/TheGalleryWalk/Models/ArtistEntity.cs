@@ -36,8 +36,7 @@ namespace TheGalleryWalk.Models
         public string Death { get; set; }
 
 
-        public IList<string> Artworks { get; set; }
-        public IEnumerable<ParseObject> ArtworkEntities { get; set; }
+        public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }
 
     }

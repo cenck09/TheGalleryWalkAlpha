@@ -50,6 +50,7 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+
         public GalleryEntity toEntityWithSelf()
         {
             return new GalleryEntity()
@@ -58,23 +59,10 @@ namespace TheGalleryWalk.Models
                 EmailAddress = this.Email,
                 PhoneNumber = this.PhoneNumber,
                 ParseID = this.ObjectId,
+                GalleryOwnerID = this.GalleryOwnerID,
                 Website = this.Website,
-                GalleryOwnerID = this.GalleryOwnerID
+                Address = this.Address
             };
         }
-
-        public GalleryParseClass getInstanceFromParseObject(ParseObject entity)
-        {
-            return new GalleryParseClass()
-            {
-                Email = entity.Get<string>("Email"),
-                Name = entity.Get<string>("Name"),
-                PhoneNumber = entity.Get<string>("PhoneNumber"),
-                ObjectId = entity.ObjectId,
-                GalleryOwnerID = entity.Get<string>("GalleryOwnerID"),
-                Website = entity.Get<string>("Website")
-            };
-        }
-
     }
 }

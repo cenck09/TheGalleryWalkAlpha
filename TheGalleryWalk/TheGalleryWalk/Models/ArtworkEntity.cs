@@ -35,7 +35,7 @@ namespace TheGalleryWalk.Models
         public string Description { get; set; }
         
 
-        public IEnumerable<ParseObject> ArtworkEntities { get; set; }
+        public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }
 
         public List<SelectListItem> addArtworkFormlistItem;

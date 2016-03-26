@@ -42,10 +42,10 @@ namespace TheGalleryWalk.Models
 
         public string GalleryOwnerID { get; set; }
 
-        public IEnumerable<ParseObject> ArtworkEntities { get; set; }
+        public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public ArtworkEntity ArtworkAdd { get; set; }
 
-        public IEnumerable<ParseObject> ArtistEntities { get; set; }
+        public IEnumerable<ArtistParseClass> ArtistEntities { get; set; }
         public ArtistEntity ArtistAdd { get; set; }
 
     }
