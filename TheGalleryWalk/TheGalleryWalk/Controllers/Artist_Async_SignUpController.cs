@@ -32,7 +32,7 @@ namespace TheGalleryWalk.Controllers
                     Email = registerData.EmailAddress,
                     Name = registerData.Name,
                     PhoneNumber = registerData.phoneNumber,
-                    Enabled = false,
+                    Enabled = 0
                 };
 
                 Debug.WriteLine("Creating user: " + user.Name);

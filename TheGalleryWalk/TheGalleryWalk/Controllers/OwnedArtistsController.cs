@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
@@ -16,100 +14,69 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> OwnedArtists()
         {
             ViewBag.showForm = 0;
+            var userInstance = ParseUser.CurrentUser;
+            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(userInstance);
 
-            var user = ParseUser.CurrentUser;
-            if (user == null)
+            if (this.verifyUser(userInstance))
             {
-                return returnFailedUserView();
-
-            } else if (user.IsAuthenticated)
-            {
-                return await returnBaseView(user);
+                return await baseView(user);
             }
-            else
-            {
-                return returnFailedUserView();
-            }
+            else{return returnFailedUserView();}
         }
 
         public ActionResult AddArtist()
         {
-            Debug.WriteLine("Add artist function called");
             return PartialView("~/Views/AddArtist/Index.cshtml");
         }
 
         [HttpPost]
         public async Task<ActionResult> AddArtist(ArtistEntity registerData)
         {
-            var user = ParseUser.CurrentUser;
-            if (!verifyUser(user))
-            {
-                return returnFailedUserView();
-            }
-
-            var artistQuery = ParseObject.GetQuery("Artist");
-            var artistEntity = new ParseObject("Artist");
-            artistEntity.Add("Name", registerData.Name);
-            artistEntity.Add("Style", registerData.Style);
-            artistEntity.Add("Artworks", new List<string>());
+            if (!verifyUser(ParseUser.CurrentUser)){ return returnFailedUserView(); }
 
             ViewBag.showForm = 1;
-        
-            IList<string> artistIds = user.Get<IList<string>>("Artists");
-         
+            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(ParseUser.CurrentUser);
+
             if (ModelState.IsValid)
             {
+                ArtistParseClass artist = new ArtistParseClass()
+                {
+                    Name = registerData.Name,
+                    Style = registerData.Style,
+                    Birth = registerData.Birth,
+                    Death = registerData.Death,
+                    Description = registerData.Description,
+                    GalleryOwnerID = user.ObjectId
+                };
+
                 try
                 {
-                    await artistEntity.SaveAsync();
-
-                    artistIds.Add(artistEntity.ObjectId);
-                    user["Artists"] = artistIds;
-                
-                    await user.SaveAsync();
+                    await artist.SaveAsync();
                     ViewBag.showForm = 0;
-
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                }
-            }
-
-            return await returnBaseView(user);
+                catch (Exception ex){Debug.WriteLine(ex);}
+            }       
+            return await baseView(user);
         }
 
-        public async Task<ActionResult> returnBaseView(ParseUser user)
+        public async Task<ActionResult> baseView(GalleryOwnerParseUser user)
         {
-            IList<string> artistIds; // = user.Get<IList<string>>("Galleries");
+            GalleryOwnerEntity owner = user.toEntityWithSelf();
             try
             {
-                artistIds = user.Get<IList<string>>("Artists");
+                var query = from item in new ParseQuery<ArtistParseClass>()
+                            where item.GalleryOwnerID == user.ObjectId
+                            select item;
+
+                owner.ArtistEntities = await query.FindAsync();
             }
-            catch
+            catch (Exception ex)
             {
-                artistIds = new List<string>();
-                user["Artists"] = artistIds;
-                await user.SaveAsync();
+                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                owner.ArtistEntities = new List<ArtistParseClass>();
             }
 
-            IEnumerable<ParseObject> ArtistEntities;
-            var artistQuery = ParseObject.GetQuery("Artist");
-            GalleryEntity G_Owner = new GalleryEntity();
-            G_Owner.ArtistAdd = new ArtistEntity();
-
-            if (artistIds.Count > 0)
-            {
-                artistQuery = artistQuery.WhereContainedIn("objectId", artistIds);
-
-                ArtistEntities = await artistQuery.FindAsync();
-
-               // G_Owner.ArtistEntities = ArtistEntities;
-
-                return View("~/Views/OwnedArtists/OwnedArtists.cshtml", "_LayoutLoggedIn", G_Owner);
-            }
-
-            return View("../OwnedArtists/OwnedArtists", "_LayoutLoggedIn");
+            return View("~/Views/OwnedArtists/OwnedArtists.cshtml", "_LayoutLoggedIn", owner);
         }
 
         public ActionResult returnFailedUserView()
@@ -119,19 +86,10 @@ namespace TheGalleryWalk.Controllers
 
         private bool verifyUser(ParseUser user)
         {
-            if (user == null)
-            {
-                return false;
-
-            }
-            else if (!user.IsAuthenticated)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            if (user == null) { return false; }
+            else if (!user.IsAuthenticated) { return false; }
+            else { return true; }
         }
+
     }
 }

@@ -9,15 +9,28 @@ namespace TheGalleryWalk.Models
 {
     [ParseClassName("ArtistParseUser")]
     public class ArtistParseUser : ParseUser
-    {   
-        public string Name;
+    {
+        [ParseFieldName("Name")]
+        public string Name
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public string PhoneNumber;
+        [ParseFieldName("PhoneNumber")]
+        public string PhoneNumber
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public Boolean Enabled;
+        [ParseFieldName("Enabled")]
+        public int Enabled
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
 
-        public IList<string> Artwork;
-
-     
+      
     }
 }

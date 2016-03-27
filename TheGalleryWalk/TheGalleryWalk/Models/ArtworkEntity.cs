@@ -29,8 +29,6 @@ namespace TheGalleryWalk.Models
         [DisplayName("Artist")]
         public string Artist { get; set; }
 
-        [Required(ErrorMessage = "Please enter a Description."),
-             StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a description with more than one letter.")]
         [DisplayName("Description")]
         public string Description { get; set; }
         
