@@ -33,6 +33,8 @@ namespace TheGalleryWalk.Controllers
 
                     await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
 
+                    var user = ParseUser.CurrentUser;
+                    Debug.WriteLine("---- Class Name for login ----"+user.ClassName);
                     return RedirectToAction("OwnedGalleries", "OwnedGalleries", null);
 
                 }

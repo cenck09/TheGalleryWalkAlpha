@@ -174,6 +174,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Backgrounds\brushed.png" />
+    <Content Include="Content\Backgrounds\brushed_%402X.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\GalleryWalkStyles.css" />
@@ -231,11 +233,14 @@
     <Content Include="Views\Artist\ArtistView.cshtml" />
     <Content Include="Views\OwnedArtists\OwnedArtists.cshtml" />
     <Content Include="Views\Artwork\ArtworkView.cshtml" />
+    <Content Include="Views\ArtsyPortal\ArtsyPortalView.cshtml" />
+    <Content Include="Views\Artist_Async_SignUp\Signup.cshtml" />
+    <Content Include="Views\Artist_Async_SignUp\CompletedSignUp.cshtml" />
+    <Content Include="Views\Artist_Async_SignUp\ErrorSignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
-    <Folder Include="Views\Artist_Async_SignUp\" />
     <Folder Include="Views\Async_SignOut\" />
   </ItemGroup>
   <ItemGroup>

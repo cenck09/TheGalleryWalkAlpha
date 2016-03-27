@@ -17,6 +17,19 @@
 .color-primary-3 { color: #047296 }
 .color-primary-4 { color: #054B62 }
 
+.portalOptionWindow{
+    padding:15px;
+    margin:20px;
+    display:inline-block;
+    background-color: whitesmoke;
+    color: black;
+    text-shadow:rgba(0,0,0,0.4) 0px 0px 5px;
+    height:130px;
+    width: 200px;
+    border-radius:5px;
+    box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
+}
+
 #artistAddError{
     color:white;
     text-align:center;
@@ -109,6 +122,12 @@
    box-shadow: rgba(0,0,0,0.6) 0px 0px 8px;
 }
 
+.WebsiteBody{
+    background-repeat: repeat;
+    background-image: url('Backgrounds/brushed_@2X.png');
+    //    background-attachment: fixed;
+
+}
 
 .InfoViewHeader{
      height:300px;
@@ -152,6 +171,8 @@
 .menuGrade {
     background-color: rgba(2, 188, 240, 0.9);
     color:deepskyblue;
+    box-shadow: rgba(0,0,0,0.4) 0px 0px 5px;
+
  /*   background: #07BCF8;  For browsers that do not support gradients */
 /*    background: -webkit-linear-gradient(#07BCF8, #047296);  For Safari 5.1 to 6.0 */
 /*    background: -o-linear-gradient(#07BCF8, #047296); For Opera 11.1 to 12.0 */
@@ -167,6 +188,13 @@
 
 .menuTitle{
     color:whitesmoke;
+    font-family: "fertigo-pro",sans-serif;
+}
+
+.portalTitle{
+    color:whitesmoke;
+    font-size:small;
+    font-family: "fertigo-pro",sans-serif;
 }
 
 
