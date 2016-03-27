@@ -22,7 +22,6 @@
                 Login
             </h3>
 
-
             <ol class="formField">
                 @Html.LabelFor(model => model.EmailAddress, new { @class = "formFieldTitle" })
                 @Html.TextBoxFor(model => model.EmailAddress, String.Empty , new { @placeholder = ViewBag.Message, @readonly = true , @class = "formFieldInput" })
@@ -38,10 +37,7 @@
                 <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Login</button>
             </div>
 
-
         </fieldset>
-
-
     }
 
     <script type="text/javascript">

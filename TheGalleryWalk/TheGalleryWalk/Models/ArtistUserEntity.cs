@@ -36,7 +36,7 @@ namespace TheGalleryWalk.Models
         [Required(ErrorMessage = "Please enter your Phone Number."),
         RegularExpression("^[01]?[- .]?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})[- .]?\\d{3}[- .]?\\d{4}$", ErrorMessage = "Please enter the number with the area code ###-###-####")]
         [DisplayName("Phone Number")]
-        public string phoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter your email address."),
          RegularExpression("^(?(\"\")(\"\".+?\"\"@)|(([0-9a-zA-Z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-zA-Z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,6}))$", ErrorMessage = "Please enter a valid Email Address"),
@@ -44,6 +44,12 @@ namespace TheGalleryWalk.Models
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
 
+        public string ParseID;
+
+        public int Enabled;
+
+        public ArtworkEntity ArtworkAdd;
+        public IEnumerable<ArtworkParseClass> ArtworkEntities;
 
     }
 }

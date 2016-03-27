@@ -1,4 +1,5 @@
-﻿@using System.Diagnostics;
+﻿
+@using System.Diagnostics;
 
 @model TheGalleryWalk.Models.ArtworkEntity
 <!--
@@ -11,9 +12,9 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
-   
 
-    @using (Html.BeginForm("AddArtwork", "Gallery", FormMethod.Post, new { id = "AddArtworkForm" }))
+
+    @using (Html.BeginForm("AddArtwork", "Artist_OwnedArtwork", FormMethod.Post, new { id = "AddArtworkForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
@@ -21,30 +22,7 @@
             </h3>
 
             <ol class="formField" style="display:none">
-                @Html.TextBoxFor(model => model.ParentGalleryParseID, new { @Value = Model.ParentGalleryParseID, @class = "formFieldInput" })
-            </ol>
-
-            <ol class="formField">
-                @Html.LabelFor(model => model.Artist, new { @class = "formFieldTitle" })
-               @try
-               {
-                if (Model.addArtworkFormlistItem.Count > 0)
-                {
-                       Debug.WriteLine("Add Artwork Artist list item count = " + Model.addArtworkFormlistItem.Count);
-
-                    @Html.DropDownListFor(model => model.Artist, Model.addArtworkFormlistItem, "-- Select Artist --", new { @class = "formFieldInput" })
-                   }
-                   else
-                   {
-                    <li  id="artworkAddError" style="color:white"> You need to add an Artist to your account first</li>
-                   }
-               }
-               catch (Exception ex)
-               {
-                   Debug.WriteLine("Failed to get Artist List : " + ex);
-                    <li id="artworkAddError" style="color:white"> You need to add an Artist to your account first</li>
-                }
-              
+                @Html.TextBoxFor(model => model.Artist, new { @Value = Model.parseID, @class = "formFieldInput" })
             </ol>
 
             <ol class="formField">
@@ -59,7 +37,7 @@
             </ol>
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
-               <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
+                <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
             </div>
 
         </fieldset>

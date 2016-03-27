@@ -2,10 +2,11 @@
 <html>
 <head>
 
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
     <script src="https://use.typekit.net/wrs6bwk.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/GalleryWalkStyles.css">
-   
+
+
 </head>
 <body class="WebsiteBody">
     <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center">
@@ -25,20 +27,28 @@
                     <span class="icon-bar" style="background-color:white"></span>
                     <span class="icon-bar" style="background-color:white"></span>
                 </button>
-                    @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand menuTitle"})
+                @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand  menuTitle" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav GalleryNavBar menuItem navbar-nav">
                     <li><a class="menuItem" href="@Url.Action("Index","Home")">Home</a></li>
                     <li><a class="menuItem" href="@Url.Action("About","Home")">About</a></li>
-                    <li><a class="menuItem" href="@Url.Action("Contact","Home")">Contact</a></li>       
+                    <li><a class="menuItem" href="@Url.Action("Contact","Home")">Contact</a></li>
                 </ul>
-                <ul class="nav navbar-nav menuItem navbar-right">
+                <div class="nav navbar-nav menuItem navbar-right">
+                    <div class="dropdown">
+                        <span class="glyphicon glyphicon-cog" style="height:50px; padding-top:11px;  font-size:23px;" data-toggle="dropdown"></span>
+                        <ul class="dropdown-menu menuGrade" role="menu" aria-labelledby="menu1">
+                            <li><a class="menuItem" href="@Url.Action("Artist_OwnedArtwork", "Artist_OwnedArtwork", null, null, null)">My Artwork</a></li>
 
-                    @Html.ActionLink("The Artsy Portal", "Login", "Async_SignIn", new { area = "" }, new { @class = "navbar-brand portalTitle" })
+                           <!-- <li><a class="menuItem" href="Url.Action("OwnedGalleries", "OwnedGalleries", null, null,null)">Account</a></li> -->
+                            <li role="presentation" class="divider"></li>
+                            <li><a class="menuItem" href="@Url.Action("SignOut" , "Async_SignOut")"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
 
-                  
-                </ul>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -47,15 +57,16 @@
             @RenderBody()
         </div>
         <hr />
-      
+
     </div>
     <div class="container body-content">
 
     </div>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 
 </body>
 </html>
+
