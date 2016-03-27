@@ -25,7 +25,15 @@ namespace TheGalleryWalk.Controllers
            
             if (this.verifyUser())
             {
-                return View("../Home/Index", "_LayoutLoggedIn");
+                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
+                {
+                    return View("../Home/Index", "_LayoutLoggedIn");
+                }
+                else
+                {
+                    return View("../Home/Index", "_LayoutArtistLoggedIn");
+                }
+
             }
             else
             {
@@ -53,7 +61,14 @@ namespace TheGalleryWalk.Controllers
 
             if (this.verifyUser())
             {
-                return View("../Home/About", "_LayoutLoggedIn");
+                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
+                {
+                    return View("../Home/Index", "_LayoutLoggedIn");
+                }
+                else
+                {
+                    return View("../Home/Index", "_LayoutArtistLoggedIn");
+                }
             }
             else
             {
@@ -67,7 +82,14 @@ namespace TheGalleryWalk.Controllers
 
             if(this.verifyUser())
             {
-                return View("../Home/Contact", "_LayoutLoggedIn");
+                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
+                {
+                    return View("../Home/Index", "_LayoutLoggedIn");
+                }
+                else
+                {
+                    return View("../Home/Index", "_LayoutArtistLoggedIn");
+                }
             }
             else
             {

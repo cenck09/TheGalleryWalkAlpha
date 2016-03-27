@@ -147,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Artist_Async_SignUpController.cs" />
+    <Compile Include="Controllers\Artist_OwnedArtworkController.cs" />
     <Compile Include="Controllers\ArtworkController.cs" />
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
@@ -237,6 +238,9 @@
     <Content Include="Views\Artist_Async_SignUp\Signup.cshtml" />
     <Content Include="Views\Artist_Async_SignUp\CompletedSignUp.cshtml" />
     <Content Include="Views\Artist_Async_SignUp\ErrorSignUp.cshtml" />
+    <Content Include="Views\Shared\_LayoutArtistLoggedIn.cshtml" />
+    <Content Include="Views\Artist_OwnedArtwork\OwnedArtwork.cshtml" />
+    <Content Include="Views\AddArtwork_Artist\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

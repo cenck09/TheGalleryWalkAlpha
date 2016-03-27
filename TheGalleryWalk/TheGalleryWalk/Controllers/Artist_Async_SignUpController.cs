@@ -14,7 +14,6 @@ namespace TheGalleryWalk.Controllers
 {
     public class Artist_Async_SignUpController : Controller
     {
-     
         public ActionResult Signup()
         {
             return View("~/Views/Artist_Async_SignUp/Signup.cshtml");
@@ -32,7 +31,8 @@ namespace TheGalleryWalk.Controllers
                     Email = registerData.EmailAddress,
                     Name = registerData.Name,
                     PhoneNumber = registerData.PhoneNumber,
-                    Enabled = 0
+                    Enabled = 0,
+                    UserType = "ArtistUser"
                 };
 
                 Debug.WriteLine("Creating user: " + user.Name);

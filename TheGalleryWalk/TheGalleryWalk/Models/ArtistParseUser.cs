@@ -24,6 +24,13 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+        [ParseFieldName("UserType")]
+        public string UserType
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
         [ParseFieldName("Enabled")]
         public int Enabled
         {
@@ -31,6 +38,29 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
-      
+
+        public ArtistUserEntity toEntityWithSelf()
+        {
+            return new ArtistUserEntity()
+            {
+                Name = this.Name,
+                EmailAddress = this.Email,
+                PhoneNumber = this.PhoneNumber,
+                ParseID = this.ObjectId,
+                Enabled = this.Enabled
+            };
+        }
+
+        public ArtistParseUser getInstanceFromParseObject(ParseUser user)
+        {
+            return new ArtistParseUser()
+            {
+                Email = user.Email,
+                Name = user.Get<string>("Name"),
+                PhoneNumber = user.Get<string>("PhoneNumber"),
+                Enabled = user.Get<int>("Enabled"),
+                ObjectId = user.ObjectId
+            };
+        }
     }
 }
