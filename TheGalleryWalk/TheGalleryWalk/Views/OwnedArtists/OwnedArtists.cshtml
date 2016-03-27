@@ -1,7 +1,7 @@
 ﻿@using Parse;
 @using TheGalleryWalk.Models;
 
-@model TheGalleryWalk.Models.GalleryEntity
+@model TheGalleryWalk.Models.GalleryOwnerEntity
 
 
 @{
@@ -27,14 +27,13 @@
    
     <div style="text-align:center;">
         @using System.Diagnostics;
-        @try
-        {
-            Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", Model.ArtistEntities);
-
+             @try
+            {
+                Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", Model.ArtistEntities);
             }
             catch (Exception ex)
             {
-            Debug.WriteLine("There was an error ::    "+ex);
+                Debug.WriteLine("There was an error ::    "+ex);
             }
 </div>
     <div>
@@ -66,23 +65,19 @@
 
 
 
+
 <script type="text/javascript">
 
+
     $(document).ready(function () {
-
-        $("#EntityInformationWindow").height($("#EntityImage").height()+40);
-        document.getElementById("addArtworkBtn").onclick = function () { addArtworkForm() };
-        document.getElementById("rmvArtworkBtn").onclick = function () { removeArtworkForm() };
-
         document.getElementById("addArtistBtn").onclick = function () { addArtistForm() };
         document.getElementById("rmvArtistBtn").onclick = function () { removeArtistForm() };
 
         var showFormValue = @(ViewBag.showForm);
 
-        var url = '@Url.Action("AddArtwork", "Gallery")';
-        if(showFormValue == 1){
-            addArtworkForm();
-        }else if (showFormValue == -1){
+        if(!showFormValue){
+            removeArtistForm();
+        }else{
             addArtistForm();
         }
 
@@ -99,6 +94,8 @@
             $("#rmvArtistBtn").show();
             document.getElementById('addArtistForm').scrollIntoView(true);
         }
+
+
 
     })
 

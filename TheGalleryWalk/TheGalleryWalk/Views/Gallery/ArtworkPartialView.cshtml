@@ -19,9 +19,7 @@
         ArtworkEntity artwork = new ArtworkEntity();
         artwork.parseID = item.ObjectId;
         artwork.Name = item.Get<string>("Name");
-        artwork.Artist = item.Get<string>("Artist");
-        artwork.Description = item.Get<string>("Description");
-
+        artwork.Artist = item.Get<string>("ArtistID");
         name = item.Get<string>("Name");
 
 

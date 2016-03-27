@@ -11,11 +11,26 @@ namespace TheGalleryWalk.Models
     [ParseClassName("GaleryOwnerParseUser")]
     public class GalleryOwnerParseUser : ParseUser
     {
-        public string Name;
+        [ParseFieldName("Name")]
+        public string Name
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public string PhoneNumber;
+        [ParseFieldName("PhoneNumber")]
+        public string PhoneNumber
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public int Enabled;
+        [ParseFieldName("Enabled")]
+        public int Enabled
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
 
 
         public GalleryOwnerEntity toEntityWithSelf()

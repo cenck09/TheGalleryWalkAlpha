@@ -154,7 +154,6 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OwnedArtworkController.cs" />
     <Compile Include="Controllers\OwnedArtistsController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
     <Compile Include="Global.asax.cs">

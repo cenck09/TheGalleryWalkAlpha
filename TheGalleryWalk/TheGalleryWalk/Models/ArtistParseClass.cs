@@ -57,6 +57,13 @@ namespace TheGalleryWalk.Models {
             set { SetProperty(value); }
         }
 
+        [ParseFieldName("GalleryOwnerID")]
+        public string GalleryOwnerID
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
 
         public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
     }
