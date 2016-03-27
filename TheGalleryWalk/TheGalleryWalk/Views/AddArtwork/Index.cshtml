@@ -28,24 +28,23 @@
                 @Html.LabelFor(model => model.Artist, new { @class = "formFieldTitle" })
                @try
                {
-                if (Model.addArtistFormlistItem.Count > 0)
+                if (Model.addArtworkFormlistItem.Count > 0)
                 {
-                       Debug.WriteLine("Add Artwork Artist list item count = " + Model.addArtistFormlistItem.Count);
+                       Debug.WriteLine("Add Artwork Artist list item count = " + Model.addArtworkFormlistItem.Count);
 
-                    @Html.DropDownListFor(model => model.Artist, Model.addArtistFormlistItem, "-- Select Artist --", new { @class = "formFieldInput" })
+                    @Html.DropDownListFor(model => model.Artist, Model.addArtworkFormlistItem, "-- Select Artist --", new { @class = "formFieldInput" })
                    }
                    else
                    {
-                    <li class="formFieldInput" id="artistAddError"> You need to add an artist first</li>
+                    <li  id="artworkAddError"> You need to add artwork first</li>
                    }
                }
                catch (Exception ex)
                {
-                   Debug.WriteLine("Failed to get Artist List : " + ex);
-                    <li id="artistAddError"> You need to add an artist first</li>
+                   Debug.WriteLine("Failed to get Artwork List : " + ex);
+                    <li id="artworkAddError"> You need to add an artist first</li>
                 }
-                @Html.ValidationMessageFor(model => model.Artist, String.Empty, new { @class = "errorMessage" })
-
+              
             </ol>
 
             <ol class="formField">

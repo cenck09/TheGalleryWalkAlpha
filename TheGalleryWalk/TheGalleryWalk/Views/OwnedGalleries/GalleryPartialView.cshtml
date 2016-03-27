@@ -2,7 +2,7 @@
 @using System.Threading;
 @using System.Diagnostics;
 @using TheGalleryWalk.Models;
-@model IEnumerable<ParseObject>
+@model IEnumerable<GalleryParseClass>
 
 
 <head>
@@ -15,30 +15,14 @@
     Debug.WriteLine("Data is not null " + Model.Count());
     foreach (var item in Model)
     {
+
         GalleryEntity gallery = new GalleryEntity();
-        gallery.parseID = item.ObjectId;
+        gallery.ParseID = item.ObjectId;
         gallery.Name = item.Get<string>("Name");
         gallery.EmailAddress = item.Get<string>("Email");
-        gallery.phoneNumber = item.Get<string>("PhoneNumber");
-        try
-        {
-            gallery.Artists = item.Get<IList<string>>("Artists");
-        }
-        catch (Exception ex)
-        {
-            gallery.Artists = new List<string>();
-            Debug.WriteLine(ex);
-        }
+        gallery.PhoneNumber = item.Get<string>("PhoneNumber");
+        gallery.Address = item.Get<string>("Address");
 
-        try
-        {
-            gallery.Artworks = item.Get<IList<string>>("Artworks");
-        }
-        catch (Exception ex)
-        {
-            gallery.Artworks = new List<string>();
-            Debug.WriteLine(ex);
-        }
         gallery.ArtistAdd = new ArtistEntity();
         gallery.ArtworkAdd = new ArtworkEntity();
 

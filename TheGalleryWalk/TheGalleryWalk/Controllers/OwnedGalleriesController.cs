@@ -16,15 +16,12 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> OwnedGalleries()
         {
             ViewBag.showForm = 0;
-
             var user = ParseUser.CurrentUser;
-            if (user == null)
-            {
-                return returnFailedUserView();
 
-            } else if (user.IsAuthenticated)
+            if (this.verifyUser(user))
             {
-                return await returnBaseView(user);
+                GalleryOwnerParseUser galleryParseUser = new GalleryOwnerParseUser().getInstanceFromParseObject(user);
+                return await returnBaseView(galleryParseUser.toEntityWithSelf());
             }
             else
             {
@@ -34,86 +31,79 @@ namespace TheGalleryWalk.Controllers
 
         public ActionResult AddGallery()
         {
-            Debug.WriteLine("Add gallery function called");
             return PartialView("~/Views/AddGallery/Index.cshtml");
         }
 
         [HttpPost]
         public async Task<ActionResult> AddGallery(GalleryEntity registerData)
         {
-            var user = ParseUser.CurrentUser;
-            if (!verifyUser(user))
+            var userInstance = ParseUser.CurrentUser;
+
+            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(userInstance);
+    
+            var galleryOwner = user.toEntityWithSelf();
+
+            if (!verifyUser(userInstance))
             {
                 return returnFailedUserView();
             }
 
-            var galleryQuery = ParseObject.GetQuery("Gallery");
-            var galleryEntity = new ParseObject("Gallery");
-            galleryEntity.Add("Name", registerData.Name);
-            galleryEntity.Add("Email", registerData.EmailAddress);
-            galleryEntity.Add("Address", registerData.Address);
-            galleryEntity.Add("PhoneNumber", registerData.phoneNumber);
-            galleryEntity.Add("Artists", new List<string>());
-            galleryEntity.Add("Artworks", new List<string>());
-
             ViewBag.showForm = 1;
-        
-            IList<string> galleryIds = user.Get<IList<string>>("Galleries");
-         
+
             if (ModelState.IsValid)
             {
+                var galleryEntity = new GalleryParseClass()
+                {
+                    Name = registerData.Name,
+                    Email = registerData.EmailAddress,
+                    Address = registerData.Address,
+                    PhoneNumber = registerData.PhoneNumber,
+                    Website = registerData.Website,
+                    GalleryOwnerID = userInstance.ObjectId,
+                };
+
+                Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + galleryEntity.GalleryOwnerID);
+
                 try
                 {
                     await galleryEntity.SaveAsync();
-
-                    galleryIds.Add(galleryEntity.ObjectId);
-                    user["Galleries"] = galleryIds;
-                
-                    await user.SaveAsync();
                     ViewBag.showForm = 0;
-
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
                 }
             }
+            else
+            {
+                galleryOwner.GalleryAdd = registerData;
+            }
 
-            return await returnBaseView(user);
+            return await returnBaseView(galleryOwner);
         }
 
-        public async Task<ActionResult> returnBaseView(ParseUser user)
+
+        public async Task<ActionResult> returnBaseView(GalleryOwnerEntity G_Owner)
         {
-            IList<string> galleryIds; // = user.Get<IList<string>>("Galleries");
+            if (G_Owner.GalleryAdd == null ) { G_Owner.GalleryAdd = new GalleryEntity(); }
+
             try
             {
-                galleryIds = user.Get<IList<string>>("Galleries");
+                var query = from item in new ParseQuery<GalleryParseClass>()
+                            where item.GalleryOwnerID == G_Owner.ParseID
+                            select item;
+
+                G_Owner.GalleryEntities = await query.FindAsync();
             }
-            catch
+            catch(Exception ex)
             {
-                galleryIds = new List<string>();
-                user["Galleries"] = galleryIds;
-                await user.SaveAsync();
+                Debug.WriteLine("There was an error returning owned galleries base view :: "+ ex);
+                G_Owner.GalleryEntities = new List<GalleryParseClass>();
             }
+           
 
-            IEnumerable<ParseObject> GalleryEntities;
-            var galleryQuery = ParseObject.GetQuery("Gallery");
-            GalleryOwnerEntity G_Owner = new GalleryOwnerEntity();
-            G_Owner.GalleryAdd = new GalleryEntity();
-
-            if (galleryIds.Count > 0)
-            {
-                galleryQuery = galleryQuery.WhereContainedIn("objectId", galleryIds);
-
-                GalleryEntities = await galleryQuery.FindAsync();
-
-                G_Owner.GalleryEntities = GalleryEntities;
-
-                return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
-            }
-
-            return View("../OwnedGalleries/OwnedGalleries", "_LayoutLoggedIn");
-        }
+            return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
+       }
 
         public ActionResult returnFailedUserView()
         {

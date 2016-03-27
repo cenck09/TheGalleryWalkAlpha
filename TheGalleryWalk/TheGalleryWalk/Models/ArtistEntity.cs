@@ -13,6 +13,7 @@ namespace TheGalleryWalk.Models
 {
     public class ArtistEntity
     {
+        public string parseID { get; set; }
 
         [Key]
         public int ID { get; set; }
@@ -28,9 +29,14 @@ namespace TheGalleryWalk.Models
         [DisplayName("Description")]
         public string Description { get; set; }
 
+        [DisplayName("Birth")]
+        public string Birth { get; set; }
 
-        public IList<string> Artworks { get; set; }
-        public IEnumerable<ParseObject> ArtworkEntities { get; set; }
+        [DisplayName("Death")]
+        public string Death { get; set; }
+
+
+        public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }
 
     }

@@ -32,7 +32,7 @@
                @Model.EmailAddress
            </h6>
            <h6 class="EntityInfo">
-               @Model.phoneNumber
+               @Model.PhoneNumber
            </h6>
            <h6 class="EntityInfo">
                @Model.Address
@@ -54,7 +54,7 @@
         @try
         {
             Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
+            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", Model.ArtworkEntities);
             }
             catch (Exception ex)
             {
@@ -74,11 +74,14 @@
             @if (Model.ArtworkAdd == null)
             {
                 ArtworkEntity newArtwork = new ArtworkEntity();
-                newArtwork.ParentGalleryParseID = Model.parseID;
+                newArtwork.ParentGalleryParseID = Model.ParseID;
+                Debug.WriteLine("New Artwork ID on page  -----  " + newArtwork.ParentGalleryParseID);
+
                 @Html.Partial("~/Views/AddArtwork/Index.cshtml", model: newArtwork);
             }
             else
             {
+                Model.ArtworkAdd.ParentGalleryParseID = Model.ParseID;    
                 @Html.Partial("~/Views/AddArtwork/Index.cshtml", Model.ArtworkAdd);
             }
                
@@ -106,28 +109,8 @@
             Debug.WriteLine("There was an error ::    " + ex);
             }
 </div>
-    <div>
-        <div class="add-btn" id="addArtistBtn">
-            <h4>+ Artist  </h4>
-        </div>
-        <div class="add-btn" id="rmvArtistBtn" style="display:none;">
-            <h4>- Artist  </h4>
-        </div>
-        <div id="addArtistForm" style="display:none">
+   
 
-            @if (Model.ArtistAdd == null)
-            {
-                ArtistEntity newArtist = new ArtistEntity();
-                newArtist.ParentGalleryParseID = Model.parseID;
-                @Html.Partial("~/Views/AddArtist/Index.cshtml", model: newArtist);
-            }
-            else
-            {
-                @Html.Partial("~/Views/AddArtist/Index.cshtml", model: Model.ArtistAdd);
-            }
-
-        </div>
-    </div>
 </body>
 
 </html>
@@ -141,16 +124,12 @@
         document.getElementById("addArtworkBtn").onclick = function () { addArtworkForm() };
         document.getElementById("rmvArtworkBtn").onclick = function () { removeArtworkForm() };
 
-        document.getElementById("addArtistBtn").onclick = function () { addArtistForm() };
-        document.getElementById("rmvArtistBtn").onclick = function () { removeArtistForm() };
-
+     
         var showFormValue = @(ViewBag.showForm);
 
         var url = '@Url.Action("AddArtwork", "Gallery")';
         if(showFormValue == 1){
             addArtworkForm();   
-        }else if (showFormValue == -1){
-            addArtistForm();
         }
 
         function removeArtworkForm() {

@@ -1,7 +1,7 @@
 ﻿@using Parse;
 @using System.Threading;
 @using System.Diagnostics;
-
+@using TheGalleryWalk.Models;
 @model IEnumerable<ParseObject>
 
 
@@ -16,11 +16,19 @@
     string name;
     foreach (var item in Model)
     {
+        ArtistEntity artist = new ArtistEntity();
+        artist.parseID = item.ObjectId;
+        artist.Name = item.Get<string>("Name");
+        artist.Style = item.Get<string>("Style");
+        artist.Description = item.Get<string>("Description");
+
         name = item.Get<string>("Name");
 
-        <div class="GalleryInfoWindow" style="margin:10px">
-            <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
-            <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(name)</p>
-        </div>
+         <a  href="@Url.Action("ArtistView","Artist", artist)">
+            <div class="GalleryInfoWindow" style="margin:10px">
+                <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(name)</p>
+            </div>
+        </a>
     }
 }

@@ -29,9 +29,14 @@
                 @Html.ValidationMessageFor(model => model.EmailAddress, String.Empty, new { @class = "errorMessage" })
             </ol>
             <ol class="formField">
-                @Html.LabelFor(model => model.phoneNumber, new { @class = "formFieldTitle" })
-                @Html.TextBoxFor(model => model.phoneNumber, String.Empty, new { @class = "formFieldInput" })
-                @Html.ValidationMessageFor(model => model.phoneNumber, String.Empty, new { @class = "errorMessage" })
+                @Html.LabelFor(model => model.PhoneNumber, new { @class = "formFieldTitle" })
+                @Html.TextBoxFor(model => model.PhoneNumber, String.Empty, new { @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, String.Empty, new { @class = "errorMessage" })
+            </ol>
+            <ol class="formField">
+                @Html.LabelFor(model => model.Website, new { @class = "formFieldTitle" })
+                @Html.TextBoxFor(model => model.Website, String.Empty, new { @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.Website, String.Empty, new { @class = "errorMessage" })
             </ol>
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
