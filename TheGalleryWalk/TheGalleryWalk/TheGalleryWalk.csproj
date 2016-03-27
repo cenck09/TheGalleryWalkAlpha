@@ -147,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Artist_Async_SignUpController.cs" />
+    <Compile Include="Controllers\Artist_OwnedArtworkController.cs" />
     <Compile Include="Controllers\ArtworkController.cs" />
     <Compile Include="Controllers\Async_SignInController.cs" />
     <Compile Include="Controllers\Async_SignOutController.cs" />
@@ -174,6 +175,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Backgrounds\brushed.png" />
+    <Content Include="Content\Backgrounds\brushed_%402X.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\GalleryWalkStyles.css" />
@@ -231,11 +234,17 @@
     <Content Include="Views\Artist\ArtistView.cshtml" />
     <Content Include="Views\OwnedArtists\OwnedArtists.cshtml" />
     <Content Include="Views\Artwork\ArtworkView.cshtml" />
+    <Content Include="Views\ArtsyPortal\ArtsyPortalView.cshtml" />
+    <Content Include="Views\Artist_Async_SignUp\Signup.cshtml" />
+    <Content Include="Views\Artist_Async_SignUp\CompletedSignUp.cshtml" />
+    <Content Include="Views\Artist_Async_SignUp\ErrorSignUp.cshtml" />
+    <Content Include="Views\Shared\_LayoutArtistLoggedIn.cshtml" />
+    <Content Include="Views\Artist_OwnedArtwork\OwnedArtwork.cshtml" />
+    <Content Include="Views\AddArtwork_Artist\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
-    <Folder Include="Views\Artist_Async_SignUp\" />
     <Folder Include="Views\Async_SignOut\" />
   </ItemGroup>
   <ItemGroup>

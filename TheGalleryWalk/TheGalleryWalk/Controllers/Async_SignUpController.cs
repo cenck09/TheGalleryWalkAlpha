@@ -28,12 +28,14 @@ namespace TheGalleryWalk.Controllers
                 {
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
-                    Email = registerData.EmailAddress
+                    Email = registerData.EmailAddress,
+                    Name = registerData.Name,
+                    PhoneNumber = registerData.PhoneNumber,
+                    Enabled = 0,
+                    UserType = "GalleryOwnerUser"
                 };
 
-                user["Name"] = registerData.Name;
-                user["PhoneNumber"] = registerData.PhoneNumber;
-                user["Enabled"] = 0;
+            
 
                 try
                 {

@@ -32,6 +32,12 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+        [ParseFieldName("UserType")]
+        public string UserType
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
         public GalleryOwnerEntity toEntityWithSelf()
         {

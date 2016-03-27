@@ -28,19 +28,25 @@
 
       }
 
-    <script type="text/javascript">
+    <h3>Need an account? Register as </h3>
+    <div style="text-align:center; margin-top:50px;">
+        <a class="menuItem portalOptionWindow" style="color:black;" href="@Url.Action("Signup","Async_SignUp")"><span class="glyphicon glyphicon-user"></span> Gallery Owner</a>
+        <a class="menuItem portalOptionWindow" style="color:black;" href="@Url.Action("Signup" , "Artist_Async_SignUp")"><span class="glyphicon glyphicon-log-in"></span> Artist</a>
+    </div>
 
-        $(document).ready(function () {
+        <script type="text/javascript">
 
-            $('#submitButton').mouseenter(function(){
-                $(this).css({ "background-color": "white" });
-                $(this).find('#buttonText').css({ "color": "deepskyblue" });
-            }).mouseleave(function () {
-                $(this).css({ "background-color": "deepskyblue" });
-                $(this).find('#buttonText').css({ "color": "white" });
+            $(document).ready(function () {
 
+                $('#submitButton').mouseenter(function () {
+                    $(this).css({ "background-color": "white" });
+                    $(this).find('#buttonText').css({ "color": "deepskyblue" });
+                }).mouseleave(function () {
+                    $(this).css({ "background-color": "deepskyblue" });
+                    $(this).find('#buttonText').css({ "color": "white" });
+
+                });
             });
-        });
 
-    </script>
-</div>
+        </script>
+    </div>

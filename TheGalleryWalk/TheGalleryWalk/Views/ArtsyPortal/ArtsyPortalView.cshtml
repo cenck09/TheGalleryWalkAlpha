@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "ArtsyPortalView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="padding:30px; color:gray; text-shadow:rgba(0,0,0,0.4) 0px 5px 5px;">Artsy Portal</h3>
+
+<div style="text-align:center; margin-top:50px;">
+    <a class="menuItem portalOptionWindow" style="color:black;" href="@Url.Action("Login" , "Async_SignIn")"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+</div>
+<h3>Register as </h3>
+<div style="text-align:center; margin-top:50px;">
+    <a class="menuItem portalOptionWindow" style="color:black;" href="@Url.Action("Signup","Async_SignUp")"><span class="glyphicon glyphicon-user"></span> Gallery Owner</a>
+    <a class="menuItem portalOptionWindow" style="color:black;" href="@Url.Action("Signup" , "Artist_Async_SignUp")"><span class="glyphicon glyphicon-log-in"></span> Artist</a>
+</div>
