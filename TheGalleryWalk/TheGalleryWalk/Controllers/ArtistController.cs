@@ -113,7 +113,7 @@ namespace TheGalleryWalk.Controllers
 
           
             
-            return View("~/Views/Gallery/GalleryView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", selectedArtist);
+            return View("~/Views/Artist/ArtistView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", selectedArtist);
         }
 
 

@@ -34,31 +34,7 @@
            <h6 class="EntityInfo">
                @Model.Description
            </h6>
-           
-
        </div>
-
-
-
-    <span class="Divider"></span>
-
-    <div class="Info-header">
-        <h3>
-            Displayed Artwork
-        </h3>
-    </div>
-
-    <div style="text-align:center;">
-        @try
-        {
-            Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
-            }
-            catch (Exception ex)
-            {
-            Debug.WriteLine("There was an error ::    " + ex);
-            }
-
 
 </body>
 

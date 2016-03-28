@@ -72,7 +72,7 @@ namespace TheGalleryWalk.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                Debug.WriteLine("There was an error returning owned artist base view :: " + ex);
                 owner.ArtistEntities = new List<ArtistParseClass>();
             }
 
