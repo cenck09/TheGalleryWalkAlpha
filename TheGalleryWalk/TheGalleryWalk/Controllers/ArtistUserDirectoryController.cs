@@ -15,12 +15,15 @@ namespace TheGalleryWalk.Controllers
         // GET: ArtistUserDirectory
         public async Task<ActionResult> ArtistUserDirectory()
         {
-
+            /* This query will be updated to remove artists without artwork and other things we'll need*/
             var query = from item in new ParseQuery<ParseUser>()
                         where item.Get<string>("UserType") == "ArtistUser"
+                        where item.Get<string>("MyFavoriteGalleries") != null
+                        where item.Get<string>("MyFavoriteArtists") != null
                         select item;
 
             IEnumerable<ParseUser> users = await query.FindAsync();
+
             IList<ArtistParseUser> artistusers = new List<ArtistParseUser>();
 
             foreach(var item in users)

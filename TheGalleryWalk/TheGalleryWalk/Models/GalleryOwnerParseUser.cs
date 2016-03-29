@@ -39,6 +39,24 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+
+        [ParseFieldName("MyFavoriteGalleries")]
+        public IList<string> MyFavoriteGalleries
+        {
+            get { return GetProperty<List<string>>(); }
+            set { SetProperty(value); }
+        }
+
+
+        [ParseFieldName("MyFavoriteArtists")]
+        public IList<string> MyFavoriteArtists
+        {
+            get { return GetProperty<List<string>>(); }
+            set { SetProperty(value); }
+        }
+
+
+        /*Deprecated -- avoid using toEntityWithSelf: marked to delete*/
         public GalleryOwnerEntity toEntityWithSelf()
         {
             return new GalleryOwnerEntity()
@@ -47,7 +65,7 @@ namespace TheGalleryWalk.Models
                 EmailAddress = this.Email,
                 PhoneNumber = this.PhoneNumber,
                 ParseID = this.ObjectId,
-                Enabled = this.Enabled
+                Enabled = this.Enabled,
             };
         }
 
@@ -59,7 +77,10 @@ namespace TheGalleryWalk.Models
                 Name = user.Get<string>("Name"),
                 PhoneNumber = user.Get<string>("PhoneNumber"),
                 Enabled = user.Get<int>("Enabled"),
-                ObjectId = user.ObjectId
+                ObjectId = user.ObjectId,
+                Username = user.Username,
+                MyFavoriteArtists = user.Get<IList<string>>("MyFavoriteArtists"),
+                MyFavoriteGalleries = user.Get<IList<string>>("MyFavoriteGalleries")
             };
         }
 
