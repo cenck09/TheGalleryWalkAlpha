@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ArtistUserDirectoryController.cs" />
     <Compile Include="Controllers\Artist_Async_SignUpController.cs" />
     <Compile Include="Controllers\Artist_OwnedArtworkController.cs" />
     <Compile Include="Controllers\ArtworkController.cs" />
@@ -241,6 +242,8 @@
     <Content Include="Views\Shared\_LayoutArtistLoggedIn.cshtml" />
     <Content Include="Views\Artist_OwnedArtwork\OwnedArtwork.cshtml" />
     <Content Include="Views\AddArtwork_Artist\Index.cshtml" />
+    <Content Include="Views\ArtistUserDirectory\ArtistUserDirectory.cshtml" />
+    <Content Include="Views\ArtistUserDirectory\ArtistUserPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
