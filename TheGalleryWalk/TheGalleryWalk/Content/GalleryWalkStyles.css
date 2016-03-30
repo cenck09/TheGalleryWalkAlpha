@@ -10,6 +10,18 @@
 
 
 /* As hex codes */
+.ImageContainer {
+    margin: 10px;
+    width: 150px;
+    height: 205px;
+    line-height: 115px;
+    text-align: center;
+}
+.resize_fit_center {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
+}
 
 .color-primary-0 { color: #07BCF8 }	/* Main Primary color */
 .color-primary-1 { color: #FBFEFF }
@@ -53,6 +65,7 @@
     border-radius: 5px;
     max-width: 700px;
     min-width: 300px;
+    height: 300px;
     margin:auto;
     margin-top:50px;
     padding: 10px;
