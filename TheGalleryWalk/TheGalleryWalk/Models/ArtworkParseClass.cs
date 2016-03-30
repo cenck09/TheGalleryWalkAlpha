@@ -39,5 +39,13 @@ namespace TheGalleryWalk.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
+        [ParseFieldName("Style")]
+        public string Style
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
     }
 }

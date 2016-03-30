@@ -28,9 +28,44 @@ namespace TheGalleryWalk.Controllers
             }
            
         }// EOM
-     
-    
-        
+
+
+
+        public ActionResult updateArtworkInfo()
+        {
+            return PartialView("~/Views/EditArtwork/EditArtworkPartialView.cshtml");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> updateArtworkInfo(ArtworkEntity artwork)
+        {
+            ViewBag.showForm = 2;
+            if (ModelState.IsValid)
+            {
+                var query = from item in new ParseQuery<ArtworkParseClass>()
+                            where item.ObjectId == artwork.parseID
+                            select item;
+
+                ArtworkParseClass gClass = await query.FirstAsync();
+
+                gClass.Name = artwork.Name;
+                gClass.Style = artwork.Style;
+                gClass.Description = artwork.Description;
+
+                try
+                {
+                    await gClass.SaveAsync();
+                    ViewBag.showForm = 0;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
+
+            return await baseView(ParseUser.CurrentUser, artwork);
+        }
+
 
 
         public ArtworkEntity getArtworkEntityForParseObject(ParseObject Artwork)

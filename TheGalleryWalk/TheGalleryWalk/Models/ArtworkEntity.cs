@@ -31,7 +31,10 @@ namespace TheGalleryWalk.Models
 
         [DisplayName("Description")]
         public string Description { get; set; }
-        
+
+        [DisplayName("Style")]
+        public string Style { get; set; }
+
 
         public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }

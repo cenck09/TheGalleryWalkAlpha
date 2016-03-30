@@ -303,6 +303,7 @@
     <Content Include="Views\ArtistUserInfo\ArtistUserInfoView.cshtml" />
     <Content Include="Views\EditGallery\EditGalleryPartialView.cshtml" />
     <Content Include="Views\EditArtist\EditArtistPartialView.cshtml" />
+    <Content Include="Views\EditArtwork\EditArtworkPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
