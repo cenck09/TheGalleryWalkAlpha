@@ -25,7 +25,7 @@
       
         @if (ParseUser.CurrentUser != null)
             {
-                if(ParseUser.CurrentUser.Get<IList<string>>("MyFavoriteArtists").Contains(ParseUser.CurrentUser.ObjectId))
+                if(ParseUser.CurrentUser.Get<IList<string>>("MyFavoriteArtists").Contains(Model.ObjectId))
                 {
                     <a href="@Url.Action("unfollowArtist","ArtistUserInfo", Model)">
                         - remove Artist -

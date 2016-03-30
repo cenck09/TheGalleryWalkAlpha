@@ -28,9 +28,12 @@ namespace TheGalleryWalk.Controllers
   
                     Debug.WriteLine("\n\n ----------- Adding artist for user type ---- "+user.Get<string>("UserType")+" \n\n");
                     IList<string> followedByArtistList = user.Get<IList<string>>("MyFavoriteArtists");
-                    followedByArtistList.Add(ParseUser.CurrentUser.ObjectId);
+                    followedByArtistList.Add(artistUser.ObjectId);
                     user["MyFavoriteArtists"] = followedByArtistList;
-                   
+                    foreach (var item in followedByArtistList)
+                    {
+                        Debug.WriteLine("Fav artist id list on follow :"+ item);
+                    }
                     await user.SaveAsync();
                     ViewBag.AddedArtist = 1; // for javascript to post a window for success
                 }
@@ -54,7 +57,7 @@ namespace TheGalleryWalk.Controllers
 
                     Debug.WriteLine("\n\n ----------- Adding artist for user type ---- " + user.Get<string>("UserType") + " \n\n");
                     IList<string> followedByArtistList = user.Get<IList<string>>("MyFavoriteArtists");
-                    followedByArtistList.Remove(ParseUser.CurrentUser.ObjectId);
+                    followedByArtistList.Remove(artistUser.ObjectId);
                     user["MyFavoriteArtists"] = followedByArtistList;
 
                     await user.SaveAsync();

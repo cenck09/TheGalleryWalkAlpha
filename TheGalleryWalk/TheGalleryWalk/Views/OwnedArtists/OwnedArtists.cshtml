@@ -1,5 +1,7 @@
 ﻿@using Parse;
 @using TheGalleryWalk.Models;
+@using System.Threading;
+@using System.Threading.Tasks;
 
 @model TheGalleryWalk.Models.GalleryOwnerEntity
 
@@ -18,7 +20,26 @@
 </head>
 
 <body>
-    
+    <div class="Info-header">
+        <h3>
+            Followed Artists
+        </h3>
+    </div>
+
+    <div style="text-align:center;">
+       
+        @try
+        {
+             Html.RenderPartial("~/Views/ArtistUserDirectory/ArtistUserPartialView.cshtml", Model.MyFavoriteArtists);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("There was an error ::    " + ex);
+        }
+
+    </div>
+
+
     <div class="Info-header">
            <h3>
                My Artists
@@ -28,7 +49,7 @@
     <div style="text-align:center;">
         @using System.Diagnostics;
              @try
-            {
+            { 
                 Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", Model.ArtistEntities);
             }
             catch (Exception ex)

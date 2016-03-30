@@ -28,6 +28,7 @@ namespace TheGalleryWalk.Controllers
 
             foreach(var item in users)
             {
+                Debug.WriteLine("Artist user with id -- "+ item.ObjectId);
                 artistusers.Add(new ArtistParseUser().getInstanceFromParseObject(item));
             }
 
