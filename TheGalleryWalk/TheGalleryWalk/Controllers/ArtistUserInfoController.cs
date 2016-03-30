@@ -13,9 +13,9 @@ namespace TheGalleryWalk.Controllers
     public class ArtistUserInfoController : AsyncController
     {
 
-        public ActionResult ArtistUserInfoView(ArtistParseUser artistUser)
+        public async Task<ActionResult> ArtistUserInfoView(ArtistParseUser artistUser)
         {
-            return baseView(artistUser);
+            return await baseView(artistUser);
         }
 
         public async Task<ActionResult> followArtist(ArtistParseUser artistUser)
@@ -43,7 +43,7 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine("Failed to save to artist"+ ex);
                 ViewBag.AddedArtist = 2; // for script to post it failed to the user
             }
-            return baseView(artistUser);
+            return await baseView(artistUser);
         }
 
 
@@ -69,13 +69,27 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine("Failed to save to artist" + ex);
                 ViewBag.AddedArtist = 4; // for script to post it failed to the user
             }
-            return baseView(artistUser);
+            return await baseView(artistUser);
         }
 
 
 
-        public ActionResult baseView(ArtistParseUser artistUser)
+        public async Task<ActionResult> baseView(ArtistParseUser artistUser)
         {
+            try
+            {
+                var query = from item in new ParseQuery<ArtworkParseClass>()
+                            where item.ArtistID == artistUser.ObjectId
+                            select item;
+
+                artistUser.ArtworkEntities = await query.FindAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
+            }
+            
             if (this.verifyUser())
             {
                 if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))

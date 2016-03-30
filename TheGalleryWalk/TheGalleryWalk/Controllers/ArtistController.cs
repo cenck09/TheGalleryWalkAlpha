@@ -51,7 +51,7 @@ namespace TheGalleryWalk.Controllers
                 }
             }
 
-            return await baseView(ParseUser.CurrentUser, artist);
+            return await baseView(artist);
         }
 
         public async Task<ActionResult> ArtistView(ArtistEntity selectedArtist)
@@ -65,7 +65,7 @@ namespace TheGalleryWalk.Controllers
             }
             else
             {
-                return await baseView(user, selectedArtist);
+                return await baseView( selectedArtist);
             }
            
         }// EOM
@@ -86,92 +86,41 @@ namespace TheGalleryWalk.Controllers
         }
 
 
-        public async Task<ActionResult> baseView(ParseUser user, ArtistEntity selectedArtist)
+
+
+
+        public async Task<ActionResult> baseView(ArtistEntity artistUser)
         {
-            var artistQuery = ParseObject.GetQuery("Artist");
-            var userArtistQuery = ParseObject.GetQuery("Artist");
-            artistQuery = artistQuery.WhereEqualTo("objectId", selectedArtist.parseID);
-
-
-            IList<string> userArtworkIds; // = user.Get<IList<string>>("Galleries");
-            try
-            {
-                userArtworkIds = user.Get<IList<string>>("Artists");
-            }
-            catch (Exception ex)
-            {
-                userArtworkIds = new List<string>();
-                Debug.WriteLine("Failed to get artist list from user "+ex);
-            }
-            userArtistQuery = userArtistQuery.WhereContainedIn("objectId", userArtworkIds);
-
-            IEnumerable<ParseObject> userArtistEntities;
-            try
-            {
-                userArtistEntities = await userArtistQuery.FindAsync();
-            }catch(Exception ex)
-            {
-                userArtistEntities = new List<ParseObject>();
-                Debug.WriteLine("Failed to get artist entities : "+ex);
-            }
-
-
-            
-
-
             try
             {
                 var query = from item in new ParseQuery<ArtworkParseClass>()
-                            where item.ArtistID == selectedArtist.parseID
+                            where item.ArtistID == artistUser.parseID
                             select item;
 
-                IEnumerable<ArtworkParseClass> ArtworkEntities = await query.FindAsync();
+                artistUser.ArtworkEntities = await query.FindAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
-                selectedArtist.ArtworkEntities = new List<ArtworkParseClass>();
+                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
 
-
-            ParseObject Gallery = null;
-            try
+            if (this.verifyUser(ParseUser.CurrentUser))
             {
-                Gallery = await artistQuery.FirstAsync();
+                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
+                {
+                    return View("~/Views/Artist/ArtistView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", artistUser);
+                }
+                else
+                {
+                    return returnFailedUserView();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Debug.WriteLine(ex);
+                return returnFailedUserView();
             }
-
-            IList<string> artworkIds; // = user.Get<IList<string>>("Galleries");
-            try
-            {
-                artworkIds = Gallery.Get<IList<string>>("Artworks");
-            }
-            catch(Exception ex)
-            {
-                artworkIds = new List<string>();
-                Debug.WriteLine(ex);
-            }
-            var artworkQuery = ParseObject.GetQuery("Artwork");
-
-
-            //IList<string> artistIds; // = user.Get<IList<string>>("Galleries");
-            //try
-            //{
-            //    artistIds = Gallery.Get<IList<string>>("Artists");
-            //}
-            //catch (Exception ex)
-            //{
-            //    artistIds = new List<string>();
-            //    Debug.WriteLine(ex);
-            //}
-
-          
-            
-            return View("~/Views/Artist/ArtistView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", selectedArtist);
         }
 
 
