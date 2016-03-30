@@ -5,7 +5,6 @@
     ViewBag.Title = "ArtistUserInfoView";
 }
 
-<h2>ArtistInfoView</h2>
 
 <div style="margin-top:50px; margin-left:50px; padding:10px;">
 
@@ -15,31 +14,71 @@
     @if (ViewBag.AddedArtist == 3){ <div> You have removed this artist </div> }
     @if (ViewBag.AddedArtist == 4){ <div> Failed to remove the artist </div>  }
 
-
-    <h1>
-        @Html.Raw(Model.Name);
-    </h1>
+</div>
 
 
-    <div style="margin:20px; padding: 5px; background-color: aqua; border-radius:5px;">
-      
+
+
+
+<div class="EntityInformationWindow" id="EntityInformationWindow">
+
+    <div class="EntityImage">
+        <img id="EntityImage" src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") alt="demo Artist" style="width:auto; border-radius:4px; height:auto;" />
+    </div>
+
         @if (ParseUser.CurrentUser != null)
+        {
+            if (ParseUser.CurrentUser.Get<IList<string>>("MyFavoriteArtists").Contains(Model.ObjectId))
             {
-                if(ParseUser.CurrentUser.Get<IList<string>>("MyFavoriteArtists").Contains(Model.ObjectId))
-                {
+                <div style="margin:20px; padding: 5px; background-color: aqua; width:200px; float:right; border-radius:5px;">
+
                     <a href="@Url.Action("unfollowArtist","ArtistUserInfo", Model)">
                         - remove Artist -
                     </a>
-                }
-                else
-                {
+                </div>
+            }
+            else
+            {
+                <div style="margin:20px; padding: 5px; background-color: aqua; width:200px; float:right; border-radius:5px;">
+
                     <a href="@Url.Action("followArtist","ArtistUserInfo", Model)">
                         + Follow Artist +
                     </a>
-                    }
-                }
+                </div>
+               }
+          }
 
 
+            
+
+
+    <div id="galleryInfo">
+        <h3 class="EntityInfo">
+            @Model.Name
+        </h3>
+    </div>
 </div>
 
+
+
+<span class="Divider"></span>
+
+<div class="Info-header">
+    <h3>
+        Displayed Artwork
+    </h3>
 </div>
+
+<div style="text-align:center;">
+    @using System.Diagnostics;
+    @try
+    {
+        Html.RenderPartial("~/Views/Artist/ArtworkPartialView.cshtml", Model.ArtworkEntities);
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine("There was an error ::    " + ex);
+    }
+</div>
+
+

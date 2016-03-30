@@ -54,6 +54,8 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+        public IEnumerable<ParseObject> ArtworkEntities;
+
         /*Deprecated -- marked to remove toEntityWithSelf*/
         public ArtistUserEntity toEntityWithSelf()
         {
