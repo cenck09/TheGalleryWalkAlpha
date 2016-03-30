@@ -19,23 +19,38 @@
 </head>
 
 <body>
-    
-       <div class="EntityInformationWindow" id="EntityInformationWindow">
+    <div class="EntityInformationWindow" id="EntityInformationWindow">
 
-           <div  class="EntityImage">
-               <img id="EntityImage" src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
-           </div>
-           <h3 class="EntityInfo">
-               @Model.Name
-           </h3>
-           <h6 class="EntityInfo">
-               @Model.Artist
-           </h6>
-           <h6 class="EntityInfo">
-               @Model.Description
-           </h6>
-       </div>
+        <div class="EntityImage">
+            <img id="EntityImage" src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+        </div>
 
+        <div>
+            <div class="edit-btn" id="editBtn">
+                <h4> - Edit Artwork - </h4>
+            </div>
+            <div class="edit-btn" id="cancelEditBtn" style="display:none;">
+                <h4> - Cancel - </h4>
+            </div>
+            <div id="editForm" style="display:none;">
+                @Html.Partial("~/Views/EditArtwork/EditArtworkPartialView.cshtml", model: Model);
+            </div>
+        </div>
+
+        <div id="artworkInfo">
+            <h3 class="EntityInfo">
+                @Model.Name
+            </h3>
+            <h6 class="EntityInfo">
+                @Model.Artist
+            </h6>
+            <h6 class="EntityInfo">
+                @Model.Description
+            </h6>
+        </div>
+
+
+    </div>
 </body>
 
 </html>
@@ -44,10 +59,37 @@
 
     $(document).ready(function () {
 
-        $("#EntityInformationWindow").height($("#EntityImage").height()+40);
+        document.getElementById("editBtn").onclick = function () { addEditForm() };
+        document.getElementById("cancelEditBtn").onclick = function () { removeEditForm() };
 
-        var showFormValue = @(ViewBag.showForm);
 
+var showFormValue = @(ViewBag.showForm);
+       
+        if(showFormValue == 1){
+            addArtworkForm();
+        }
+
+        if(showFormValue == 3){
+            addEditForm();
+        }
+
+
+        function removeEditForm() {
+            $('#editForm').hide();
+            $("#editBtn").show();
+            $("#cancelEditBtn").hide();
+            $("#artworkInfo").show()
+        }
+
+        function addEditForm() {
+            //  $('#addGalleryForm').load(url);
+            $("#editForm").show();
+            $("#editBtn").hide();
+            $("#cancelEditBtn").show();
+            $("#artworkInfo").hide()
+
+            document.getElementById('editForm').scrollIntoView(true);
+        }
     })
 
 </script>
