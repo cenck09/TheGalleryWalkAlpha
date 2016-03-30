@@ -48,6 +48,7 @@ namespace TheGalleryWalk.Models
 
         public int Enabled;
 
+     
         public ArtworkEntity ArtworkAdd;
         public IEnumerable<ArtworkParseClass> ArtworkEntities;
 

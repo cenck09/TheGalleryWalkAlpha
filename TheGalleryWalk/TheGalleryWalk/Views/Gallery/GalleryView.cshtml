@@ -23,7 +23,7 @@
        <div class="EntityInformationWindow" id="EntityInformationWindow">
 
            <div  class="EntityImage">
-               <img id="EntityImage" src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+               <img id="EntityImage" src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
            </div>
            <h3 class="EntityInfo">
                @Model.Name
@@ -120,7 +120,7 @@
 
     $(document).ready(function () {
 
-        $("#EntityInformationWindow").height($("#EntityImage").height()+40);
+     //   $("#EntityInformationWindow").height($("#EntityImage").height()+40);
         document.getElementById("addArtworkBtn").onclick = function () { addArtworkForm() };
         document.getElementById("rmvArtworkBtn").onclick = function () { removeArtworkForm() };
 
