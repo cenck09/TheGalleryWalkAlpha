@@ -78,17 +78,13 @@ namespace TheGalleryWalk.Controllers
             try
             {
                 var query = new ParseQuery<ParseUser>().WhereContainedIn("objectId", user.MyFavoriteArtists);
-
                 IEnumerable<ParseObject> favArtists = await query.FindAsync();
 
                 if (owner.MyFavoriteArtists == null)
                 {
                     owner.MyFavoriteArtists = new List<ArtistParseUser>();
                 }
-                foreach (var item in user.MyFavoriteArtists)
-                {
-                    Debug.WriteLine(item);
-                }
+         
                 Debug.WriteLine("\n\n ----- Fav Artists loaded array " + favArtists.Count());
                 foreach (var item in favArtists)
                 {
