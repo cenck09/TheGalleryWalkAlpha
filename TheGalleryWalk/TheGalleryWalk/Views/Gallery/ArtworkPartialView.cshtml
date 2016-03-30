@@ -25,9 +25,21 @@
 
         <a href="@Url.Action("ArtworkView","Artwork", artwork)">
             <div class="GalleryInfoWindow" style="margin:10px">
-                <img src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+                <img src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") id="EntityImage" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
                 <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(name)</p>
             </div>
         </a>
     }
 }
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".GalleryInfoWindow").height($("#EntityImage").height() + 40);
+        $(".GalleryInfoWindow").width($("#EntityImage").width() + 40);
+
+    })
+
+</script>
