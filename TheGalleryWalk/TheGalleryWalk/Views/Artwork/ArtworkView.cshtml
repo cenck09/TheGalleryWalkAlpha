@@ -4,7 +4,7 @@
 @model TheGalleryWalk.Models.ArtworkEntity
 
 @{
-    ViewBag.Title = "Owned_GalleryView";
+    ViewBag.Title = "Owned_ArtistView";
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
 
@@ -34,36 +34,20 @@
            <h6 class="EntityInfo">
                @Model.Description
            </h6>
-           
-
        </div>
-
-
-
-    <span class="Divider"></span>
-
-    <div class="Info-header">
-        <h3>
-            Displayed Artwork
-        </h3>
-    </div>
-
-    <div style="text-align:center;">
-        @try
-        {
-            Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
-            }
-            catch (Exception ex)
-            {
-            Debug.WriteLine("There was an error ::    " + ex);
-            }
-
 
 </body>
 
 </html>
 
+<script type="text/javascript">
 
+    $(document).ready(function () {
 
+        $("#EntityInformationWindow").height($("#EntityImage").height()+40);
 
+        var showFormValue = @(ViewBag.showForm);
+
+    })
+
+</script>

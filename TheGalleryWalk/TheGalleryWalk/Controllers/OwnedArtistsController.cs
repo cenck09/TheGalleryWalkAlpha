@@ -72,33 +72,8 @@ namespace TheGalleryWalk.Controllers
             }
             catch (Exception ex)
             {
+                Debug.WriteLine("There was an error returning owned artist base view :: " + ex);
                 owner.ArtistEntities = new List<ArtistParseClass>();
-            }
-
-            try
-            {
-                var query = new ParseQuery<ParseUser>().WhereContainedIn("objectId", user.MyFavoriteArtists);
-                IEnumerable<ParseObject> favArtists = await query.FindAsync();
-
-                if (owner.MyFavoriteArtists == null)
-                {
-                    owner.MyFavoriteArtists = new List<ArtistParseUser>();
-                }
-         
-                Debug.WriteLine("\n\n ----- Fav Artists loaded array " + favArtists.Count());
-                foreach (var item in favArtists)
-                {
-                    Debug.WriteLine("Processing item : " + item.ObjectId);
-                    owner.MyFavoriteArtists.Add(new ArtistParseUser() {
-                        ObjectId = item.ObjectId,
-                        Name = item.Get<string>("Name")
-                    });
-                }
-               // owner.FollowedArtists = await query.FindAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("There was an error :: " + ex);
             }
 
             return View("~/Views/OwnedArtists/OwnedArtists.cshtml", "_LayoutLoggedIn", owner);
