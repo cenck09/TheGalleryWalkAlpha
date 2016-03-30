@@ -17,6 +17,9 @@
             <ol class="formField" style="display:none">
                 @Html.TextBoxFor(model => model.parseID, new { @Value = Model.parseID, @class = "formFieldInput" })
             </ol>
+            <ol class="formField" style="display:none">
+                @Html.TextBoxFor(model => model.Artist, new { @Value = Model.Artist, @class = "formFieldInput" })
+            </ol>
 
             <ol class="formField">
                 @Html.LabelFor(model => model.Name, new { @class = "formFieldTitle" })
