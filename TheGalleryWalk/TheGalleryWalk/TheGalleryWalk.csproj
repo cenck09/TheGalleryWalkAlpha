@@ -301,6 +301,7 @@
     <Content Include="Views\ArtistUserDirectory\ArtistUserDirectory.cshtml" />
     <Content Include="Views\ArtistUserDirectory\ArtistUserPartialView.cshtml" />
     <Content Include="Views\ArtistUserInfo\ArtistUserInfoView.cshtml" />
+    <Content Include="Views\EditGallery\EditGalleryPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
