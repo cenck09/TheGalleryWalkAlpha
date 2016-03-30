@@ -32,7 +32,9 @@ namespace TheGalleryWalk.Controllers
                     Name = registerData.Name,
                     PhoneNumber = registerData.PhoneNumber,
                     Enabled = 0,
-                    UserType = "GalleryOwnerUser"
+                    UserType = "GalleryOwnerUser",
+                    MyFavoriteArtists = new List<string>(),
+                    MyFavoriteGalleries = new List<string>()
                 };
 
             

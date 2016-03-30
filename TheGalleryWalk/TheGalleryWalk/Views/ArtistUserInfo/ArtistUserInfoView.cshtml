@@ -1,0 +1,45 @@
+﻿@using Parse;
+
+@model TheGalleryWalk.Models.ArtistParseUser
+@{
+    ViewBag.Title = "ArtistUserInfoView";
+}
+
+<h2>ArtistInfoView</h2>
+
+<div style="margin-top:50px; margin-left:50px; padding:10px;">
+
+    
+    @if (ViewBag.AddedArtist == 1){ <div> You have added this artist </div>   }
+    @if (ViewBag.AddedArtist == 2){ <div> Failed to add artist </div>         }
+    @if (ViewBag.AddedArtist == 3){ <div> You have removed this artist </div> }
+    @if (ViewBag.AddedArtist == 4){ <div> Failed to remove the artist </div>  }
+
+
+    <h1>
+        @Html.Raw(Model.Name);
+    </h1>
+
+
+    <div style="margin:20px; padding: 5px; background-color: aqua; border-radius:5px;">
+      
+        @if (ParseUser.CurrentUser != null)
+            {
+                if(ParseUser.CurrentUser.Get<IList<string>>("MyFavoriteArtists").Contains(Model.ObjectId))
+                {
+                    <a href="@Url.Action("unfollowArtist","ArtistUserInfo", Model)">
+                        - remove Artist -
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("followArtist","ArtistUserInfo", Model)">
+                        + Follow Artist +
+                    </a>
+                    }
+                }
+
+
+</div>
+
+</div>
