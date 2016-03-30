@@ -21,17 +21,30 @@
            <div  class="EntityImage">
                <img id="EntityImage" src="/Content/demoImages/demoGallery.jpg" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
            </div>
-           <h3 class="EntityInfo">
-               @Model.Name
-           </h3>
-           <h6 class="EntityInfo">
-               @Model.Style
-           </h6>
-           <h6 class="EntityInfo">
-               @Model.Description
-           </h6>
-           
+         
+           <div>
+               <div class="edit-btn" id="editBtn">
+                   <h4> - Edit Gallery - </h4>
+               </div>
+               <div class="edit-btn" id="cancelEditBtn" style="display:none;">
+                   <h4> - Cancel - </h4>
+               </div>
+               <div id="editForm" style="display:none;">
+                   @Html.Partial("~/Views/EditArtist/EditArtistPartialView.cshtml", model: Model);
+               </div>
+           </div>
 
+           <div id="galleryInfo">
+               <h3 class="EntityInfo">
+                   @Model.Name
+               </h3>
+               <h6 class="EntityInfo">
+                   @Model.Style
+               </h6>
+               <h6 class="EntityInfo">
+                   @Model.Description
+               </h6>
+           </div>
        </div>
 
 
@@ -73,6 +86,32 @@
         $("#EntityInformationWindow").height($("#EntityImage").height()+40);
      
         var showFormValue = @(ViewBag.showForm);
+
+        
+        document.getElementById("editBtn").onclick = function () { addEditForm() };
+        document.getElementById("cancelEditBtn").onclick = function () { removeEditForm() };
+
+        if(showFormValue == 3){
+            addEditForm();
+        }
+
+        
+        function removeEditForm() {
+            $('#editForm').hide();
+            $("#editBtn").show();
+            $("#cancelEditBtn").hide();
+            $("#galleryInfo").show()
+        }
+
+        function addEditForm() {
+            //  $('#addGalleryForm').load(url);
+            $("#editForm").show();
+            $("#editBtn").hide();
+            $("#cancelEditBtn").show();
+            $("#galleryInfo").hide()
+
+            document.getElementById('editForm').scrollIntoView(true);
+        }
 
     })
 

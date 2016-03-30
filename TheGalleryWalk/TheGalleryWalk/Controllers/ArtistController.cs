@@ -13,6 +13,47 @@ namespace TheGalleryWalk.Controllers
     public class ArtistController : AsyncController
     {
 
+
+        public ActionResult updateGalleryInfo()
+        {
+            return PartialView("~/Views/EditArtist/EditArtistPartialView.cshtml");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> updateArtistInfo(ArtistEntity artist)
+        {
+            if (!verifyUser(ParseUser.CurrentUser))
+            {
+                return returnFailedUserView();
+            }
+
+            ViewBag.showForm = 2;
+            if (ModelState.IsValid)
+            {
+                var query = from item in new ParseQuery<ArtistParseClass>()
+                            where item.ObjectId == artist.parseID
+                            select item;
+
+                ArtistParseClass gClass = await query.FirstAsync();
+
+                gClass.Name = artist.Name;
+                gClass.Style = artist.Style;
+                gClass.Description = artist.Description;
+
+                try
+                {
+                    await gClass.SaveAsync();
+                    ViewBag.showForm = 0;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
+
+            return await baseView(ParseUser.CurrentUser, artist);
+        }
+
         public async Task<ActionResult> ArtistView(ArtistEntity selectedArtist)
         {
              ViewBag.showForm = 0;
