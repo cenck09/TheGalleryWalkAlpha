@@ -48,12 +48,17 @@
         @try
         {
             Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
-            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", (Model.ArtworkEntities as IEnumerable<ParseObject>));
-            }
-            catch (Exception ex)
-            {
+            Html.RenderPartial("~/Views/Artist/ArtworkPartialView.cshtml", Model.ArtworkEntities);
+           
+        }
+        catch (Exception ex)
+        {
             Debug.WriteLine("There was an error ::    " + ex);
-            }
+        }
+    </div>
+
+
+
 
 
 </body>

@@ -241,6 +241,7 @@
     <Content Include="Views\Shared\_LayoutArtistLoggedIn.cshtml" />
     <Content Include="Views\Artist_OwnedArtwork\OwnedArtwork.cshtml" />
     <Content Include="Views\AddArtwork_Artist\Index.cshtml" />
+    <Content Include="Views\Artist\ArtworkPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

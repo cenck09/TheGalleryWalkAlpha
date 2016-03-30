@@ -74,8 +74,25 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine("Failed to get artist entities : "+ex);
             }
 
+
             
-           
+
+
+            try
+            {
+                var query = from item in new ParseQuery<ArtworkParseClass>()
+                            where item.ArtistID == selectedArtist.parseID
+                            select item;
+
+                IEnumerable<ArtworkParseClass> ArtworkEntities = await query.FindAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                selectedArtist.ArtworkEntities = new List<ArtworkParseClass>();
+            }
+
+
 
             ParseObject Gallery = null;
             try
@@ -100,16 +117,16 @@ namespace TheGalleryWalk.Controllers
             var artworkQuery = ParseObject.GetQuery("Artwork");
 
 
-            IList<string> artistIds; // = user.Get<IList<string>>("Galleries");
-            try
-            {
-                artistIds = Gallery.Get<IList<string>>("Artists");
-            }
-            catch (Exception ex)
-            {
-                artistIds = new List<string>();
-                Debug.WriteLine(ex);
-            }
+            //IList<string> artistIds; // = user.Get<IList<string>>("Galleries");
+            //try
+            //{
+            //    artistIds = Gallery.Get<IList<string>>("Artists");
+            //}
+            //catch (Exception ex)
+            //{
+            //    artistIds = new List<string>();
+            //    Debug.WriteLine(ex);
+            //}
 
           
             
