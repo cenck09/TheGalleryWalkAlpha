@@ -28,6 +28,42 @@ namespace TheGalleryWalk.Controllers
             }
        }// EOM
 
+        public ActionResult updateGalleryInfo()
+        {
+            return PartialView("~/Views/EditGallery/EditGalleryPartialView.cshtml");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> updateGalleryInfo(GalleryEntity gallery)
+        {
+            ViewBag.showForm = 2;
+            if (ModelState.IsValid)
+            {
+                var query = from item in new ParseQuery<GalleryParseClass>()
+                            where item.ObjectId == gallery.ParseID
+                            select item;
+
+                GalleryParseClass gClass = await query.FirstAsync();
+
+                var array = new List<string>();
+                gClass.Name = gallery.Name;
+                gClass.Address = gallery.Address;
+                gClass.Email = gallery.EmailAddress;
+
+                try
+                {
+                    await gClass.SaveAsync();
+                    ViewBag.showForm = 0;
+                    gallery = gClass.toEntityWithSelf();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
+
+            return await baseView(gallery);
+        }
 
         public ActionResult AddArtwork()
         {

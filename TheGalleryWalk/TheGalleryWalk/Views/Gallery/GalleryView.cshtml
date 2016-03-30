@@ -25,18 +25,34 @@
            <div  class="EntityImage">
                <img id="EntityImage" src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
            </div>
-           <h3 class="EntityInfo">
-               @Model.Name
-           </h3>
-           <h6 class="EntityInfo">
-               @Model.EmailAddress
-           </h6>
-           <h6 class="EntityInfo">
-               @Model.PhoneNumber
-           </h6>
-           <h6 class="EntityInfo">
-               @Model.Address
-           </h6>
+
+           <div>
+               <div class="edit-btn" id="editBtn">
+                   <h4> - Edit Gallery - </h4>
+               </div>
+               <div class="edit-btn" id="cancelEditBtn" style="display:none;">
+                   <h4> - Cancel - </h4>
+               </div>
+               <div id="editForm" style="display:none;">
+                   @Html.Partial("~/Views/EditGallery/EditGalleryPartialView.cshtml", model: Model);
+               </div>
+           </div>
+
+         <div id="galleryInfo">
+             <h3 class="EntityInfo">
+                 @Model.Name
+             </h3>
+             <h6 class="EntityInfo">
+                 @Model.EmailAddress
+             </h6>
+             <h6 class="EntityInfo">
+                 @Model.PhoneNumber
+             </h6>
+             <h6 class="EntityInfo">
+                 @Model.Address
+             </h6>
+         </div>
+        
 
        </div>
 
@@ -124,12 +140,37 @@
         document.getElementById("addArtworkBtn").onclick = function () { addArtworkForm() };
         document.getElementById("rmvArtworkBtn").onclick = function () { removeArtworkForm() };
 
+        document.getElementById("editBtn").onclick = function () { addEditForm() };
+        document.getElementById("cancelEditBtn").onclick = function () { removeEditForm() };
+
      
         var showFormValue = @(ViewBag.showForm);
 
         var url = '@Url.Action("AddArtwork", "Gallery")';
         if(showFormValue == 1){
             addArtworkForm();   
+        }
+
+        if(showFormValue == 3){
+
+        }
+
+        
+        function removeEditForm() {
+            $('#editForm').hide();
+            $("#editBtn").show();
+            $("#cancelEditBtn").hide();
+            $("#galleryInfo").show()
+        }
+
+        function addEditForm() {
+            //  $('#addGalleryForm').load(url);
+            $("#editForm").show();
+            $("#editBtn").hide();
+            $("#cancelEditBtn").show();
+            $("#galleryInfo").hide()
+
+            document.getElementById('editForm').scrollIntoView(true);
         }
 
         function removeArtworkForm() {
