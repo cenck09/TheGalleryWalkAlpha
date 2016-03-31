@@ -33,6 +33,10 @@ namespace TheGalleryWalk.Controllers
                             select item;
 
                 ArtistParseClass gClass = await query.FirstAsync();
+                if (gClass.FileOwnerId != getUserId())
+                {
+                   return returnFailedUserView();
+                }
 
                 gClass.Name = artist.Name;
                 gClass.Style = artist.Style;
