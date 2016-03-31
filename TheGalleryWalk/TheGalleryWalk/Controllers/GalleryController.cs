@@ -10,15 +10,14 @@ using System.Diagnostics;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class GalleryController : AsyncController
+    public class GalleryController : BaseValidatorController
     {
 
         public async Task<ActionResult> GalleryView(GalleryEntity selectedGallery)
         {
              ViewBag.showForm = 0;
 
-            var user = ParseUser.CurrentUser;
-            if(!verifyUser(user))
+            if(!verifyUser())
             {
                 return returnFailedUserView();
             }
@@ -74,7 +73,7 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> AddArtwork(ArtworkEntity registerData)
         {
             ViewBag.showForm = 1;
-            if (!verifyUser(ParseUser.CurrentUser))
+            if (!verifyUser())
             {
                 return returnFailedUserView();
             }
@@ -155,7 +154,13 @@ namespace TheGalleryWalk.Controllers
                 G.ArtworkAdd = new ArtworkEntity();
                 G.ArtworkAdd.addArtworkFormlistItem = new List<SelectListItem>();
 
-                GalleryOwnerEntity owner = new GalleryOwnerParseUser().getInstanceFromParseObject(ParseUser.CurrentUser).toEntityWithSelf();
+                GeneralParseUserData userD = await getUserData();
+
+                GalleryOwnerEntity owner = new GalleryOwnerEntity()
+                {
+                    Name = userD.Name,
+                    ParseID = userD.UserId,
+                };
 
                 try
                 {
@@ -184,18 +189,7 @@ namespace TheGalleryWalk.Controllers
             return View("~/Views/Gallery/GalleryView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", G );
         }
 
-        public ActionResult returnFailedUserView()
-        {
-            return View("../Home/Index", "_Layout");
-        }
-
-        private bool verifyUser(ParseUser user)
-        {
-            if (user == null) { return false; }
-            else if (!user.IsAuthenticated){ return false; }
-            else { return true; }
-        }
-
+  
     }
 }
 

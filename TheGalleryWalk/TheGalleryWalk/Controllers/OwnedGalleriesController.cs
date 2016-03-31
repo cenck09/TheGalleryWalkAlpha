@@ -20,7 +20,7 @@ namespace TheGalleryWalk.Controllers
 
             if (this.verifyUser(user))
             {
-                GalleryOwnerParseUser galleryParseUser = new GalleryOwnerParseUser().getInstanceFromParseObject(user);
+                GalleryOwnerParseUserData galleryParseUser = new GalleryOwnerParseUserData().getInstanceFromParseObject(user);
                 return await returnBaseView(galleryParseUser.toEntityWithSelf());
             }
             else
@@ -39,7 +39,7 @@ namespace TheGalleryWalk.Controllers
         {
             var userInstance = ParseUser.CurrentUser;
 
-            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(userInstance);
+            GalleryOwnerParseUserData user = new GalleryOwnerParseUserData().getInstanceFromParseObject(userInstance);
     
             var galleryOwner = user.toEntityWithSelf();
 

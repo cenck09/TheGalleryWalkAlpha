@@ -50,8 +50,8 @@ namespace TheGalleryWalk.Models
         public ArtistEntity ArtistAdd { get; set; }
 
         public IEnumerable<ArtistParseClass> ArtistEntities{ get; set; }
-        public IList<ArtistParseUser> MyFavoriteArtists { get; set; }
-        public IList<GalleryOwnerParseUser> MyFavoriteGalleries { get; set; }
+        public IList<ArtistParseUserData> MyFavoriteArtists { get; set; }
+        public IList<GalleryOwnerParseUserData> MyFavoriteGalleries { get; set; }
 
     }
 

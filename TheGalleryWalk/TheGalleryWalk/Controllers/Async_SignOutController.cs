@@ -8,21 +8,12 @@ using Parse;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class Async_SignOutController : AsyncController
+    public class Async_SignOutController : BaseValidatorController
     {
         // GET: Async_SignOut
-       public async Task<ActionResult> SignOut()
+       public ActionResult SignOut()
         {
-            var user = ParseUser.CurrentUser;
-            if(user == null)
-            {
-                return View("../Home/Index","_Layout");
-            }
-            else
-            {
-                await ParseUser.LogOutAsync();
-
-            }
+            logOutUser();
             return View("../Home/Index", "_Layout");
         }
     }

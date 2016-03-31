@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class OwnedArtistsController : AsyncController
+    public class OwnedArtistsController : BaseValidatorController
     {      
         public async Task<ActionResult> OwnedArtists()
         {
             ViewBag.showForm = 0;
             var userInstance = ParseUser.CurrentUser;
-            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(userInstance);
+            GalleryOwnerParseUserData user = new GalleryOwnerParseUserData().getInstanceFromParseObject(userInstance);
 
             if (this.verifyUser(userInstance))
             {
@@ -35,7 +35,7 @@ namespace TheGalleryWalk.Controllers
             if (!verifyUser(ParseUser.CurrentUser)){ return returnFailedUserView(); }
 
             ViewBag.showForm = 1;
-            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(ParseUser.CurrentUser);
+            GalleryOwnerParseUserData user = new GalleryOwnerParseUserData().getInstanceFromParseObject(ParseUser.CurrentUser);
 
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace TheGalleryWalk.Controllers
             return await baseView(user);
         }
 
-        public async Task<ActionResult> baseView(GalleryOwnerParseUser user)
+        public async Task<ActionResult> baseView(GalleryOwnerParseUserData user)
         {
             GalleryOwnerEntity owner = user.toEntityWithSelf();
             try
@@ -82,14 +82,14 @@ namespace TheGalleryWalk.Controllers
 
                 if (owner.MyFavoriteArtists == null)
                 {
-                    owner.MyFavoriteArtists = new List<ArtistParseUser>();
+                    owner.MyFavoriteArtists = new List<ArtistParseUserData>();
                 }
          
                 Debug.WriteLine("\n\n ----- Fav Artists loaded array " + favArtists.Count());
                 foreach (var item in favArtists)
                 {
                     Debug.WriteLine("Processing item : " + item.ObjectId);
-                    owner.MyFavoriteArtists.Add(new ArtistParseUser() {
+                    owner.MyFavoriteArtists.Add(new ArtistParseUserData() {
                         ObjectId = item.ObjectId,
                         Name = item.Get<string>("Name")
                     });

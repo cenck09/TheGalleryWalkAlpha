@@ -10,10 +10,8 @@ using System.Diagnostics;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class ArtistController : AsyncController
+    public class ArtistController : BaseValidatorController
     {
-
-
         public ActionResult updateGalleryInfo()
         {
             return PartialView("~/Views/EditArtist/EditArtistPartialView.cshtml");
@@ -22,7 +20,7 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> updateArtistInfo(ArtistEntity artist)
         {
-            if (!verifyUser(ParseUser.CurrentUser))
+            if (!userIsGalleryOwner())
             {
                 return returnFailedUserView();
             }
@@ -50,45 +48,19 @@ namespace TheGalleryWalk.Controllers
                     Debug.WriteLine(ex);
                 }
             }
-
             return await baseView(artist);
         }
 
         public async Task<ActionResult> ArtistView(ArtistEntity selectedArtist)
         {
-             ViewBag.showForm = 0;
+           ViewBag.showForm = 0;
+  
+            if(!userIsGalleryOwner()) { return returnFailedUserView();  }
+            else { return await baseView(selectedArtist);  }
 
-            var user = ParseUser.CurrentUser;
-            if(!verifyUser(user))
-            {
-                return returnFailedUserView();
-            }
-            else
-            {
-                return await baseView( selectedArtist);
-            }
-           
         }// EOM
      
     
-        
-
-
-        public ArtistEntity getArtistEntityForParseObject(ParseObject Artist)
-        {
-            ArtistEntity artistToReturn = new ArtistEntity();
-            artistToReturn.Name = Artist.Get<string>("Name");
-            artistToReturn.Style = Artist.Get<string>("Style");
-            artistToReturn.Description = Artist.Get<string>("Description");
-            
-
-            return artistToReturn;
-        }
-
-
-
-
-
         public async Task<ActionResult> baseView(ArtistEntity artistUser)
         {
             try
@@ -105,17 +77,9 @@ namespace TheGalleryWalk.Controllers
                 artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
-
-            if (this.verifyUser(ParseUser.CurrentUser))
+            if (userIsGalleryOwner())
             {
-                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
-                {
-                    return View("~/Views/Artist/ArtistView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", artistUser);
-                }
-                else
-                {
-                    return returnFailedUserView();
-                }
+                return View("~/Views/Artist/ArtistView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", artistUser);
             }
             else
             {
@@ -123,28 +87,9 @@ namespace TheGalleryWalk.Controllers
             }
         }
 
-
         public ActionResult returnFailedUserView()
         {
             return View("../Home/Index", "_Layout");
         }
-
-        private bool verifyUser(ParseUser user)
-        {
-            if (user == null)
-            {
-                return false;
-
-            }
-            else if (!user.IsAuthenticated)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
     }
 }
