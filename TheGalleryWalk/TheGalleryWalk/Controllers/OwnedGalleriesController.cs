@@ -50,6 +50,7 @@ namespace TheGalleryWalk.Controllers
                     PhoneNumber = registerData.PhoneNumber,
                     Website = registerData.Website,
                     GalleryOwnerID = getUserId(),
+                    FileOwnerId = getUserId()
                 };
 
                 Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + galleryEntity.GalleryOwnerID);

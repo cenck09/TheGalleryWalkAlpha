@@ -24,6 +24,12 @@ namespace TheGalleryWalk.Models {
             set { SetProperty(value); }
         }
 
+        [ParseFieldName("FileOwnerId")]
+        public string FileOwnerId
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
         [ParseFieldName("Style")]
         public string Style

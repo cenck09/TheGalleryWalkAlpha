@@ -43,7 +43,10 @@ namespace TheGalleryWalk.Controllers
                             select item;
 
                 GalleryParseClass gClass = await query.FirstAsync();
-
+                if (gClass.FileOwnerId != getUserId())
+                {
+                   return returnFailedUserView();
+                }
                 var array = new List<string>();
                 gClass.Name = gallery.Name;
                 gClass.Address = gallery.Address;
@@ -73,7 +76,7 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> AddArtwork(ArtworkEntity registerData)
         {
             ViewBag.showForm = 1;
-            if (!verifyUser())
+            if (!userIsGalleryOwner())
             {
                 return returnFailedUserView();
             }
@@ -102,7 +105,8 @@ namespace TheGalleryWalk.Controllers
                     Name = registerData.Name,
                     ArtistID = registerData.Artist,
                     Description = registerData.Description,
-                    GalleryID = registerData.ParentGalleryParseID
+                    GalleryID = registerData.ParentGalleryParseID,
+                    FileOwnerId = getUserId()
                 };
 
                 await artwork.SaveAsync();
