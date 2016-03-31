@@ -10,31 +10,29 @@ using TheGalleryWalk.Models;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class ArtistUserInfoController : AsyncController
+    public class ArtistUserInfoController : BaseValidatorController
     {
 
-        public async Task<ActionResult> ArtistUserInfoView(ArtistParseUser artistUser)
+        public async Task<ActionResult> ArtistUserInfoView(ArtistUserEntity artistUser)
         {
-            return await baseView(artistUser);
-        }
-
-        public async Task<ActionResult> followArtist(ArtistParseUser artistUser)
+            Debug.WriteLine("\n\n ---- Artist ID on infowindow first load "+artistUser.ParseID + " - Name - "+ artistUser.Name);
+            return await baseView(artistUser); }
+      
+        public async Task<ActionResult> followArtist(ArtistUserEntity artistUser)
         {
             try
             {
                 if (this.verifyUser())
                 {
-                    ParseUser user = ParseUser.CurrentUser;
-  
-                    Debug.WriteLine("\n\n ----------- Adding artist for user type ---- "+user.Get<string>("UserType")+" \n\n");
-                    IList<string> followedByArtistList = user.Get<IList<string>>("MyFavoriteArtists");
-                    followedByArtistList.Add(artistUser.ObjectId);
-                    user["MyFavoriteArtists"] = followedByArtistList;
-                    foreach (var item in followedByArtistList)
-                    {
-                        Debug.WriteLine("Fav artist id list on follow :"+ item);
-                    }
-                    await user.SaveAsync();
+                    GeneralParseUserData userData = await getUserData();
+                    Debug.WriteLine("\n\n ----- userData before following artist --"+userData.UserId + " --name-- "+ userData.Name);
+                    if(userData.MyFavoriteArtists == null) { Debug.WriteLine("Follow artist found null myFavoriteArtists"); userData.MyFavoriteArtists = new List<string>(); }
+
+                    IList<string> favArtist = userData.MyFavoriteArtists;
+                    favArtist.Add(artistUser.ParseID);
+                    userData.MyFavoriteArtists = favArtist;
+                    await userData.SaveAsync();
+
                     ViewBag.AddedArtist = 1; // for javascript to post a window for success
                 }
             }
@@ -47,21 +45,28 @@ namespace TheGalleryWalk.Controllers
         }
 
 
-        public async Task<ActionResult> unfollowArtist(ArtistParseUser artistUser)
+        public async Task<ActionResult> unfollowArtist(ArtistUserEntity artistUser)
         {
             try
             {
                 if (this.verifyUser())
                 {
-                    ParseUser user = ParseUser.CurrentUser;
+                    GeneralParseUserData userData = await getUserData();
+                    Debug.WriteLine("Fav artist list before remove" + userData.MyFavoriteArtists.Count);
+                    IList<string> favArtist = userData.MyFavoriteArtists;
+                    favArtist.Remove(artistUser.ParseID);
 
-                    Debug.WriteLine("\n\n ----------- Adding artist for user type ---- " + user.Get<string>("UserType") + " \n\n");
-                    IList<string> followedByArtistList = user.Get<IList<string>>("MyFavoriteArtists");
-                    followedByArtistList.Remove(artistUser.ObjectId);
-                    user["MyFavoriteArtists"] = followedByArtistList;
+                    userData.MyFavoriteArtists = favArtist;
+                    await userData.SaveAsync();
 
-                    await user.SaveAsync();
+                    Debug.WriteLine("Fav artist list after remove"+ userData.MyFavoriteArtists.Count);
+
                     ViewBag.AddedArtist = 3; // for javascript to post a window for success
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to verify current user");
+                    return returnFailedUserView();
                 }
             }
             catch (Exception ex)
@@ -74,50 +79,56 @@ namespace TheGalleryWalk.Controllers
 
 
 
-        public async Task<ActionResult> baseView(ArtistParseUser artistUser)
+        public async Task<ActionResult> baseView(ArtistUserEntity artistUser)
         {
             try
             {
                 var query = from item in new ParseQuery<ArtworkParseClass>()
-                            where item.ArtistID == artistUser.ObjectId
+                            where item.ArtistID == artistUser.ParseID
                             select item;
-
+                Debug.WriteLine("\n\n Parse Artist User ID"+artistUser.ParseID);
                 artistUser.ArtworkEntities = await query.FindAsync();
+                Debug.WriteLine(" \n\n ---- Artwork array count --- " +artistUser.ArtworkEntities.Count());
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                Debug.WriteLine("There was an error returning base view :: " + ex);
                 artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
-            
-            if (this.verifyUser())
+
+            ViewBag.IsFollowing = 0;
+            if (verifyUser())
             {
-                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
+                GeneralParseUserData userData = await getUserData();
+                if (userData != null)
                 {
-                    return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_LayoutLoggedIn", artistUser);
+                    foreach(string favs in userData.MyFavoriteArtists)
+                    {
+                        Debug.WriteLine(" Followed Artist array before base view -- "+favs);
+                    }
+                    if (userData.MyFavoriteArtists.Contains(artistUser.ParseID))
+                    {
+                        ViewBag.IsFollowing = 1;
+                    }
+                    else
+                    {
+                        ViewBag.IsFollowing = 2;
+                    }
                 }
-                else
-                {
-                    return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_LayoutArtistLoggedIn", artistUser);
-                }
+            }
+
+            if (userIsGalleryOwner())
+            {
+                return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_LayoutLoggedIn", artistUser);
+            }
+            else if(userIsArtist())
+            {
+                return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_LayoutArtistLoggedIn", artistUser);
             }
             else
             {
                 return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_Layout", artistUser);
             }
-        }
-        public bool verifyUser()
-        {
-            var user = ParseUser.CurrentUser;
-            if (user == null)
-            {
-                return false;
-            }
-            if (user.IsAuthenticated)
-            {
-                return true;
-            }
-            else { return false; }
         }
     }
 }

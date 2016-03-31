@@ -12,18 +12,15 @@ using System.Threading.Tasks;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class Artist_OwnedArtworkController : Controller
+    public class Artist_OwnedArtworkController : BaseValidatorController
     {
         // GET: Artist_OwnedArtwork
         public async Task<ActionResult> Artist_OwnedArtwork()
         {
             ViewBag.showForm = 0;
-            var user = ParseUser.CurrentUser;
-
-            if (this.verifyUser(user))
+            if (userIsArtist())
             {
-                ArtistParseUser ParseUser = new ArtistParseUser().getInstanceFromParseObject(user);
-                return await returnBaseView(ParseUser.toEntityWithSelf());
+                return await returnBaseView(getArtistUserEntity(await getUserData()));
             }
             else
             {
@@ -39,18 +36,14 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> AddArtwork(ArtworkEntity registerData)
         {
-            var userInstance = ParseUser.CurrentUser;
-
-            ArtistParseUser user = new ArtistParseUser().getInstanceFromParseObject(userInstance);
-
-            var artistUser = user.toEntityWithSelf();
-
-            if (!verifyUser(userInstance))
+            if (!userIsArtist())
             {
                 return returnFailedUserView();
             }
 
             ViewBag.showForm = 1;
+            GeneralParseUserData userData = await getUserData();
+            ArtistUserEntity artistUser =  getArtistUserEntity(userData);
 
             if (ModelState.IsValid)
             {
@@ -58,7 +51,7 @@ namespace TheGalleryWalk.Controllers
                 {
                     Name = registerData.Name,
                     GalleryID = null,
-                    ArtistID = user.ObjectId,
+                    ArtistID = getUserId(),
                     Description = registerData.Description
                 };
 
@@ -66,7 +59,7 @@ namespace TheGalleryWalk.Controllers
                 try
                 {
                     await Entity.SaveAsync();
-                    Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + Entity.ArtistID);
+                    if (userData.HasArtwork == 0) { userData.HasArtwork = 1; await userData.SaveAsync(); }
                     ViewBag.showForm = 0;
                 }
                 catch (Exception ex)
@@ -82,49 +75,26 @@ namespace TheGalleryWalk.Controllers
             return await returnBaseView(artistUser);
         }
 
-
-        public async Task<ActionResult> returnBaseView(ArtistUserEntity G_Owner)
+        public async Task<ActionResult> returnBaseView(ArtistUserEntity artistUser)
         {
-            if (G_Owner.ArtworkAdd == null) { G_Owner.ArtworkAdd = new ArtworkEntity(); }
+            if (artistUser.ArtworkAdd == null) { artistUser.ArtworkAdd = new ArtworkEntity(); }
 
             try
             {
                 var query = from item in new ParseQuery<ArtworkParseClass>()
-                            where item.ArtistID == G_Owner.ParseID
+                            where item.ArtistID == getUserId()
                             select item;
 
-                G_Owner.ArtworkEntities = await query.FindAsync();
+                artistUser.ArtworkEntities = await query.FindAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
-                G_Owner.ArtworkEntities = new List<ArtworkParseClass>();
+                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
-
-            return View("~/Views/Artist_OwnedArtwork/OwnedArtwork.cshtml", "_LayoutArtistLoggedIn", G_Owner);
+            return View("~/Views/Artist_OwnedArtwork/OwnedArtwork.cshtml", "_LayoutArtistLoggedIn", artistUser);
         }
 
-        public ActionResult returnFailedUserView()
-        {
-            return View("../Home/Index", "_Layout");
-        }
-
-        private bool verifyUser(ParseUser user)
-        {
-            if (user == null)
-            {
-                return false;
-
-            }
-            else if (!user.IsAuthenticated)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
     }
 }

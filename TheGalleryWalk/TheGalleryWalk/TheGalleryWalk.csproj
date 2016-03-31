@@ -155,6 +155,7 @@
     <Compile Include="Controllers\Async_SignOutController.cs" />
     <Compile Include="Controllers\Async_SignUpController.cs" />
     <Compile Include="Controllers\ArtistController.cs" />
+    <Compile Include="Controllers\BaseValidatorController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedArtistsController.cs" />
@@ -164,19 +165,16 @@
     </Compile>
     <Compile Include="Models\ArtistEntity.cs" />
     <Compile Include="Models\ArtistParseClass.cs" />
-    <Compile Include="Models\ArtistParseUser.cs" />
     <Compile Include="Models\ArtistUserEntity.cs" />
     <Compile Include="Models\ArtworkEntity.cs" />
     <Compile Include="Models\ArtworkParseClass.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
-    <Compile Include="Models\GalleryOwnerParseUser.cs" />
     <Compile Include="Models\GalleryParseClass.cs" />
+    <Compile Include="Models\GeneralParseUser.cs" />
+    <Compile Include="Models\GeneralParseUserData.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
     <Compile Include="Models\GalleryOwnerEntity.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -257,38 +255,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
-    <Folder Include="obj\Release\CSAutoParameterize\original\Views\" />
-    <Folder Include="obj\Release\CSAutoParameterize\transformed\Views\" />
-    <Folder Include="obj\Release\Database\" />
-    <Folder Include="obj\Release\Package\PackageTmp\bin\roslyn\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Content\Backgrounds\" />
-    <Folder Include="obj\Release\Package\PackageTmp\fonts\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Scripts\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\AddArtist\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\AddArtwork\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\AddArtwork_Artist\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\AddGallery\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Artist\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Artist_Async_SignUp\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Artist_OwnedArtwork\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\ArtsyPortal\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Artwork\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Async_SignIn\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Async_SignUp\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Gallery\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Home\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\OwnedArtists\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\OwnedGalleries\" />
-    <Folder Include="obj\Release\Package\PackageTmp\Views\Shared\" />
-    <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
-    <Folder Include="obj\Release\TempPE\" />
-    <Folder Include="obj\Release\TransformWebConfig\assist\" />
-    <Folder Include="obj\Release\TransformWebConfig\original\" />
-    <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\ArtistUserDirectory\ArtistUserDirectory\" />
-    <Folder Include="Views\ArtistUserDirectory\ArtistUserInfo\" />
     <Folder Include="Views\Async_SignOut\" />
+    <Folder Include="Views\BaseValidator\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -6,34 +6,19 @@ using System.Threading.Tasks;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseValidatorController
     {
-        public bool verifyUser()
-        {
-            var user = ParseUser.CurrentUser;
-            if (user == null)
-            {
-                return false;
-            }
-            if (user.IsAuthenticated)
-            {
-                return true;
-            } else {return false;  }
-        }
+
         public ActionResult Index()
         {
-           
-            if (this.verifyUser())
-            {
-                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
-                {
-                    return View("../Home/Index", "_LayoutLoggedIn");
-                }
-                else
-                {
-                    return View("../Home/Index", "_LayoutArtistLoggedIn");
-                }
 
+            if (userIsGalleryOwner())
+            {
+                return View("../Home/Index", "_LayoutLoggedIn");
+            }
+            else if(userIsArtist())
+            {
+                return View("../Home/Index", "_LayoutArtistLoggedIn");
             }
             else
             {
@@ -58,17 +43,13 @@ namespace TheGalleryWalk.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            if (this.verifyUser())
+            if (userIsGalleryOwner())
             {
-                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
-                {
-                    return View("../Home/Index", "_LayoutLoggedIn");
-                }
-                else
-                {
-                    return View("../Home/Index", "_LayoutArtistLoggedIn");
-                }
+                return View("../Home/Index", "_LayoutLoggedIn");
+            }
+            else if(userIsArtist())
+            {
+                return View("../Home/Index", "_LayoutArtistLoggedIn");
             }
             else
             {
@@ -80,16 +61,14 @@ namespace TheGalleryWalk.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            if(this.verifyUser())
+
+            if (userIsGalleryOwner())
             {
-                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
-                {
-                    return View("../Home/Index", "_LayoutLoggedIn");
-                }
-                else
-                {
-                    return View("../Home/Index", "_LayoutArtistLoggedIn");
-                }
+                return View("../Home/Index", "_LayoutLoggedIn");
+            }
+            else if (userIsArtist())
+            {
+                return View("../Home/Index", "_LayoutArtistLoggedIn");
             }
             else
             {

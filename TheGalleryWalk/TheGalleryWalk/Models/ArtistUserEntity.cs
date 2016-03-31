@@ -44,9 +44,12 @@ namespace TheGalleryWalk.Models
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
 
-        public string ParseID;
+        public string ParseID
+        {
+            get; set;
+        }
 
-        public int Enabled;
+        public int Enabled { get; set; }
 
      
         public ArtworkEntity ArtworkAdd;

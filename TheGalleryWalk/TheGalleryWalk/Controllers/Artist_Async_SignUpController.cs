@@ -12,7 +12,7 @@ using System.Collections;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class Artist_Async_SignUpController : Controller
+    public class Artist_Async_SignUpController : BaseValidatorController
     {
         public ActionResult Signup()
         {
@@ -24,29 +24,44 @@ namespace TheGalleryWalk.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ArtistParseUser()
+
+                var user = new GeneralParseUser()
                 {
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
                     Email = registerData.EmailAddress,
-                    Name = registerData.Name,
-                    PhoneNumber = registerData.PhoneNumber,
-                    Enabled = 0,
-                    UserType = "ArtistUser",
-                    MyFavoriteGalleries = new List<string>(),
-                    MyFavoriteArtists = new List<string>()
+                    UserType = "ArtistUser"
                 };
 
-                Debug.WriteLine("Creating user: " + user.Name);
+             
+                try { await user.SignUpAsync(); }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("There was an error " + ex);
+                    return View("ErrorSignUp");
+                }
+
+                var userInfo = new GeneralParseUserData()
+                {
+                    Name = registerData.Name,
+                    PhoneNumber = registerData.PhoneNumber,
+                    Enabled = 1, // enabled by default, will set to 0 before production 
+                    UserType = "ArtistUser",
+                    UserId = user.ObjectId,
+                    MyFavoriteGalleries = new List<string>(),
+                    MyFavoriteArtists = new List<string>(),
+                    HasArtwork = 0,
+                    IsBanned = 0
+                };
 
                 try
                 {
-                    await user.SignUpAsync();
+                    await userInfo.SaveAsync();
                     return View("CompletedSignUp");
-
                 }
                 catch (Exception ex)
                 {
+                    await user.DeleteAsync();
                     Debug.WriteLine("There was an error " + ex);
                     return View("ErrorSignUp");
                 }

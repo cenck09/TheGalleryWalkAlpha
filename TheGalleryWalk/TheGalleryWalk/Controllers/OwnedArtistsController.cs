@@ -9,17 +9,23 @@ using System.Threading.Tasks;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class OwnedArtistsController : AsyncController
+    public class OwnedArtistsController : BaseValidatorController
     {      
         public async Task<ActionResult> OwnedArtists()
         {
-            ViewBag.showForm = 0;
-            var userInstance = ParseUser.CurrentUser;
-            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(userInstance);
-
-            if (this.verifyUser(userInstance))
+            if (verifyUser())
             {
-                return await baseView(user);
+                ViewBag.showForm = 0;
+                GeneralParseUserData userData = await getUserData();
+
+                GalleryOwnerEntity owner = new GalleryOwnerEntity()
+                {
+                    ParseID = userData.ObjectId,
+                    Name = userData.Name,
+                    ArtistAdd = new ArtistEntity()
+                };
+
+                return await baseView(owner, userData);
             }
             else{return returnFailedUserView();}
         }
@@ -32,10 +38,18 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> AddArtist(ArtistEntity registerData)
         {
-            if (!verifyUser(ParseUser.CurrentUser)){ return returnFailedUserView(); }
+            if (!verifyUser()){ return returnFailedUserView(); }
+
 
             ViewBag.showForm = 1;
-            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(ParseUser.CurrentUser);
+            GeneralParseUserData userData = await getUserData();
+
+            GalleryOwnerEntity owner = new GalleryOwnerEntity()
+            {
+                ParseID = userData.ObjectId,
+                Name = userData.Name,
+                ArtistAdd = registerData
+            };
 
             if (ModelState.IsValid)
             {
@@ -46,7 +60,7 @@ namespace TheGalleryWalk.Controllers
                     Birth = registerData.Birth,
                     Death = registerData.Death,
                     Description = registerData.Description,
-                    GalleryOwnerID = user.ObjectId
+                    GalleryOwnerID = getUserId()
                 };
 
                 try
@@ -56,46 +70,45 @@ namespace TheGalleryWalk.Controllers
                 }
                 catch (Exception ex){Debug.WriteLine(ex);}
             }       
-            return await baseView(user);
+            return await baseView(owner, userData);
         }
 
-        public async Task<ActionResult> baseView(GalleryOwnerParseUser user)
+        public async Task<ActionResult> baseView(GalleryOwnerEntity owner, GeneralParseUserData userData)
         {
-            GalleryOwnerEntity owner = user.toEntityWithSelf();
+          
             try
             {
                 var query = from item in new ParseQuery<ArtistParseClass>()
-                            where item.GalleryOwnerID == user.ObjectId
+                            where item.GalleryOwnerID == getUserId()
                             select item;
 
                 owner.ArtistEntities = await query.FindAsync();
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 owner.ArtistEntities = new List<ArtistParseClass>();
             }
 
             try
             {
-                var query = new ParseQuery<ParseUser>().WhereContainedIn("objectId", user.MyFavoriteArtists);
+                var query = new ParseQuery<GeneralParseUserData>().WhereContainedIn("UserId", userData.MyFavoriteArtists);
                 IEnumerable<ParseObject> favArtists = await query.FindAsync();
 
                 if (owner.MyFavoriteArtists == null)
                 {
-                    owner.MyFavoriteArtists = new List<ArtistParseUser>();
+                    owner.MyFavoriteArtists = new List<ArtistUserEntity>();
                 }
          
                 Debug.WriteLine("\n\n ----- Fav Artists loaded array " + favArtists.Count());
-                foreach (var item in favArtists)
+                foreach (GeneralParseUserData item in favArtists)
                 {
                     Debug.WriteLine("Processing item : " + item.ObjectId);
-                    owner.MyFavoriteArtists.Add(new ArtistParseUser() {
-                        ObjectId = item.ObjectId,
-                        Name = item.Get<string>("Name")
-                    });
+                    owner.MyFavoriteArtists.Add(getArtistUserEntity(item));
                 }
                // owner.FollowedArtists = await query.FindAsync();
             }
+
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error :: " + ex);
@@ -103,18 +116,5 @@ namespace TheGalleryWalk.Controllers
 
             return View("~/Views/OwnedArtists/OwnedArtists.cshtml", "_LayoutLoggedIn", owner);
         }
-
-        public ActionResult returnFailedUserView()
-        {
-            return View("../Home/Index", "_Layout");
-        }
-
-        private bool verifyUser(ParseUser user)
-        {
-            if (user == null) { return false; }
-            else if (!user.IsAuthenticated) { return false; }
-            else { return true; }
-        }
-
     }
 }
