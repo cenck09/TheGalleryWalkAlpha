@@ -20,7 +20,7 @@ namespace TheGalleryWalk.Controllers
             ViewBag.showForm = 0;
             if (userIsArtist())
             {
-                return await returnBaseView(await getArtistUserEntity());
+                return await returnBaseView(getArtistUserEntity(await getUserData()));
             }
             else
             {
@@ -42,7 +42,8 @@ namespace TheGalleryWalk.Controllers
             }
 
             ViewBag.showForm = 1;
-            ArtistUserEntity artistUser = await getArtistUserEntity();
+            GeneralParseUserData userData = await getUserData();
+            ArtistUserEntity artistUser =  getArtistUserEntity(userData);
 
             if (ModelState.IsValid)
             {
@@ -58,7 +59,7 @@ namespace TheGalleryWalk.Controllers
                 try
                 {
                     await Entity.SaveAsync();
-                    Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + Entity.ArtistID);
+                    if (userData.HasArtwork == 0) { userData.HasArtwork = 1; await userData.SaveAsync(); }
                     ViewBag.showForm = 0;
                 }
                 catch (Exception ex)
@@ -74,21 +75,6 @@ namespace TheGalleryWalk.Controllers
             return await returnBaseView(artistUser);
         }
 
-        public async Task<ArtistUserEntity> getArtistUserEntity()
-        {
-            try
-            {
-                GeneralParseUserData userData = await getUserData();
-                return new ArtistUserEntity()
-                {
-                    ParseID = userData.UserId,
-                    Name = userData.Name,
-                    PhoneNumber = userData.PhoneNumber,
-                };
-            }
-            catch (Exception ex) {return new ArtistUserEntity();}
-        }
-
         public async Task<ActionResult> returnBaseView(ArtistUserEntity artistUser)
         {
             if (artistUser.ArtworkAdd == null) { artistUser.ArtworkAdd = new ArtworkEntity(); }
@@ -96,7 +82,7 @@ namespace TheGalleryWalk.Controllers
             try
             {
                 var query = from item in new ParseQuery<ArtworkParseClass>()
-                            where item.ArtistID == artistUser.ParseID
+                            where item.ArtistID == getUserId()
                             select item;
 
                 artistUser.ArtworkEntities = await query.FindAsync();
@@ -107,13 +93,7 @@ namespace TheGalleryWalk.Controllers
                 artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
-
             return View("~/Views/Artist_OwnedArtwork/OwnedArtwork.cshtml", "_LayoutArtistLoggedIn", artistUser);
-        }
-
-        public ActionResult returnFailedUserView()
-        {
-            return View("../Home/Index", "_Layout");
         }
 
     }

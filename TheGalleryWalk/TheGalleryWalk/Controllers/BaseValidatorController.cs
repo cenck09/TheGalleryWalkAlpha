@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -21,17 +22,38 @@ namespace TheGalleryWalk.Controllers
         public bool userIsArtist() { return ( verifyUser() && "ArtistUser".Equals(getUserType())); }
         public bool userIsGalleryOwner() { return (verifyUser() && "GalleryOwnerUser".Equals(getUserType())); }
 
+
+
+        public GalleryOwnerEntity getGalleryOwnerEntity(GeneralParseUserData userData)
+        {
+            return new GalleryOwnerEntity()
+            {
+                ParseID = userData.ObjectId,
+                Name = userData.Name
+            };
+        }
+
+        public ArtistUserEntity getArtistUserEntity(GeneralParseUserData userData)
+        {
+            Debug.WriteLine("\n\n ------ Getting ArtistEntity with userData ID = "+ userData.UserId);
+            return new ArtistUserEntity()
+            {
+                ParseID = userData.UserId.ToString(),
+                Name = userData.Name
+            };
+        }
+
         public bool verifyUser()
         {
             if (Session["UserId"] == null) {  return false; }
             else { return true; }
         }
 
-        public void logInUser( ParseUser user)
+        public void logInUser(ParseUser user)
         {
             setUserId(user.ObjectId);
             setUserType(user.Get<string>("UserType"));
-        }
+     }
 
         public void logOutUser()
         {

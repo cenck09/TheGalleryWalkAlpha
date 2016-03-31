@@ -5,8 +5,8 @@ using System.Web;
 using Parse;
 
 namespace TheGalleryWalk.Models
-{        [ParseClassName("GeneralParseUser")]
-
+{
+    [ParseClassName("GeneralParseUser")]
     public class GeneralParseUser : ParseUser
     {
         [ParseFieldName("UserType")]

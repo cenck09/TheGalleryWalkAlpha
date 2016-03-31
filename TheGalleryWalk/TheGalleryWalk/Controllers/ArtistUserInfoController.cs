@@ -15,9 +15,9 @@ namespace TheGalleryWalk.Controllers
 
         public async Task<ActionResult> ArtistUserInfoView(ArtistUserEntity artistUser)
         {
-            return await baseView(artistUser);
-        }
-
+            Debug.WriteLine("\n\n ---- Artist ID on infowindow first load "+artistUser.ParseID + " - Name - "+ artistUser.Name);
+            return await baseView(artistUser); }
+      
         public async Task<ActionResult> followArtist(ArtistUserEntity artistUser)
         {
             try
@@ -25,8 +25,14 @@ namespace TheGalleryWalk.Controllers
                 if (this.verifyUser())
                 {
                     GeneralParseUserData userData = await getUserData();
-                    userData.MyFavoriteArtists.Add(artistUser.ParseID);
+                    Debug.WriteLine("\n\n ----- userData before following artist --"+userData.UserId + " --name-- "+ userData.Name);
+                    if(userData.MyFavoriteArtists == null) { Debug.WriteLine("Follow artist found null myFavoriteArtists"); userData.MyFavoriteArtists = new List<string>(); }
+
+                    IList<string> favArtist = userData.MyFavoriteArtists;
+                    favArtist.Add(artistUser.ParseID);
+                    userData.MyFavoriteArtists = favArtist;
                     await userData.SaveAsync();
+
                     ViewBag.AddedArtist = 1; // for javascript to post a window for success
                 }
             }
@@ -46,9 +52,21 @@ namespace TheGalleryWalk.Controllers
                 if (this.verifyUser())
                 {
                     GeneralParseUserData userData = await getUserData();
-                    userData.MyFavoriteArtists.Remove(artistUser.ParseID);
+                    Debug.WriteLine("Fav artist list before remove" + userData.MyFavoriteArtists.Count);
+                    IList<string> favArtist = userData.MyFavoriteArtists;
+                    favArtist.Remove(artistUser.ParseID);
+
+                    userData.MyFavoriteArtists = favArtist;
                     await userData.SaveAsync();
+
+                    Debug.WriteLine("Fav artist list after remove"+ userData.MyFavoriteArtists.Count);
+
                     ViewBag.AddedArtist = 3; // for javascript to post a window for success
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to verify current user");
+                    return returnFailedUserView();
                 }
             }
             catch (Exception ex)
@@ -68,13 +86,35 @@ namespace TheGalleryWalk.Controllers
                 var query = from item in new ParseQuery<ArtworkParseClass>()
                             where item.ArtistID == artistUser.ParseID
                             select item;
-
+                Debug.WriteLine("\n\n Parse Artist User ID"+artistUser.ParseID);
                 artistUser.ArtworkEntities = await query.FindAsync();
+                Debug.WriteLine(" \n\n ---- Artwork array count --- " +artistUser.ArtworkEntities.Count());
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                Debug.WriteLine("There was an error returning base view :: " + ex);
                 artistUser.ArtworkEntities = new List<ArtworkParseClass>();
+            }
+
+            ViewBag.IsFollowing = 0;
+            if (verifyUser())
+            {
+                GeneralParseUserData userData = await getUserData();
+                if (userData != null)
+                {
+                    foreach(string favs in userData.MyFavoriteArtists)
+                    {
+                        Debug.WriteLine(" Followed Artist array before base view -- "+favs);
+                    }
+                    if (userData.MyFavoriteArtists.Contains(artistUser.ParseID))
+                    {
+                        ViewBag.IsFollowing = 1;
+                    }
+                    else
+                    {
+                        ViewBag.IsFollowing = 2;
+                    }
+                }
             }
 
             if (userIsGalleryOwner())

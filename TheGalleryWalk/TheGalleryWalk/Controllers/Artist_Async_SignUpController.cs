@@ -45,11 +45,13 @@ namespace TheGalleryWalk.Controllers
                 {
                     Name = registerData.Name,
                     PhoneNumber = registerData.PhoneNumber,
-                    Enabled = 0,
+                    Enabled = 1, // enabled by default, will set to 0 before production 
                     UserType = "ArtistUser",
                     UserId = user.ObjectId,
                     MyFavoriteGalleries = new List<string>(),
-                    MyFavoriteArtists = new List<string>()
+                    MyFavoriteArtists = new List<string>(),
+                    HasArtwork = 0,
+                    IsBanned = 0
                 };
 
                 try

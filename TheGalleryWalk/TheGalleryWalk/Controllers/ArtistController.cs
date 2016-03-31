@@ -86,10 +86,5 @@ namespace TheGalleryWalk.Controllers
                 return returnFailedUserView();
             }
         }
-
-        public ActionResult returnFailedUserView()
-        {
-            return View("../Home/Index", "_Layout");
-        }
     }
 }

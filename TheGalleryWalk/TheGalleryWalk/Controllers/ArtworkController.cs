@@ -23,7 +23,7 @@ namespace TheGalleryWalk.Controllers
             }
             else
             {
-                return await baseView(selectedArtwork);
+                return baseView(selectedArtwork);
             }
            
         }// EOM
@@ -68,14 +68,12 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine(" \n\n  ----- The State Is not valid for adding artwork! ----  \n\n");
             }
 
-            return await baseView(artwork);
+            return baseView(artwork);
         }
 
 
-
-        public async Task<ActionResult> baseView(ArtworkEntity selectedArtwork)
+        public ActionResult baseView(ArtworkEntity selectedArtwork)
         {
-  
             return View("~/Views/Artwork/ArtworkView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", selectedArtwork);
         }      
     }

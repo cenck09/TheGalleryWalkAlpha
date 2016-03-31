@@ -26,8 +26,8 @@ namespace TheGalleryWalk
 
            try {
 
-                ParseObject.RegisterSubclass<GalleryOwnerParseUserData>();
-                ParseObject.RegisterSubclass<ArtistParseUserData>();
+                ParseObject.RegisterSubclass<GeneralParseUserData>();
+                ParseObject.RegisterSubclass<GeneralParseUser>();
                 ParseObject.RegisterSubclass<GalleryParseClass>();
                 ParseObject.RegisterSubclass<ArtworkParseClass>();
                 ParseObject.RegisterSubclass<ArtistParseClass>();

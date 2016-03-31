@@ -30,8 +30,8 @@ namespace TheGalleryWalk.Controllers
             {
                 try
                 {
-                    await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
-                    var user = ParseUser.CurrentUser;
+                    
+                   ParseUser user = await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
                     logInUser(user);
                     
                     if (userIsGalleryOwner())

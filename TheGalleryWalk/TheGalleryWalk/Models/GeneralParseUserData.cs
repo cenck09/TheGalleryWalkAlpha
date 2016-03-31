@@ -6,6 +6,7 @@ using Parse;
 
 namespace TheGalleryWalk.Models
 {
+    [ParseClassName("GeneralParseUserData")]
     public class GeneralParseUserData : ParseObject
     {
         [ParseFieldName("UserId")]
@@ -47,7 +48,7 @@ namespace TheGalleryWalk.Models
         [ParseFieldName("MyFavoriteGalleries")]
         public IList<string> MyFavoriteGalleries
         {
-            get { return GetProperty<List<string>>(); }
+            get { return GetProperty<IList<string>>(); }
             set { SetProperty(value); }
         }
 
@@ -55,7 +56,21 @@ namespace TheGalleryWalk.Models
         [ParseFieldName("MyFavoriteArtists")]
         public IList<string> MyFavoriteArtists
         {
-            get { return GetProperty<List<string>>(); }
+            get { return GetProperty<IList<string>>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("IsBanned")]
+        public int IsBanned
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("HasArtwork")]
+        public int HasArtwork
+        {
+            get { return GetProperty<int>(); }
             set { SetProperty(value); }
         }
 
