@@ -10,59 +10,41 @@ using System.Diagnostics;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class ArtistUserDirectoryController : AsyncController
+    public class ArtistUserDirectoryController : BaseValidatorController
     {
-        // GET: ArtistUserDirectory
         public async Task<ActionResult> ArtistUserDirectory()
         {
             /* This query will be updated to remove artists without artwork and other things we'll need*/
-            var query = from item in new ParseQuery<ParseUser>()
+            var query = from item in new ParseQuery<GeneralParseUserData>()
                         where item.Get<string>("UserType") == "ArtistUser"
                         where item.Get<string>("MyFavoriteGalleries") != null
                         where item.Get<string>("MyFavoriteArtists") != null
+                        where item.Get<int>("IsBanned") == 0
+                        where item.Get<int>("HasArtwork") == 1
+                        where item.Get<int>("Enabled") == 1
                         select item;
 
-            IEnumerable<ParseUser> users = await query.FindAsync();
+           IEnumerable<GeneralParseUserData> artistusers = await query.FindAsync();
+            IList<ArtistUserEntity> artists = new List<ArtistUserEntity>();
 
-            IList<ArtistParseUser> artistusers = new List<ArtistParseUser>();
-
-            foreach(var item in users)
+            foreach (GeneralParseUserData artistuser in artistusers)
             {
-                Debug.WriteLine("Artist user with id -- "+ item.ObjectId);
-                artistusers.Add(new ArtistParseUser().getInstanceFromParseObject(item));
+                ArtistUserEntity artistUserEntity = getArtistUserEntity(artistuser);
+                artists.Add(artistUserEntity); Debug.WriteLine("Artist Id after adding to artist list" + artistUserEntity.ParseID);
             }
 
-            Debug.WriteLine("\n\n ----- Number of artist users -------  " + artistusers.Count()+"\n\n");
-
-            if (this.verifyUser())
-            {              
-                if ("GalleryOwnerUser".Equals(ParseUser.CurrentUser.Get<string>("UserType")))
-                {
-                    return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_LayoutLoggedIn", artistusers);
-                }
-                else
-                {
-                    return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_LayoutArtistLoggedIn", artistusers);
-                }
-            }
+          if (userIsGalleryOwner())
+           {
+              return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_LayoutLoggedIn", artists);
+           }
+           else if(userIsArtist())
+           {
+             return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_LayoutArtistLoggedIn", artists);
+           }
             else
             {
-                return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_Layout", artistusers);
+                return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_Layout", artists);
             }
-        }
-
-        public bool verifyUser()
-        {
-            var user = ParseUser.CurrentUser;
-            if (user == null)
-            {
-                return false;
-            }
-            if (user.IsAuthenticated)
-            {
-                return true;
-            }
-            else { return false; }
         }
     }
 }

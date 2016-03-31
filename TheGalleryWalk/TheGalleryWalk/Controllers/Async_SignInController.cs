@@ -11,7 +11,7 @@ using TheGalleryWalk.Models;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class Async_SignInController : AsyncController
+    public class Async_SignInController : BaseValidatorController
     {
 
 
@@ -27,25 +27,21 @@ namespace TheGalleryWalk.Controllers
             ViewBag.showForm = 1;
 
             if (ModelState.IsValid)
-            { 
+            {
                 try
-                {   
-
-                    await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
-
-                    var user = ParseUser.CurrentUser;
-                    var userType = user.Get<string>("UserType");
-
-                    Debug.WriteLine("---- Class Name for login ----"+userType);
-                    if (userType == "GalleryOwnerUser")
+                {
+                    
+                   ParseUser user = await ParseUser.LogInAsync(loginData.EmailAddress, loginData.Password);
+                    logInUser(user);
+                    
+                    if (userIsGalleryOwner())
                     {
                         return RedirectToAction("OwnedGalleries", "OwnedGalleries", null);
                     }
-                    else {
+                    else if(userIsArtist()) {
                         return RedirectToAction("Artist_OwnedArtwork", "Artist_OwnedArtwork", null);
-
                     }
-
+                  
                 }
                 catch (Exception ex)
                 {

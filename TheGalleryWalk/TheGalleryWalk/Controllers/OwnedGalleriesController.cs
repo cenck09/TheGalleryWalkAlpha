@@ -11,17 +11,15 @@ using System.Threading.Tasks;
 
 namespace TheGalleryWalk.Controllers
 {
-    public class OwnedGalleriesController : AsyncController
+    public class OwnedGalleriesController : BaseValidatorController
     {      
         public async Task<ActionResult> OwnedGalleries()
         {
             ViewBag.showForm = 0;
-            var user = ParseUser.CurrentUser;
 
-            if (this.verifyUser(user))
+            if (this.verifyUser())
             {
-                GalleryOwnerParseUser galleryParseUser = new GalleryOwnerParseUser().getInstanceFromParseObject(user);
-                return await returnBaseView(galleryParseUser.toEntityWithSelf());
+                return await returnBaseView(getGalleryOwnerEntity(await getUserData()));
             }
             else
             {
@@ -37,18 +35,10 @@ namespace TheGalleryWalk.Controllers
         [HttpPost]
         public async Task<ActionResult> AddGallery(GalleryEntity registerData)
         {
-            var userInstance = ParseUser.CurrentUser;
-
-            GalleryOwnerParseUser user = new GalleryOwnerParseUser().getInstanceFromParseObject(userInstance);
-    
-            var galleryOwner = user.toEntityWithSelf();
-
-            if (!verifyUser(userInstance))
-            {
-                return returnFailedUserView();
-            }
-
+            if (!verifyUser()) { return returnFailedUserView(); }
             ViewBag.showForm = 1;
+
+            GalleryOwnerEntity galleryOwner = getGalleryOwnerEntity(await getUserData());
 
             if (ModelState.IsValid)
             {
@@ -59,7 +49,7 @@ namespace TheGalleryWalk.Controllers
                     Address = registerData.Address,
                     PhoneNumber = registerData.PhoneNumber,
                     Website = registerData.Website,
-                    GalleryOwnerID = userInstance.ObjectId,
+                    GalleryOwnerID = getUserId(),
                 };
 
                 Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + galleryEntity.GalleryOwnerID);
@@ -90,7 +80,7 @@ namespace TheGalleryWalk.Controllers
             try
             {
                 var query = from item in new ParseQuery<GalleryParseClass>()
-                            where item.GalleryOwnerID == G_Owner.ParseID
+                            where item.GalleryOwnerID == getUserId()
                             select item;
 
                 G_Owner.GalleryEntities = await query.FindAsync();
@@ -100,31 +90,8 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine("There was an error returning owned galleries base view :: "+ ex);
                 G_Owner.GalleryEntities = new List<GalleryParseClass>();
             }
-           
-
+               
             return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);
        }
-
-        public ActionResult returnFailedUserView()
-        {
-            return View("../Home/Index", "_Layout");
-        }
-
-        private bool verifyUser(ParseUser user)
-        {
-            if (user == null)
-            {
-                return false;
-
-            }
-            else if (!user.IsAuthenticated)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
     }
 }
