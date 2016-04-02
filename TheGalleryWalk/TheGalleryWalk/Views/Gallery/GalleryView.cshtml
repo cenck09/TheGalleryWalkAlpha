@@ -117,8 +117,7 @@
     <div style="text-align:center;">
         @try
         {
-            IEnumerable<ParseObject> artists = Model.ArtistEntities;
-            Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", artists);
+            Html.RenderPartial("~/Views/Gallery/ArtistPartialView.cshtml", Model.ArtistEntities);
             }
             catch (Exception ex)
             {

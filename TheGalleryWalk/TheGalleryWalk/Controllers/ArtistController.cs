@@ -76,6 +76,7 @@ namespace TheGalleryWalk.Controllers
                IEnumerable<ArtworkParseClass> artworkParseClass = await query.FindAsync();
                 foreach(ArtworkParseClass item in artworkParseClass)
                 {
+                    Debug.WriteLine("Processing artwork: "+item.Name + " with artist ID : "+ item.ArtistID );
                     artistUser.ArtworkEntities.Add(getArtworkEntity(item));
                 }
             }

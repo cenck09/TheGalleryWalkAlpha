@@ -206,7 +206,6 @@ C:\Users\Tom\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\S
 C:\Users\Tom\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.csprojResolveAssemblyReference.cache
 C:\Users\Tom\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.dll
 C:\Users\Tom\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.pdb
-C:\Users\Chris\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.csprojResolveAssemblyReference.cache
 C:\Users\Chris\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\roslyn\csc.exe
 C:\Users\Chris\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Chris\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
