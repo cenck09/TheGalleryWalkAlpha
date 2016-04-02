@@ -29,7 +29,7 @@ namespace TheGalleryWalk.Controllers
             if (ModelState.IsValid)
             {
                 var query = from item in new ParseQuery<ArtistParseClass>()
-                            where item.ObjectId == artist.parseID
+                            where item.ObjectId == artist.ParseID
                             select item;
 
                 ArtistParseClass gClass = await query.FirstAsync();
@@ -70,7 +70,7 @@ namespace TheGalleryWalk.Controllers
             try
             {
                 var query = from item in new ParseQuery<ArtworkParseClass>()
-                            where item.ArtistID == artistUser.parseID
+                            where item.ArtistID == artistUser.ParseID
                             select item;
 
                IEnumerable<ArtworkParseClass> artworkParseClass = await query.FindAsync();

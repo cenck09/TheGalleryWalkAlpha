@@ -10,15 +10,9 @@ namespace TheGalleryWalk.Models
 {
 
     [ParseClassName("ArtworkParseClass")]
-    public class ArtworkParseClass : ParseObject
+    public class ArtworkParseClass : BaseParseObject
     {
    
-        [ParseFieldName("Name")]
-        public string Name
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty(value); }
-        }
         [ParseFieldName("ArtistID")]
         public string ArtistID
         {

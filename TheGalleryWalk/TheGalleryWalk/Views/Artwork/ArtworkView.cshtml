@@ -26,7 +26,7 @@
         </div>
 
         <div>
-            <div class="edit-btn" id="editbtn" style="display:none;">
+            <div class="edit-btn" id="editBtn" style="display:none;">
                 <h4> - Edit Artwork - </h4>
             </div>
             <div class="edit-btn" id="cancelEditBtn" style="display:none;">
@@ -61,22 +61,12 @@
 
         document.getElementById("editBtn").onclick = function () { addEditForm() };
         document.getElementById("cancelEditBtn").onclick = function () { removeEditForm() };
-
-
-var showFormValue = @(ViewBag.showForm);
        
-        var showEditOptions = @(ViewBag.showEditOptions);
+        var showEdit = @(ViewBag.showEditOptions);
        
-        if(showFormValue == 1){
-            addArtworkForm();
-        }
-
-        if(showFormValue == 3){
-            addEditForm();
-        }
-
-        if(showEditOptions == 1){
-            $("#editbtn").show();
+     
+        if(showEdit == 1){
+            $("#editBtn").show();
         }
 
         function removeEditForm() {

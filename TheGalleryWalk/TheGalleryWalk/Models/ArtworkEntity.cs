@@ -10,19 +10,8 @@ using Parse;
 
 namespace TheGalleryWalk.Models
 {
-    public class ArtworkEntity
+    public class ArtworkEntity : BaseEntity
     {
-
-        public string parseID { get; set; }
-
-
-        [Key]
-        public int ID { get; set; }
-
-        [Required(ErrorMessage = "Please enter a name."),
-              StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
-        [DisplayName("Name")]
-        public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter an Artist."),
              StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter an Artist with more than one letter.")]
@@ -36,12 +25,9 @@ namespace TheGalleryWalk.Models
         public string Style { get; set; }
 
 
-    //    public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }
-
         public List<SelectListItem> addArtworkFormlistItem { get; set; }
         public List<SelectListItem> GalleryListForArtworkSharing { get; set; }
-
         public string OwnershipState { get; set; }
 
     }

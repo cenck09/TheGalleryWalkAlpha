@@ -7,14 +7,9 @@ using Parse;
 namespace TheGalleryWalk.Models { 
 
     [ParseClassName("ArtistParseClass")]
-    public class ArtistParseClass: ParseObject
+    public class ArtistParseClass: BaseParseObject
     {
-        [ParseFieldName("Name")]
-        public string Name
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty(value); }
-        }
+      
        
         [ParseFieldName("Description")]
         public string Description

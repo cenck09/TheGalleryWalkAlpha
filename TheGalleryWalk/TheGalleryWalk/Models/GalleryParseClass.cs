@@ -7,15 +7,9 @@ using Parse;
 namespace TheGalleryWalk.Models
 {
     [ParseClassName("GalleryParseClass")]
-    public class GalleryParseClass : ParseObject
+    public class GalleryParseClass : BaseParseObject
     {
       
-        [ParseFieldName("Name")]
-        public string Name
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty(value); }
-        }
         [ParseFieldName("PhoneNumber")]
         public string PhoneNumber
         {
