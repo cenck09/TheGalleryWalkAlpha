@@ -58,6 +58,7 @@ namespace TheGalleryWalk.Controllers
                 PhoneNumber = string.IsNullOrEmpty(userData.PhoneNumber) ? "" : userData.PhoneNumber,
                 ArtworkAdd = new ArtworkEntity(),
                 ArtworkEntities = new List<ArtworkEntity>(), 
+                PermittedGalleries = new List<string>(),
             };
         }
         public ArtworkEntity getArtworkEntity(ArtworkParseClass artwork)
@@ -72,6 +73,7 @@ namespace TheGalleryWalk.Controllers
                 Description = string.IsNullOrEmpty(artwork.Description) ? "" : artwork.Description,
                 OwnershipState = "Unowned",
                 Style = string.IsNullOrEmpty(artwork.Style) ? "" : artwork.Style,
+                ShouldAddSharingOptions = false,
             };
         }
         public GalleryEntity getGalleryEntity(GalleryParseClass gallery)
@@ -104,6 +106,7 @@ namespace TheGalleryWalk.Controllers
                 ArtworkEntities = new List<ArtworkEntity>(),
                 Description = string.IsNullOrEmpty(artist.Description) ? "" : artist.Description,
                 Style = string.IsNullOrEmpty(artist.Style) ? "" : artist.Style,
+                
             };
         }
 

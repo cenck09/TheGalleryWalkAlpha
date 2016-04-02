@@ -12,7 +12,7 @@ namespace TheGalleryWalk.Controllers
 {
     public class ArtistController : BaseValidatorController
     {
-        public ActionResult updateGalleryInfo()
+        public ActionResult updateArtistInfo()
         {
             return PartialView("~/Views/EditArtist/EditArtistPartialView.cshtml");
         }

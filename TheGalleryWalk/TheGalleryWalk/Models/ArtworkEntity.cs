@@ -29,6 +29,6 @@ namespace TheGalleryWalk.Models
         public List<SelectListItem> addArtworkFormlistItem { get; set; }
         public List<SelectListItem> GalleryListForArtworkSharing { get; set; }
         public string OwnershipState { get; set; }
-
+        public bool ShouldAddSharingOptions { get; set; }
     }
 }

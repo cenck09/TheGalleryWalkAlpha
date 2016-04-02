@@ -75,6 +75,12 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+        [ParseFieldName("AcceptedGalleryFollowers")]
+        public IList<string> AcceptedGalleryFollowers
+        {
+            get { return GetProperty<IList<string>>(); }
+            set { SetProperty(value); }
+        }
 
 
     }
