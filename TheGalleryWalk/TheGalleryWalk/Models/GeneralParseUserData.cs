@@ -7,7 +7,7 @@ using Parse;
 namespace TheGalleryWalk.Models
 {
     [ParseClassName("GeneralParseUserData")]
-    public class GeneralParseUserData : ParseObject
+    public class GeneralParseUserData : BaseParseObject
     {
         [ParseFieldName("UserId")]
         public string UserId
@@ -16,12 +16,7 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
-        [ParseFieldName("Name")]
-        public string Name
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty(value); }
-        }
+     
         [ParseFieldName("Email")]
         public string Email
         {

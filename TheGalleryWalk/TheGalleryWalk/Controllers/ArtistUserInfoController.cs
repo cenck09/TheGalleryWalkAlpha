@@ -104,7 +104,7 @@ namespace TheGalleryWalk.Controllers
                     artistUser.ArtworkEntities.Add(new ArtworkEntity()
                     {
                         Name = item.Name,
-                        parseID = item.ObjectId,
+                        ParseID = item.ObjectId,
                         Artist = item.ArtistID,
                     });
                 }

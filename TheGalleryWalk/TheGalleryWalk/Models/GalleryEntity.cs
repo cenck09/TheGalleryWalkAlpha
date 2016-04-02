@@ -9,17 +9,8 @@ using Parse;
 
 namespace TheGalleryWalk.Models
 {
-    public class GalleryEntity
+    public class GalleryEntity : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
-        public string ParseID { get; set; }
-
-
-        [Required(ErrorMessage = "Please enter a name."),
-              StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
-        [DisplayName("Name")]
-        public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter your Phone Number."),
                RegularExpression("^[01]?[- .]?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})[- .]?\\d{3}[- .]?\\d{4}$", ErrorMessage = "Please enter the number with the area code ###-###-####")]
