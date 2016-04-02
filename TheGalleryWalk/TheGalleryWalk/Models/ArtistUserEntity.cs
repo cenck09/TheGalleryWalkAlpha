@@ -40,6 +40,7 @@ namespace TheGalleryWalk.Models
         public int Enabled { get; set; }
         public ArtworkEntity ArtworkAdd { get; set; }
         public IList<ArtworkEntity> ArtworkEntities { get; set; }
+        public IList<string> PermittedGalleries { get; set; }
 
     }
 }

@@ -53,6 +53,7 @@ namespace TheGalleryWalk.Controllers
                     HasArtwork = 0,
                     IsBanned = 0,
                     Email = user.Email,
+                    AcceptedGalleryFollowers = new List<string>(),
                 };
 
                 try
