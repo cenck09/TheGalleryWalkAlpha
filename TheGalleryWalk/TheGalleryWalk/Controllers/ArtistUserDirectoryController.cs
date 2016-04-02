@@ -16,12 +16,12 @@ namespace TheGalleryWalk.Controllers
         {
             /* This query will be updated to remove artists without artwork and other things we'll need*/
             var query = from item in new ParseQuery<GeneralParseUserData>()
-                        where item.Get<string>("UserType") == "ArtistUser"
-                        where item.Get<string>("MyFavoriteGalleries") != null
-                        where item.Get<string>("MyFavoriteArtists") != null
-                        where item.Get<int>("IsBanned") == 0
-                        where item.Get<int>("HasArtwork") == 1
-                        where item.Get<int>("Enabled") == 1
+                        where item.UserType == "ArtistUser"
+                        where item.MyFavoriteGalleries != null
+                        where item.MyFavoriteArtists != null
+                        where item.Enabled == 1
+                        where item.IsBanned == 0
+                        where item.HasArtwork == 1
                         select item;
 
            IEnumerable<GeneralParseUserData> artistusers = await query.FindAsync();

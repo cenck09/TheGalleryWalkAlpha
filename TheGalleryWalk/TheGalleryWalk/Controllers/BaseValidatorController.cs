@@ -29,17 +29,74 @@ namespace TheGalleryWalk.Controllers
             return new GalleryOwnerEntity()
             {
                 ParseID = userData.ObjectId,
-                Name = userData.Name
+                Name = userData.Name,
+                ArtistAdd = new ArtistEntity(),
+                Enabled = userData.Enabled,
+                PhoneNumber = userData.PhoneNumber,
+                GalleryAdd = new GalleryEntity(),
+                MyFavoriteArtists = new List<ArtistUserEntity>(),
+                MyFavoriteGalleries = new List<GalleryEntity>(),
+                GalleryEntities = new List<GalleryParseClass>(),
+                ArtistEntities = new List<ArtistParseClass>(),
             };
         }
 
         public ArtistUserEntity getArtistUserEntity(GeneralParseUserData userData)
         {
-            Debug.WriteLine("\n\n ------ Getting ArtistEntity with userData ID = "+ userData.UserId);
             return new ArtistUserEntity()
             {
                 ParseID = userData.UserId.ToString(),
-                Name = userData.Name
+                Name = userData.Name,
+                Enabled = userData.Enabled,
+                PhoneNumber= userData.PhoneNumber,
+                ArtworkAdd = new ArtworkEntity(),
+                ArtworkEntities = new List<ArtworkEntity>(), 
+            };
+        }
+        public ArtworkEntity getArtworkEntity(ArtworkParseClass artwork)
+        {
+            return new ArtworkEntity()
+            {
+                parseID = artwork.ObjectId,
+                Name = artwork.Name,
+                ParentGalleryParseID = artwork.GalleryID,
+                Artist = artwork.ArtistID,
+                GalleryListForArtworkSharing = new List<SelectListItem>(),
+                Description = artwork.Description,
+                OwnershipState = "Unowned",
+                Style = artwork.Style,
+            };
+        }
+        public GalleryEntity getGalleryEntity(GalleryParseClass gallery)
+        {
+            return new GalleryEntity()
+            {
+                Name = gallery.Name,
+                ArtworkEntities = new List<ArtworkParseClass>(),
+                Address = gallery.Address,
+                PhoneNumber = gallery.PhoneNumber,
+                ArtistAdd = new ArtistEntity(),
+                ArtistEntities = new List<ArtistParseClass>(),
+                ArtworkAdd = new ArtworkEntity(),
+                EmailAddress = gallery.Email,
+                ParseID = gallery.ObjectId,
+                GalleryOwnerID = gallery.GalleryOwnerID,
+                Website = gallery.Website,
+            };
+        }
+
+        public ArtistEntity getArtistEntity(ArtistParseClass artist)
+        {
+            return new ArtistEntity()
+            {
+                parseID = artist.ObjectId,
+                Name = artist.Name,
+                ParentGalleryParseID = artist.GalleryID,
+                Death = artist.Death,
+                Birth = artist.Birth,
+                ArtworkEntities = new List<ArtworkEntity>(),
+                Description = artist.Description,
+                Style = artist.Style,
             };
         }
 

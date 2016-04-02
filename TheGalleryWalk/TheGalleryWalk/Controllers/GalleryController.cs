@@ -106,7 +106,8 @@ namespace TheGalleryWalk.Controllers
                     ArtistID = registerData.Artist,
                     Description = registerData.Description,
                     GalleryID = registerData.ParentGalleryParseID,
-                    FileOwnerId = getUserId()
+                    FileOwnerId = getUserId(),
+                    Style = registerData.Style, 
                 };
 
                 await artwork.SaveAsync();

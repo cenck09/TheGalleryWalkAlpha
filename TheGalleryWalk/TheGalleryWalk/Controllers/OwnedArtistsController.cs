@@ -44,12 +44,7 @@ namespace TheGalleryWalk.Controllers
             ViewBag.showForm = 1;
             GeneralParseUserData userData = await getUserData();
 
-            GalleryOwnerEntity owner = new GalleryOwnerEntity()
-            {
-                ParseID = userData.ObjectId,
-                Name = userData.Name,
-                ArtistAdd = registerData
-            };
+            GalleryOwnerEntity owner = getGalleryOwnerEntity(userData);
 
             if (ModelState.IsValid)
             {
@@ -61,7 +56,7 @@ namespace TheGalleryWalk.Controllers
                     Death = registerData.Death,
                     Description = registerData.Description,
                     GalleryOwnerID = getUserId(),
-                    FileOwnerId = getUserId()
+                    FileOwnerId = getUserId(),
                 };
 
                 try

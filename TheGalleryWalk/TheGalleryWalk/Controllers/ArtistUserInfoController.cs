@@ -87,13 +87,17 @@ namespace TheGalleryWalk.Controllers
                             where item.ArtistID == artistUser.ParseID
                             select item;
                 Debug.WriteLine("\n\n Parse Artist User ID"+artistUser.ParseID);
-                artistUser.ArtworkEntities = await query.FindAsync();
-                Debug.WriteLine(" \n\n ---- Artwork array count --- " +artistUser.ArtworkEntities.Count());
+
+                IEnumerable<ArtworkParseClass> artwork = await query.FindAsync();
+               
+                foreach (ArtworkParseClass item in artwork)
+                {
+                    artistUser.ArtworkEntities.Add(getArtworkEntity(item));
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning base view :: " + ex);
-                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
             ViewBag.IsFollowing = 0;
