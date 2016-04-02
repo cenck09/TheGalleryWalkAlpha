@@ -52,7 +52,9 @@ namespace TheGalleryWalk.Controllers
                     Name = registerData.Name,
                     GalleryID = null,
                     ArtistID = getUserId(),
-                    Description = registerData.Description
+                    Description = registerData.Description,
+                    FileOwnerId = getUserId(),
+                    Style = registerData.Style,
                 };
 
 
@@ -85,16 +87,19 @@ namespace TheGalleryWalk.Controllers
                             where item.ArtistID == getUserId()
                             select item;
 
-                artistUser.ArtworkEntities = await query.FindAsync();
+                IEnumerable<ArtworkParseClass> artwork = await query.FindAsync();
+
+                foreach( ArtworkParseClass art in artwork)
+                {
+                    artistUser.ArtworkEntities.Add(getArtworkEntity(art));
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
-                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
             return View("~/Views/Artist_OwnedArtwork/OwnedArtwork.cshtml", "_LayoutArtistLoggedIn", artistUser);
         }
-
     }
 }

@@ -50,7 +50,7 @@ namespace TheGalleryWalk.Controllers
                     PhoneNumber = registerData.PhoneNumber,
                     Website = registerData.Website,
                     GalleryOwnerID = getUserId(),
-                    FileOwnerId = getUserId()
+                    FileOwnerId = getUserId(),
                 };
 
                 Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + galleryEntity.GalleryOwnerID);
@@ -84,12 +84,15 @@ namespace TheGalleryWalk.Controllers
                             where item.GalleryOwnerID == getUserId()
                             select item;
 
-                G_Owner.GalleryEntities = await query.FindAsync();
+                foreach (GalleryParseClass gallery in await query.FindAsync())
+                {
+                    G_Owner.GalleryEntities.Add(getGalleryEntity(gallery));
+                }
             }
             catch(Exception ex)
             {
                 Debug.WriteLine("There was an error returning owned galleries base view :: "+ ex);
-                G_Owner.GalleryEntities = new List<GalleryParseClass>();
+                G_Owner.GalleryEntities = new List<GalleryEntity>();
             }
                
             return View("~/Views/OwnedGalleries/OwnedGalleries.cshtml", "_LayoutLoggedIn", G_Owner);

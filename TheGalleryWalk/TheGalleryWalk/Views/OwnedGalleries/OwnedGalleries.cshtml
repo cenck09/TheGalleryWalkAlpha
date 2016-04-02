@@ -27,7 +27,7 @@
         @using System.Diagnostics;
         @try
         {
-            Html.RenderPartial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", (Model.GalleryEntities as IEnumerable<ParseObject>));
+            Html.RenderPartial("~/Views/OwnedGalleries/GalleryPartialView.cshtml", (Model.GalleryEntities));
 
             }
             catch (Exception ex)

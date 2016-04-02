@@ -2,7 +2,7 @@
 @using System.Threading;
 @using System.Diagnostics;
 @using TheGalleryWalk.Models;
-@model IEnumerable<ParseObject>
+@model IEnumerable<ArtworkEntity>
 
 
 <head>
@@ -11,22 +11,27 @@
 </head>
 @if (Model != null)
 {
-    string name;
+
     Debug.WriteLine("Data is not null " + Model.Count());
-    foreach (var item in Model)
+    foreach (ArtworkEntity item in Model)
     {
+        if (item.OwnershipState != null)
+        {
+            if (item.OwnershipState == "Owned")
+            {
+                //add link to method in controller to remove ownership
+            }
+            if (item.OwnershipState == "Unowned")
+            {
+               // item.GalleryListForArtworkSharing;
+               // add dropdown box that lets the user select a gallery to add it to.
+            }
+     }
 
-        ArtworkEntity artwork = new ArtworkEntity();
-        artwork.parseID = item.ObjectId;
-        artwork.Name = item.Get<string>("Name");
-        artwork.Artist = item.Get<string>("ArtistID");
-        name = item.Get<string>("Name");
-
-
-        <a href="@Url.Action("ArtworkView","Artwork", artwork)">
+        <a href="@Url.Action("ArtworkView","Artwork", item)">
             <div class="GalleryInfoWindow ImageContainer" style="margin:10px">
                 <img src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") class="resize_fit_center" id="EntityImage" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
-                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(name)</p>
+                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(item.Name)</p>
             </div>
         </a>
     }

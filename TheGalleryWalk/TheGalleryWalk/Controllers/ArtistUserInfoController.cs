@@ -81,21 +81,39 @@ namespace TheGalleryWalk.Controllers
 
         public async Task<ActionResult> baseView(ArtistUserEntity artistUser)
         {
+            IEnumerable<ArtworkParseClass> artwork = new List<ArtworkParseClass>();
             try
             {
                 var query = from item in new ParseQuery<ArtworkParseClass>()
                             where item.ArtistID == artistUser.ParseID
                             select item;
                 Debug.WriteLine("\n\n Parse Artist User ID"+artistUser.ParseID);
-                artistUser.ArtworkEntities = await query.FindAsync();
-                Debug.WriteLine(" \n\n ---- Artwork array count --- " +artistUser.ArtworkEntities.Count());
+
+                artwork = await query.FindAsync();
+             
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning base view :: " + ex);
-                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
+            foreach (ArtworkParseClass item in artwork)
+            {
+                try
+                {
+                    artistUser.ArtworkEntities.Add(new ArtworkEntity()
+                    {
+                        Name = item.Name,
+                        parseID = item.ObjectId,
+                        Artist = item.ArtistID,
+                    });
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine("Error found while artwork entity" + ex);
+                }
+
+            }
             ViewBag.IsFollowing = 0;
             if (verifyUser())
             {

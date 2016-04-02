@@ -54,6 +54,5 @@ namespace TheGalleryWalk.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
-
     }
 }

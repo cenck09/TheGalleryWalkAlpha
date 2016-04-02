@@ -50,7 +50,9 @@ namespace TheGalleryWalk.Controllers
                     UserType = "GalleryOwnerUser",
                     MyFavoriteArtists = new List<string>(),
                     MyFavoriteGalleries = new List<string>(),
-                    IsBanned = 0
+                    IsBanned = 0,
+                    HasArtwork = 0,
+                    Email = user.Email,
                 };
 
                 try

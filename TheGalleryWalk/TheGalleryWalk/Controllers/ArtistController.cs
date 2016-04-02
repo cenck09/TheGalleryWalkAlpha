@@ -73,12 +73,16 @@ namespace TheGalleryWalk.Controllers
                             where item.ArtistID == artistUser.parseID
                             select item;
 
-                artistUser.ArtworkEntities = await query.FindAsync();
+               IEnumerable<ArtworkParseClass> artworkParseClass = await query.FindAsync();
+                foreach(ArtworkParseClass item in artworkParseClass)
+                {
+                    Debug.WriteLine("Processing artwork: "+item.Name + " with artist ID : "+ item.ArtistID );
+                    artistUser.ArtworkEntities.Add(getArtworkEntity(item));
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
-                artistUser.ArtworkEntities = new List<ArtworkParseClass>();
             }
 
             if (userIsGalleryOwner())

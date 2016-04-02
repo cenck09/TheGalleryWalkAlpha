@@ -36,9 +36,13 @@ namespace TheGalleryWalk.Models
         public string Style { get; set; }
 
 
-        public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
+    //    public IEnumerable<ArtworkParseClass> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }
 
-        public List<SelectListItem> addArtworkFormlistItem;
+        public List<SelectListItem> addArtworkFormlistItem { get; set; }
+        public List<SelectListItem> GalleryListForArtworkSharing { get; set; }
+
+        public string OwnershipState { get; set; }
+
     }
 }
