@@ -16,16 +16,7 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> ArtworkView(ArtworkEntity selectedArtwork)
         {
              ViewBag.showForm = 0;
-
-            if(!verifyUser())
-            {
-                return returnFailedUserView();
-            }
-            else
-            {
-                return await baseView(selectedArtwork);
-            }
-           
+             return await baseView(selectedArtwork);
         }// EOM
 
 
@@ -44,7 +35,7 @@ namespace TheGalleryWalk.Controllers
               
 
                 var query = from item in new ParseQuery<ArtworkParseClass>()
-                            where item.ObjectId == artwork.parseID
+                            where item.ObjectId == artwork.ParseID
                             select item;
 
 
@@ -84,18 +75,32 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> baseView(ArtworkEntity selectedArtwork)
         {
             var query = from item in new ParseQuery<ArtworkParseClass>()
-                        where item.ObjectId == selectedArtwork.parseID
+                        where item.ObjectId == selectedArtwork.ParseID
                         select item;
             ArtworkParseClass artwork = await query.FirstAsync();
-            if (artwork.FileOwnerId == getUserId())
+            ViewBag.showEditOptions = 0;
+
+            if (verifyUser())
             {
-                ViewBag.showEditOptions = 1;
+                if (userIsFileOwnerOfParseObject(artwork))
+                {
+                    Debug.WriteLine("User is file owner, should enable edit buttons");
+                    ViewBag.showEditOptions = 1;
+                }
+            }
+
+            if (userIsArtist())
+            {
+                return View("~/Views/Artwork/ArtworkView.cshtml", "~/Views/Shared/_LayoutArtistLoggedIn.cshtml", selectedArtwork);
+            }
+            else if (userIsGalleryOwner())
+            {
+                return View("~/Views/Artwork/ArtworkView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", selectedArtwork);
             }
             else
             {
-                ViewBag.showEditOptions = 0;
+                return View("~/Views/Artwork/ArtworkView.cshtml", "~/Views/Shared/_Layout.cshtml", selectedArtwork);
             }
-            return View("~/Views/Artwork/ArtworkView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", selectedArtwork);
         }      
     }
 }

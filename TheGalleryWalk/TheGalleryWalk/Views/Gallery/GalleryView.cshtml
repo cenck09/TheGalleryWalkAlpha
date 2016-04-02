@@ -89,6 +89,7 @@
           
             @if (Model.ArtworkAdd == null)
             {
+                Debug.WriteLine("Artwork Add model was null");
                 ArtworkEntity newArtwork = new ArtworkEntity();
                 newArtwork.ParentGalleryParseID = Model.ParseID;
                 Debug.WriteLine("New Artwork ID on page  -----  " + newArtwork.ParentGalleryParseID);

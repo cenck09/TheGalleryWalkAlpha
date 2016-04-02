@@ -11,18 +11,9 @@ using Parse;
 
 namespace TheGalleryWalk.Models
 {
-    public class ArtistEntity
+    public class ArtistEntity : BaseEntity
     {
-        public string parseID { get; set; }
-
-        [Key]
-        public int ID { get; set; }
-
-        [Required(ErrorMessage = "Please enter a name."),
-              StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
-        [DisplayName("Name")]
-        public string Name { get; set; }
-
+       
         [DisplayName("Style")]
         public string Style { get; set; }
 
@@ -34,7 +25,6 @@ namespace TheGalleryWalk.Models
 
         [DisplayName("Death")]
         public string Death { get; set; }
-
 
         public IList<ArtworkEntity> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }

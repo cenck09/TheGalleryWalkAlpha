@@ -59,13 +59,13 @@
             {
                 ArtworkEntity artwork = new ArtworkEntity()
                 {
-                    parseID = Model.ParseID
+                    ParseID = Model.ParseID
                 };
                 @Html.Partial("~/Views/AddArtwork_Artist/Index.cshtml", artwork);
             }
             else
             {
-                Model.ArtworkAdd.parseID = Model.ParseID;
+                Model.ArtworkAdd.ParseID = Model.ParseID;
                 @Html.Partial("~/Views/AddArtwork_Artist/Index.cshtml", Model.ArtworkAdd);
             }
 

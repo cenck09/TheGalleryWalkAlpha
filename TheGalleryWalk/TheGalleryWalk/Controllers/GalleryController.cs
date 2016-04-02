@@ -81,20 +81,20 @@ namespace TheGalleryWalk.Controllers
                 return returnFailedUserView();
             }
 
-            GalleryEntity gallery = new GalleryEntity();
+            GalleryEntity gallery; 
             try
             {
                 var query = from item in new ParseQuery<GalleryParseClass>()
                             where item.ObjectId == registerData.ParentGalleryParseID
                             select item;
 
-                GalleryParseClass gClass = await query.FirstAsync();
-                gallery = gClass.toEntityWithSelf();
+                gallery = getGalleryEntity(await query.FirstAsync());
             }
 
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                gallery = new GalleryEntity();
                 returnFailedUserView();
             }
 
@@ -163,45 +163,41 @@ namespace TheGalleryWalk.Controllers
                 G.ArtistEntities = new List<ArtistEntity>();
             }
 
-            if (G.ArtworkAdd == null)
+            if(G.ArtworkAdd == null) { G.ArtworkAdd = new ArtworkEntity(); }
+
+
+            G.ArtworkAdd.addArtworkFormlistItem = new List<SelectListItem>();
+            IList<ArtistEntity> artistAddList = new List<ArtistEntity>();
+
+            try
             {
-                G.ArtworkAdd = new ArtworkEntity();
-                G.ArtworkAdd.addArtworkFormlistItem = new List<SelectListItem>();
-
-                GeneralParseUserData userD = await getUserData();
-
-                GalleryOwnerEntity owner = new GalleryOwnerEntity()
+                var query = from item in new ParseQuery<ArtistParseClass>()
+                            where item.GalleryOwnerID == getUserId()
+                            select item;
+                 
+                foreach (ArtistParseClass artist in await query.FindAsync())
                 {
-                    Name = userD.Name,
-                    ParseID = userD.UserId,
-                };
-
-                try
-                {
-                    var query = from item in new ParseQuery<ArtistParseClass>()
-                                where item.GalleryOwnerID == owner.ParseID
-                                select item;
-
-                    foreach ( ArtistParseClass artist in await query.FindAsync())
-                    {
-                        owner.ArtistEntities.Add(getArtistEntity(artist));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
-                    owner.ArtistEntities = new List<ArtistEntity>();
-                }
-
-                foreach (ArtistEntity item in owner.ArtistEntities)
-                {
-                    G.ArtworkAdd.addArtworkFormlistItem.Add(new SelectListItem
-                    {
-                        Text = item.Name,
-                        Value = item.parseID
-                    });
+                    Debug.WriteLine("Processing artist - "+ artist.Name);
+                    artistAddList.Add(getArtistEntity(artist));
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                G.ArtistEntities = new List<ArtistEntity>();
+            }
+
+            foreach (ArtistEntity item in artistAddList)
+            {
+                Debug.WriteLine("Adding artist - " + item.Name);
+
+                G.ArtworkAdd.addArtworkFormlistItem.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.ParseID
+                });
+            }
+
             return View("~/Views/Gallery/GalleryView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", G );
         }
 

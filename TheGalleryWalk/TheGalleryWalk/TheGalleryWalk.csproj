@@ -168,6 +168,8 @@
     <Compile Include="Models\ArtistUserEntity.cs" />
     <Compile Include="Models\ArtworkEntity.cs" />
     <Compile Include="Models\ArtworkParseClass.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\BaseParseObject.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
     <Compile Include="Models\GalleryParseClass.cs" />
     <Compile Include="Models\GeneralParseUser.cs" />

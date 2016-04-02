@@ -64,7 +64,7 @@ namespace TheGalleryWalk.Controllers
         {
             return new ArtworkEntity()
             {
-                parseID = artwork.ObjectId,
+                ParseID = artwork.ObjectId,
                 Name = artwork.Name,
                 ParentGalleryParseID = string.IsNullOrEmpty(artwork.GalleryID) ? "" : artwork.GalleryID,
                 Artist = artwork.ArtistID,
@@ -96,7 +96,7 @@ namespace TheGalleryWalk.Controllers
         {
             return new ArtistEntity()
             {
-                parseID = artist.ObjectId,
+                ParseID = artist.ObjectId,
                 Name = artist.Name,
                 ParentGalleryParseID = artist.GalleryID,
                 Death = string.IsNullOrEmpty(artist.Death) ? "" : artist.Death,

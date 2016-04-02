@@ -11,16 +11,9 @@ using Parse;
 
 namespace TheGalleryWalk.Models
 {
-    public class ArtistUserEntity
+    public class ArtistUserEntity : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
-
-        [Required(ErrorMessage = "Please enter a name."),
-        StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
-        [DisplayName("Name")]
-        public string Name { get; set; }
-
+       
         [Required(ErrorMessage = "Please enter a Password."),
         StringLength(20, MinimumLength = 6, ErrorMessage = "Please enter a valid Password between 6 and 20 digits.")]
         [DisplayName("Password")]
@@ -43,8 +36,6 @@ namespace TheGalleryWalk.Models
         StringLength(100, ErrorMessage = "Please enter a valid email address.")]
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
-
-        public string ParseID { get; set; }
 
         public int Enabled { get; set; }
         public ArtworkEntity ArtworkAdd { get; set; }
