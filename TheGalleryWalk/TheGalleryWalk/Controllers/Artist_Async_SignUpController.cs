@@ -51,7 +51,8 @@ namespace TheGalleryWalk.Controllers
                     MyFavoriteGalleries = new List<string>(),
                     MyFavoriteArtists = new List<string>(),
                     HasArtwork = 0,
-                    IsBanned = 0
+                    IsBanned = 0,
+                    Email = user.Email,
                 };
 
                 try

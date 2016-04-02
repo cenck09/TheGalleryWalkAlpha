@@ -182,8 +182,8 @@
     width:100%;
 }
 .menuGrade {
-    background-color: rgba(2, 188, 240, 0.9);
-    color:deepskyblue;
+    background-color: rgba(10, 10, 21, 0.7);
+    color: white;
     box-shadow: rgba(0,0,0,0.4) 0px 0px 5px;
 
  /*   background: #07BCF8;  For browsers that do not support gradients */

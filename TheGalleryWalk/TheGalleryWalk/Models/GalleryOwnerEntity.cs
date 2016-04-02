@@ -13,9 +13,9 @@ namespace TheGalleryWalk.Models
     {
         [Key]
         public int ID { get; set; }
-        public string ParseID;
+        public string ParseID { get; set; }
 
-        public int Enabled;
+        public int Enabled { get; set; }
 
         [Required(ErrorMessage = "Please enter a name."),
         StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
@@ -44,12 +44,13 @@ namespace TheGalleryWalk.Models
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
 
-        public IEnumerable<GalleryParseClass> GalleryEntities { get; set; }
+        public IList<GalleryEntity> GalleryEntities { get; set; }
         public GalleryEntity GalleryAdd { get; set; }
 
         public ArtistEntity ArtistAdd { get; set; }
 
-        public IEnumerable<ArtistParseClass> ArtistEntities{ get; set; }
+        public IList<ArtistEntity> ArtistEntities{ get; set; }
+
         public IList<ArtistUserEntity> MyFavoriteArtists { get; set; }
         public IList<GalleryEntity> MyFavoriteGalleries { get; set; }
 

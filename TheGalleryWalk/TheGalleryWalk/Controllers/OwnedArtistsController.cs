@@ -18,12 +18,7 @@ namespace TheGalleryWalk.Controllers
                 ViewBag.showForm = 0;
                 GeneralParseUserData userData = await getUserData();
 
-                GalleryOwnerEntity owner = new GalleryOwnerEntity()
-                {
-                    ParseID = userData.ObjectId,
-                    Name = userData.Name,
-                    ArtistAdd = new ArtistEntity()
-                };
+                GalleryOwnerEntity owner = getGalleryOwnerEntity(userData);
 
                 return await baseView(owner, userData);
             }
@@ -44,12 +39,7 @@ namespace TheGalleryWalk.Controllers
             ViewBag.showForm = 1;
             GeneralParseUserData userData = await getUserData();
 
-            GalleryOwnerEntity owner = new GalleryOwnerEntity()
-            {
-                ParseID = userData.ObjectId,
-                Name = userData.Name,
-                ArtistAdd = registerData
-            };
+            GalleryOwnerEntity owner = getGalleryOwnerEntity(userData);
 
             if (ModelState.IsValid)
             {
@@ -61,7 +51,7 @@ namespace TheGalleryWalk.Controllers
                     Death = registerData.Death,
                     Description = registerData.Description,
                     GalleryOwnerID = getUserId(),
-                    FileOwnerId = getUserId()
+                    FileOwnerId = getUserId(),
                 };
 
                 try
@@ -83,12 +73,15 @@ namespace TheGalleryWalk.Controllers
                             where item.GalleryOwnerID == getUserId()
                             select item;
 
-                owner.ArtistEntities = await query.FindAsync();
+                foreach (ArtistParseClass artist in await query.FindAsync())
+                {
+                    owner.ArtistEntities.Add(getArtistEntity(artist));
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                owner.ArtistEntities = new List<ArtistParseClass>();
+                owner.ArtistEntities = new List<ArtistEntity>();
             }
 
             try
