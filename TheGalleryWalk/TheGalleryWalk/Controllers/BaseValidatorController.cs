@@ -19,7 +19,6 @@ namespace TheGalleryWalk.Controllers
         public bool userIsArtist() { return ( verifyUser() && "ArtistUser".Equals(getUserType())); }
         public bool userIsGalleryOwner() { return (verifyUser() && "GalleryOwnerUser".Equals(getUserType())); }
 
-
         public bool userIsFileOwnerOfParseObject(ParseObject entity)
         {
             if (verifyUser())
@@ -58,7 +57,9 @@ namespace TheGalleryWalk.Controllers
                 PhoneNumber = string.IsNullOrEmpty(userData.PhoneNumber) ? "" : userData.PhoneNumber,
                 ArtworkAdd = new ArtworkEntity(),
                 ArtworkEntities = new List<ArtworkEntity>(), 
-                PermittedGalleries = new List<string>(),
+                PermittedGalleries =  userData.AcceptedGalleryFollowers,
+                EmailAddress = userData.Email,
+                OwnersFollowingThisArtistUser = new List<GalleryOwnerEntity>(),
             };
         }
         public ArtworkEntity getArtworkEntity(ArtworkParseClass artwork)

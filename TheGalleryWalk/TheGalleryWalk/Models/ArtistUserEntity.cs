@@ -41,7 +41,7 @@ namespace TheGalleryWalk.Models
         public ArtworkEntity ArtworkAdd { get; set; }
         public IList<ArtworkEntity> ArtworkEntities { get; set; }
         public IList<string> PermittedGalleries { get; set; }
-
+        public IList<GalleryOwnerEntity> OwnersFollowingThisArtistUser { get; set; }
     }
 }
 
