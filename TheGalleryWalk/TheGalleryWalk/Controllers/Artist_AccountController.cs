@@ -66,7 +66,7 @@ namespace TheGalleryWalk.Controllers
             {
                 Debug.WriteLine("Failed to save" + ex);
             }
-            ViewBag.ScrollToId = galleryOwner.EmailAddress;
+            ViewBag.ScrollToId = galleryOwner.ParseID.ToString();
             return await returnBaseView(getArtistUserEntity(await getUserData()));
         }
 

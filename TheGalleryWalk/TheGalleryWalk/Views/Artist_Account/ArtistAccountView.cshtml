@@ -16,7 +16,7 @@
         {
             foreach (GalleryOwnerEntity owner in Model.OwnersFollowingThisArtistUser)
             {
-                <div id=@Html.Raw(owner.EmailAddress) style="background-color:grey; color:white; margin:auto; margin-top:15px; padding:10px;">
+                <div id=@owner.ParseID style="background-color:grey; color:white; margin:auto; margin-top:15px; padding:10px;">
                     <h6>These Galleries are following you,</h6>
 
                     @if (Model.PermittedGalleries.Contains(owner.ParseID))
@@ -55,10 +55,9 @@ catch (Exception ex)
 
 <script type="text/javascript">
     $(document).ready(function () {  
-        var scrollIndicator = @(ViewBag.ScrollToId);
+        var scrollIndicator = '@ViewBag.ScrollToId';
 
         if(scrollIndicator != null){
-            alert("Scroll to view");
             document.getElementById(scrollIndicator).scrollIntoView(true);
         }
     })
