@@ -38,7 +38,14 @@
                 @Html.LabelFor(model => model.Description, new { @class = "formFieldTitle" })
                 @Html.TextBoxFor(model => model.Description, String.Empty, new { @class = "formFieldInput" })
                 @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @class = "errorMessage" })
+               
             </ol>
+
+            <ol>
+               <input type="file" name="fileselect" id="fileselect" style="text-align:center"/>
+               
+            </ol>
+
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
                 <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
@@ -64,12 +71,6 @@
 
     </script>
 
-    <form id="fileupload" name="fileupload" enctype="multipart/form-data" method="post">
-  <fieldset>
-    <input type="file" name="fileselect" id="fileselect"></input>
-    <input id="uploadbutton" type="button" value="Upload to Parse"/>
-  </fieldset>
-</form>
 
 <script type="text/javascript">
   $(function() {
@@ -83,30 +84,28 @@
     });
 
     // This function is called when the user clicks on Upload to Parse. It will create the REST API request to upload this image to Parse.
-    $('#uploadbutton').click(function() {
-      var serverUrl = 'https://api.parse.com/1/files/' + file.name;
+    $('#submitButton').click(function() {
+      
+        var fileUploadControl = $("#fileselect")[0];
 
-      $.ajax({
-        type: "POST",
-        beforeSend: function(request) {
-          request.setRequestHeader("X-Parse-Application-Id", 'MY-APP-ID');
-          request.setRequestHeader("X-Parse-REST-API-Key", 'MY-REST-API-ID');
-          request.setRequestHeader("Content-Type", file.type);
-        },
-        url: serverUrl,
-        data: file,
-        processData: false,
-        contentType: false,
-        success: function(data) {
-          alert("File available at: " + data.url);
-        },
-        error: function(data) {
-          var obj = jQuery.parseJSON(data);
-          alert(obj.error);
+        if (fileUploadControl.files.length > 0) {
+            var file = fileUploadControl.files[0];
+            var name = "photo.jpg";
+            var parseFile = new Parse.File(name, file);
+
+            parseFile.save().then(function () {
+                //Image stored successfully
+
+                //model.set("Image", parseFile);
+
+                
+            }, function (error) {
+                //Image could not be stored
+            });
         }
-      });
-    });
 
+        
+    });
 
   });
 </script>
