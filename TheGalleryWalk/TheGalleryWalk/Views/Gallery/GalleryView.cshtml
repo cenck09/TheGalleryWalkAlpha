@@ -106,6 +106,10 @@
         </div>
     </div>
 
+   
+
+  
+
 
     <span class="Divider"></span>
 
@@ -114,6 +118,19 @@
             Displayed Artists
         </h3>
     </div>
+    @try
+    {
+        if (Model.ArtistUserEntities.Count > 0)
+        {
+            <div style="text-align:center;">
+                @{Html.RenderPartial("~/Views/ArtistUserDirectory/ArtistUserPartialView.cshtml", Model.ArtistUserEntities); }
+            </div>
+        }
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine("There was an error ::    " + ex);
+    }
 
     <div style="text-align:center;">
         @try
@@ -126,7 +143,7 @@
             }
 </div>
    
-
+   
 </body>
 
 </html>

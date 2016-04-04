@@ -148,6 +148,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArtistUserDirectoryController.cs" />
     <Compile Include="Controllers\ArtistUserInfoController.cs" />
+    <Compile Include="Controllers\Artist_AccountController.cs" />
     <Compile Include="Controllers\Artist_Async_SignUpController.cs" />
     <Compile Include="Controllers\Artist_OwnedArtworkController.cs" />
     <Compile Include="Controllers\ArtworkController.cs" />
@@ -253,6 +254,8 @@
     <Content Include="Views\EditGallery\EditGalleryPartialView.cshtml" />
     <Content Include="Views\EditArtist\EditArtistPartialView.cshtml" />
     <Content Include="Views\EditArtwork\EditArtworkPartialView.cshtml" />
+    <Content Include="Views\Artist_Account\ArtistAccountView.cshtml" />
+    <Content Include="Views\ArtistUserInfo\ArtistUserArtworkView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

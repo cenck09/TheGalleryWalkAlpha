@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace TheGalleryWalk.Controllers
 {
     public class BaseValidatorController : AsyncController
     {
+
         private void setUserId(string userId) { Session["UserId"] = userId;}
         public string getUserId() { return Session["UserId"].ToString(); }
         private void setUserType(string userType) { Session["UserType"] = userType;  }
         public string getUserType() {return Session["UserType"].ToString(); }
+
+
         public bool userIsArtist() { return ( verifyUser() && "ArtistUser".Equals(getUserType())); }
         public bool userIsGalleryOwner() { return (verifyUser() && "GalleryOwnerUser".Equals(getUserType())); }
-
-
         public bool userIsFileOwnerOfParseObject(ParseObject entity)
         {
             if (verifyUser())
@@ -31,6 +29,8 @@ namespace TheGalleryWalk.Controllers
             }
             return false;
         }
+
+
         public GalleryOwnerEntity getGalleryOwnerEntity(GeneralParseUserData userData)
         {
             return new GalleryOwnerEntity()
@@ -47,7 +47,6 @@ namespace TheGalleryWalk.Controllers
                 ArtistEntities = new List<ArtistEntity>(),
             };
         }
-
         public ArtistUserEntity getArtistUserEntity(GeneralParseUserData userData)
         {
             return new ArtistUserEntity()
@@ -58,7 +57,9 @@ namespace TheGalleryWalk.Controllers
                 PhoneNumber = string.IsNullOrEmpty(userData.PhoneNumber) ? "" : userData.PhoneNumber,
                 ArtworkAdd = new ArtworkEntity(),
                 ArtworkEntities = new List<ArtworkEntity>(), 
-                PermittedGalleries = new List<string>(),
+                PermittedGalleries =  userData.AcceptedGalleryFollowers,
+                EmailAddress = userData.Email,
+                OwnersFollowingThisArtistUser = new List<GalleryOwnerEntity>(),
             };
         }
         public ArtworkEntity getArtworkEntity(ArtworkParseClass artwork)
@@ -91,9 +92,9 @@ namespace TheGalleryWalk.Controllers
                 ParseID = gallery.ObjectId,
                 GalleryOwnerID = gallery.GalleryOwnerID,
                 Website = string.IsNullOrEmpty(gallery.Website) ? "" : gallery.Website,
+                ArtistUserEntities = new List<ArtistUserEntity>()
             };
         }
-
         public ArtistEntity getArtistEntity(ArtistParseClass artist)
         {
             return new ArtistEntity()
@@ -110,23 +111,21 @@ namespace TheGalleryWalk.Controllers
             };
         }
 
+
         public bool verifyUser()
         {
             if (Session["UserId"] == null) {  return false; }
             else { return true; }
         }
-
         public void logInUser(ParseUser user)
         {
             setUserId(user.ObjectId);
             setUserType(user.Get<string>("UserType"));
      }
-
         public void logOutUser()
         {
             Session.Clear();
         }
-
         public async Task<GeneralParseUserData> getUserData()
         {
             var query = from item in new ParseQuery<GeneralParseUserData>()
@@ -135,6 +134,7 @@ namespace TheGalleryWalk.Controllers
 
             return await query.FirstAsync();
         }
+
 
         public ActionResult returnFailedUserView()
         {
