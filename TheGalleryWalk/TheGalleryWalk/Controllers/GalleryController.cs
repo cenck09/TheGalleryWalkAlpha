@@ -198,6 +198,23 @@ namespace TheGalleryWalk.Controllers
                 });
             }
 
+            try
+            {
+                var query = from item in new ParseQuery<GeneralParseUserData>()
+                            where array.Contains(item.UserId)
+                            select item;
+
+                foreach (GeneralParseUserData item in await query.FindAsync())
+                {
+                    G.ArtistUserEntities.Add(getArtistUserEntity(item));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
+                G.ArtistEntities = new List<ArtistEntity>();
+            }
+
             return View("~/Views/Gallery/GalleryView.cshtml", "~/Views/Shared/_LayoutLoggedIn.cshtml", G );
         }
 
