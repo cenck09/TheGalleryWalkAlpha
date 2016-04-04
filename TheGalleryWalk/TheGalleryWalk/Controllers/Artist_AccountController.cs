@@ -1,25 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Threading.Tasks;
 
-
-
 namespace TheGalleryWalk.Controllers
 {
     public class Artist_AccountController : BaseValidatorController
     {
-      
         public async Task<ActionResult> artistAccountView()
         {
-            ViewBag.showForm = 0;
-
             if (this.verifyUser())
             {
                 return await returnBaseView(getArtistUserEntity(await getUserData()));
@@ -30,8 +23,7 @@ namespace TheGalleryWalk.Controllers
             }
         }
 
-
-        public async Task<ActionResult> toggleArtworkSharing(GalleryOwnerEntity galleryOwner)
+        public async Task<ActionResult> toggleArtworkSharing(GalleryOwnerEntity galleryOwner) 
         {
             try
             {
@@ -44,21 +36,18 @@ namespace TheGalleryWalk.Controllers
                         userData.AcceptedGalleryFollowers = new List<string>();
                     }
 
-                    if (userData.AcceptedGalleryFollowers.Contains(galleryOwner.ParseID))
+                    IList<string> galleriesList = userData.AcceptedGalleryFollowers;
+                    if (galleriesList.Contains(galleryOwner.ParseID))
                     {
-                        IList<string> galleriesList = userData.AcceptedGalleryFollowers;
                         galleriesList.Remove(galleryOwner.ParseID);
-                        userData.AcceptedGalleryFollowers = galleriesList;
                         Debug.WriteLine("Removing gallery owner");
                     }
                     else
                     {
-                        IList<string> galleriesList = userData.AcceptedGalleryFollowers;
                         galleriesList.Add(galleryOwner.ParseID);
-                        userData.AcceptedGalleryFollowers = galleriesList;
                         Debug.WriteLine("Adding gallery owner");
                     }
-
+                    userData.AcceptedGalleryFollowers = galleriesList;
                     await userData.SaveAsync();
                 }
             }
@@ -66,18 +55,15 @@ namespace TheGalleryWalk.Controllers
             {
                 Debug.WriteLine("Failed to save" + ex);
             }
-            ViewBag.ScrollToId = galleryOwner.EmailAddress;
+            ViewBag.ScrollToId = galleryOwner.ParseID.ToString();
             return await returnBaseView(getArtistUserEntity(await getUserData()));
         }
-
-
 
         public async Task<ActionResult> returnBaseView(ArtistUserEntity user)
         {
             user.OwnersFollowingThisArtistUser = await getGalleryOwnersFollowingArtistUser(user);
             return View("~/Views/Artist_Account/ArtistAccountView.cshtml", "_LayoutArtistLoggedIn", user);
         }
-
 
         private async Task<IList<GalleryOwnerEntity>> getGalleryOwnersFollowingArtistUser(ArtistUserEntity artist)
         {
@@ -108,6 +94,5 @@ namespace TheGalleryWalk.Controllers
             }
             return ownerEntities;
         }
-
     }
 }

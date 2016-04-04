@@ -77,7 +77,24 @@ namespace TheGalleryWalk.Controllers
             return await baseView(artistUser);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> addArtworkToGallery(ArtworkEntity artwork)
+        {
+            Debug.WriteLine("\n\n -- Clicked add artwork to gallery");
+            ArtworkParseClass art = await getArtworkParseObjectFromEntity(artwork);
+            art.GalleryID = artwork.ParentGalleryParseID;
+            await art.SaveAsync();
+            return await baseView(await getArtistUserForArtwork(artwork));
+        }
 
+        public async Task<ActionResult> removeArtworkFromGallery(ArtworkEntity artwork)
+        {
+            Debug.WriteLine("\n\n -- Clicked remove artwork to gallery");
+            ArtworkParseClass art = await getArtworkParseObjectFromEntity(artwork);
+            art.GalleryID = null;
+            await art.SaveAsync();
+            return await baseView(await getArtistUserForArtwork(artwork));
+        }
 
         public async Task<ActionResult> baseView(ArtistUserEntity artistUser)
         {
@@ -101,12 +118,7 @@ namespace TheGalleryWalk.Controllers
             {
                 try
                 {
-                    artistUser.ArtworkEntities.Add(new ArtworkEntity()
-                    {
-                        Name = item.Name,
-                        ParseID = item.ObjectId,
-                        Artist = item.ArtistID,
-                    });
+                    artistUser.ArtworkEntities.Add(getArtworkEntity(item));
                 }
                 catch(Exception ex)
                 {
@@ -137,6 +149,33 @@ namespace TheGalleryWalk.Controllers
 
             if (userIsGalleryOwner())
             {
+                List<SelectListItem> list = new List<SelectListItem>();
+                var query = from item in new ParseQuery<GalleryParseClass>()
+                            where item.GalleryOwnerID == getUserId()
+                            select item;
+
+                foreach (GalleryParseClass item in await query.FindAsync())
+                {
+                    Debug.WriteLine("Adding Gallery - " + item.Name);
+                    list.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ObjectId
+                    });
+                }
+                foreach (ArtworkEntity art in artistUser.ArtworkEntities)
+                {
+                    if (string.IsNullOrEmpty(art.ParentGalleryParseID))
+                    {
+                        art.GalleryListForArtworkSharing = list;
+                        art.OwnershipState = "Unowned";
+                    }
+                    else
+                    {
+                        art.OwnershipState = "Owned";
+                    }
+                }
+
                 return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_LayoutLoggedIn", artistUser);
             }
             else if(userIsArtist())
@@ -148,5 +187,26 @@ namespace TheGalleryWalk.Controllers
                 return View("~/Views/ArtistUserInfo/ArtistUserInfoView.cshtml", "_Layout", artistUser);
             }
         }
+
+        private async Task<ArtistUserEntity> getArtistUserForArtwork(ArtworkEntity artwork)
+        {
+            var query = from item in new ParseQuery<GeneralParseUserData>()
+                        where item.UserId == artwork.Artist
+                        select item;
+            try { return (getArtistUserEntity(await query.FirstAsync())); }
+            catch { return new ArtistUserEntity(); }
+        }
+
+        private async Task<ArtworkParseClass> getArtworkParseObjectFromEntity(ArtworkEntity artwork)
+        {
+            var query = from item in new ParseQuery<ArtworkParseClass>()
+                        where item.ObjectId == artwork.ParseID
+                        select item;
+            try { return await query.FirstAsync(); }
+            catch (Exception ex) { Debug.WriteLine(ex); 
+                  return default(ArtworkParseClass);
+            }
+        }
+
     }
 }

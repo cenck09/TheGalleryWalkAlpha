@@ -22,18 +22,17 @@ namespace TheGalleryWalk.Controllers
                         where item.Enabled == 1
                         where item.IsBanned == 0
                         where item.HasArtwork == 1
+                        where item.AcceptedGalleryFollowers != null
                         select item;
 
-           IEnumerable<GeneralParseUserData> artistusers = await query.FindAsync();
             IList<ArtistUserEntity> artists = new List<ArtistUserEntity>();
 
-            foreach (GeneralParseUserData artistuser in artistusers)
+            foreach (GeneralParseUserData artistuser in await query.FindAsync())
             {
-                ArtistUserEntity artistUserEntity = getArtistUserEntity(artistuser);
-                artists.Add(artistUserEntity); Debug.WriteLine("Artist Id after adding to artist list" + artistUserEntity.ParseID);
+                artists.Add(getArtistUserEntity(artistuser));
             }
 
-          if (userIsGalleryOwner())
+           if (userIsGalleryOwner())
            {
               return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_LayoutLoggedIn", artists);
            }
@@ -41,10 +40,10 @@ namespace TheGalleryWalk.Controllers
            {
              return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_LayoutArtistLoggedIn", artists);
            }
-            else
-            {
-                return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_Layout", artists);
-            }
+           else
+           {
+             return View("~/Views/ArtistUserDirectory/ArtistUserDirectory.cshtml", "_Layout", artists);
+           }
         }
     }
 }

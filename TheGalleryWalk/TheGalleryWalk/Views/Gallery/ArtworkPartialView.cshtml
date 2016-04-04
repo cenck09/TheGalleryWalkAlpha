@@ -15,19 +15,7 @@
     Debug.WriteLine("Data is not null " + Model.Count());
     foreach (ArtworkEntity item in Model)
     {
-        if (item.OwnershipState != null)
-        {
-            if (item.OwnershipState == "Owned")
-            {
-                //add link to method in controller to remove ownership
-            }
-            if (item.OwnershipState == "Unowned")
-            {
-               // item.GalleryListForArtworkSharing;
-               // add dropdown box that lets the user select a gallery to add it to.
-            }
-     }
-
+     
         <a href="@Url.Action("ArtworkView","Artwork", item)">
             <div class="GalleryInfoWindow ImageContainer" style="margin:10px">
                 <img src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") class="resize_fit_center" id="EntityImage" alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />

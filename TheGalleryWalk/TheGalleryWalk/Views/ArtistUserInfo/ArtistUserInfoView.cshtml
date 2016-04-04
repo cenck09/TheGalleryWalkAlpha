@@ -1,4 +1,5 @@
 ﻿@using Parse;
+@using TheGalleryWalk.Models;
 
 @model TheGalleryWalk.Models.ArtistUserEntity
 @{
@@ -8,7 +9,6 @@
 
 <div style="margin-top:50px; margin-left:50px; padding:10px;">
 
-    
     @if (ViewBag.AddedArtist == 1){ <div> You have added this artist </div>   }
     @if (ViewBag.AddedArtist == 2){ <div> Failed to add artist </div>         }
     @if (ViewBag.AddedArtist == 3){ <div> You have removed this artist </div> }
@@ -32,8 +32,7 @@
                 <a href="@Url.Action("followArtist", "ArtistUserInfo", Model)">
                     - add Artist -
                 </a>
-            </div>
-
+         </div>
 
     <div id="galleryInfo">
         <h3 class="EntityInfo">
@@ -56,7 +55,10 @@
     @using System.Diagnostics;
     @try
     {
-        Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", Model.ArtworkEntities);
+        foreach (ArtworkEntity item in Model.ArtworkEntities)
+        {
+         @Html.Partial("~/Views/ArtistUserInfo/ArtistUserArtworkView.cshtml", item);
+        }
     }
     catch (Exception ex)
     {
