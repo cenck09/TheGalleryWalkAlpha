@@ -50,6 +50,7 @@ namespace TheGalleryWalk.Controllers
                     Birth = registerData.Birth,
                     Death = registerData.Death,
                     Description = registerData.Description,
+                    Image = registerData.Image,
                     GalleryOwnerID = getUserId(),
                     FileOwnerId = getUserId(),
                 };
