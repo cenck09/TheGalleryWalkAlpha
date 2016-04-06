@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Threading.Tasks;
-using System.Web;
-using System.IO;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -33,52 +31,12 @@ namespace TheGalleryWalk.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddArtist(ArtistEntity registerData, HttpPostedFileBase file)
+        public async Task<ActionResult> AddArtist(ArtistEntity registerData)
         {
             if (!verifyUser()){ return returnFailedUserView(); }
 
 
-                byte[] data;
-
-                using (Stream inputStream = file.InputStream)
-                {
-                 MemoryStream memoryStream = inputStream as MemoryStream;
-                 if (memoryStream == null)
-                    {
-                       memoryStream = new MemoryStream();
-                       inputStream.CopyTo(memoryStream);
-                    }
-                    data = memoryStream.ToArray();
-                }
-
-
-
-                var name = "photo.jpg";
-                var parseFile = new Parse.ParseFile(name, data);
-          
-             
-
-
-                try {
-                    await parseFile.SaveAsync();
-
-                    Debug.WriteLine("IMAGE SAVED SUCCESSFULLY");
-                    //Image stored successfully
-
-                    //model.set("Image", parseFile);
-                }catch(Exception e)
-                {
-                //Image could not be saved
-                    Debug.WriteLine("IMAGE COULD NOT BE SAVED");
-                }
-
-
-                
-                
-
-
-
-                ViewBag.showForm = 1;
+            ViewBag.showForm = 1;
             GeneralParseUserData userData = await getUserData();
 
             GalleryOwnerEntity owner = getGalleryOwnerEntity(userData);
@@ -92,12 +50,9 @@ namespace TheGalleryWalk.Controllers
                     Birth = registerData.Birth,
                     Death = registerData.Death,
                     Description = registerData.Description,
-                    Image = parseFile,
+                    Image = registerData.Image,
                     GalleryOwnerID = getUserId(),
                     FileOwnerId = getUserId(),
-
-                 
-
                 };
 
                 try
