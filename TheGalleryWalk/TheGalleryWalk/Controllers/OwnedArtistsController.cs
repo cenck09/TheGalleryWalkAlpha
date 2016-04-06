@@ -56,7 +56,19 @@ namespace TheGalleryWalk.Controllers
 
             try
             {
-                await parseFile.SaveAsync();
+
+                if (parseFile.IsDirty)
+                {
+                    await parseFile.SaveAsync();
+                    Debug.WriteLine("Data to save");
+
+                }
+                else
+                {
+                    Debug.WriteLine("No data to save");
+                }
+
+                Debug.WriteLine(parseFile.Url.ToString());
 
                 Debug.WriteLine("IMAGE SAVED SUCCESSFULLY");
             }
