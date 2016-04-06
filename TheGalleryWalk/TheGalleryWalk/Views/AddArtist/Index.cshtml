@@ -12,7 +12,7 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
 
-    @using (Html.BeginForm("AddArtist", "OwnedArtists", FormMethod.Post, new { id = "AddArtistForm" }))
+    @using (Html.BeginForm("AddArtist", "OwnedArtists", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddArtistForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
@@ -42,7 +42,7 @@
             </ol>
 
             <ol>
-               <input type="file" name="fileselect" id="fileselect" style="text-align:center"/>
+               <input type="file" name="file" id="file" style="text-align:center"/>
                
                
             </ol>
@@ -75,7 +75,7 @@
     var file;
 
     // Set an event listener on the Choose File field.
-    $('#fileselect').bind("change", function(e) {
+    $('#file').bind("change", function(e) {
       var files = e.target.files || e.dataTransfer.files;
       // Our file var now holds the selected file
       file = files[0];
@@ -84,6 +84,8 @@
     // This function is called when the user clicks on Upload to Parse. It will create the REST API request to upload this image to Parse.
     $('#submitButton').click(function() {
       
+
+        /*
         var fileUploadControl = $("#fileselect")[0];
 
         if (fileUploadControl.files.length > 0) {
@@ -102,6 +104,7 @@
                 //Image could not be stored
             });
         }
+        */
 
         
     });
