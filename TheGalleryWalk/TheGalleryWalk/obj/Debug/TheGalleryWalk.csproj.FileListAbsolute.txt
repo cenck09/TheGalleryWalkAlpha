@@ -259,3 +259,4 @@ C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\
 C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\System.Web.Http.WebHost.xml
 C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.dll
 C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.pdb
+C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.csprojResolveAssemblyReference.cache
