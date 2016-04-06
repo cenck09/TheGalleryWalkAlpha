@@ -256,6 +256,8 @@
     <Content Include="Views\EditArtwork\EditArtworkPartialView.cshtml" />
     <Content Include="Views\Artist_Account\ArtistAccountView.cshtml" />
     <Content Include="Views\ArtistUserInfo\ArtistUserArtworkView.cshtml" />
+    <Content Include="Views\GalleryDirectory\GalleryDirectory.cshtml" />
+    <Content Include="Views\GalleryDirectory\GalleryPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
