@@ -69,6 +69,7 @@ namespace TheGalleryWalk.Controllers
                 }
 
                 Debug.WriteLine(parseFile.Url.ToString());
+                
 
                 Debug.WriteLine("IMAGE SAVED SUCCESSFULLY");
             }
@@ -77,9 +78,9 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine("IMAGE COULD NOT BE SAVED");
             }
 
+            var fileUrl = parseFile.Url.ToString();
 
-
-                ViewBag.showForm = 1;
+            ViewBag.showForm = 1;
             GeneralParseUserData userData = await getUserData();
 
             GalleryOwnerEntity owner = getGalleryOwnerEntity(userData);
@@ -93,7 +94,7 @@ namespace TheGalleryWalk.Controllers
                     Birth = registerData.Birth,
                     Death = registerData.Death,
                     Description = registerData.Description,
-                    Image = parseFile,
+                    ImageURL = fileUrl,
                     GalleryOwnerID = getUserId(),
                     FileOwnerId = getUserId(),
                 };

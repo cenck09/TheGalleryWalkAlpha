@@ -47,12 +47,7 @@ namespace TheGalleryWalk.Models {
             set { SetProperty(value); }
         }
 
-        [ParseFieldName("Image")]
-        public Parse.ParseFile Image
-        {
-            get { return GetProperty<Parse.ParseFile>(); }
-            set { SetProperty(value); }
-        }
+       
 
 
         /* This is so we can recreate the gallery entity so we can error check forms and 
