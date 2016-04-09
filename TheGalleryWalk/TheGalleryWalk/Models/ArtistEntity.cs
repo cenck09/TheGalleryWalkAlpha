@@ -26,6 +26,7 @@ namespace TheGalleryWalk.Models
         [DisplayName("Death")]
         public string Death { get; set; }
 
+
         public IList<ArtworkEntity> ArtworkEntities { get; set; }
         public string ParentGalleryParseID { get; set; }
 

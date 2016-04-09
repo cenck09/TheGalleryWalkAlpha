@@ -11,53 +11,53 @@
 
 <html>
 <head>
-
 </head>
 
 <body>
-    
-       <div class="EntityInformationWindow" id="EntityInformationWindow">
 
-           <div  class="EntityImage">
-               <img id="EntityImage" src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg") alt="demo Artist" style="width:auto; border-radius:4px; height:auto;" />
-           </div>
-         
-           <div>
-               <div class="edit-btn" id="editBtn">
-                   <h4> - Edit Artist - </h4>
-               </div>
-               <div class="edit-btn" id="cancelEditBtn" style="display:none;">
-                   <h4> - Cancel - </h4>
-               </div>
-               <div id="editForm" style="display:none;">
-                   @Html.Partial("~/Views/EditArtist/EditArtistPartialView.cshtml", model: Model);
-               </div>
-           </div>
+    <div class="EntityInformationWindow" id="EntityInformationWindow">
 
-           <div id="galleryInfo">
-               <h3 class="EntityInfo">
-                   @Model.Name
-               </h3>
-               <h6 class="EntityInfo">
-                   @Model.Style
-               </h6>
-               <h6 class="EntityInfo">
-                   @Model.Description
-               </h6>
-           </div>
-       </div>
+        <div class="EntityImage">
+
+            <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width: 250px; border-radius: 4px; height: 250px;" />
+           
+           
+
+
+        </div>
+
+        <div>
+            <div class="edit-btn" id="editBtn">
+                <h4>- Edit Artist - </h4>
+            </div>
+            <div class="edit-btn" id="cancelEditBtn" style="display: none;">
+                <h4>- Cancel - </h4>
+            </div>
+            <div id="editForm" style="display: none;">
+                @Html.Partial("~/Views/EditArtist/EditArtistPartialView.cshtml", model: Model);
+            </div>
+        </div>
+
+        <div id="galleryInfo">
+            <h3 class="EntityInfo">@Model.Name
+            </h3>
+            <h6 class="EntityInfo">@Model.Style
+            </h6>
+            <h6 class="EntityInfo">@Model.Description
+            </h6>
+        </div>
+    </div>
 
 
 
     <span class="Divider"></span>
 
     <div class="Info-header">
-        <h3>
-            Displayed Artwork
+        <h3>Displayed Artwork
         </h3>
     </div>
 
-    <div style="text-align:center;">
+    <div style="text-align: center;">
         @try
         {
             Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
@@ -99,6 +99,7 @@
             $("#editBtn").show();
             $("#cancelEditBtn").hide();
             $("#galleryInfo").show()
+            
         }
 
         function addEditForm() {

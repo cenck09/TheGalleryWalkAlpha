@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Threading.Tasks;
+using System.Web;
+using System.IO;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -31,10 +33,52 @@ namespace TheGalleryWalk.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddArtist(ArtistEntity registerData)
+        public async Task<ActionResult> AddArtist(ArtistEntity registerData, HttpPostedFileBase file)
         {
             if (!verifyUser()){ return returnFailedUserView(); }
 
+
+            byte[] data;
+
+            using (Stream inputStream = file.InputStream)
+            {
+                MemoryStream memoryStream = inputStream as MemoryStream;
+                if(memoryStream == null)
+                {
+                    memoryStream = new MemoryStream();
+                    inputStream.CopyTo(memoryStream);
+                }
+                data = memoryStream.ToArray();
+            }
+
+            var name = "photo.jpg";
+            var parseFile = new Parse.ParseFile(name, data);
+
+            try
+            {
+
+                if (parseFile.IsDirty)
+                {
+                    await parseFile.SaveAsync();
+                    Debug.WriteLine("Data to save");
+
+                }
+                else
+                {
+                    Debug.WriteLine("No data to save");
+                }
+
+                Debug.WriteLine(parseFile.Url.ToString());
+                
+
+                Debug.WriteLine("IMAGE SAVED SUCCESSFULLY");
+            }
+            catch
+            {
+                Debug.WriteLine("IMAGE COULD NOT BE SAVED");
+            }
+
+            var fileUrl = parseFile.Url.ToString();
 
             ViewBag.showForm = 1;
             GeneralParseUserData userData = await getUserData();
@@ -50,6 +94,7 @@ namespace TheGalleryWalk.Controllers
                     Birth = registerData.Birth,
                     Death = registerData.Death,
                     Description = registerData.Description,
+                    ImageURL = fileUrl,
                     GalleryOwnerID = getUserId(),
                     FileOwnerId = getUserId(),
                 };

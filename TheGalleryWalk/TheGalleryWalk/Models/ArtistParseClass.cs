@@ -47,6 +47,8 @@ namespace TheGalleryWalk.Models {
             set { SetProperty(value); }
         }
 
+       
+
 
         /* This is so we can recreate the gallery entity so we can error check forms and 
               recreate the gallery object required for this view to render */
