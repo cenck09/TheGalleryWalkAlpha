@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Diagnostics;
+using System.IO;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -73,8 +74,51 @@ namespace TheGalleryWalk.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddArtwork(ArtworkEntity registerData)
+        public async Task<ActionResult> AddArtwork(ArtworkEntity registerData, HttpPostedFileBase file)
         {
+
+            byte[] data;
+
+            using (Stream inputStream = file.InputStream)
+            {
+                MemoryStream memoryStream = inputStream as MemoryStream;
+                if (memoryStream == null)
+                {
+                    memoryStream = new MemoryStream();
+                    inputStream.CopyTo(memoryStream);
+                }
+                data = memoryStream.ToArray();
+            }
+
+            var name = "photo.jpg";
+            var parseFile = new Parse.ParseFile(name, data);
+
+            try
+            {
+
+                if (parseFile.IsDirty)
+                {
+                    await parseFile.SaveAsync();
+                    Debug.WriteLine("Data to save");
+
+                }
+                else
+                {
+                    Debug.WriteLine("No data to save");
+                }
+
+                Debug.WriteLine(parseFile.Url.ToString());
+
+
+                Debug.WriteLine("IMAGE SAVED SUCCESSFULLY");
+            }
+            catch
+            {
+                Debug.WriteLine("IMAGE COULD NOT BE SAVED");
+            }
+
+            var fileUrl = parseFile.Url.ToString();
+
             ViewBag.showForm = 1;
             if (!userIsGalleryOwner())
             {
@@ -105,6 +149,7 @@ namespace TheGalleryWalk.Controllers
                     Name = registerData.Name,
                     ArtistID = registerData.Artist,
                     Description = registerData.Description,
+                    ImageURL = fileUrl,
                     GalleryID = registerData.ParentGalleryParseID,
                     FileOwnerId = getUserId(),
                     Style = registerData.Style, 

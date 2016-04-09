@@ -92,6 +92,7 @@
             // Set an event listener on the Choose File field.
             $('#fileselect').bind("change", function (e) {
                 var files = e.target.files || e.dataTransfer.files;
+                Debug.writeln("HIT!!!");
                 // Our file var now holds the selected file
                 file = files[0];
             });
