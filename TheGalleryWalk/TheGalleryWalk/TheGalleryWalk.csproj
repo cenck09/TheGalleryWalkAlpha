@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GalleryDirectoryController.cs" />
     <Compile Include="Controllers\ArtistUserDirectoryController.cs" />
     <Compile Include="Controllers\ArtistUserInfoController.cs" />
     <Compile Include="Controllers\Artist_AccountController.cs" />
@@ -262,6 +263,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
+    <Folder Include="obj\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Async_SignOut\" />
     <Folder Include="Views\BaseValidator\" />

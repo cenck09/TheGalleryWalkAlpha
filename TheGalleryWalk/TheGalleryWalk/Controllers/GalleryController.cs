@@ -57,7 +57,7 @@ namespace TheGalleryWalk.Controllers
                 {
                     await gClass.SaveAsync();
                     ViewBag.showForm = 0;
-                    gallery = gClass.toEntityWithSelf();
+                    gallery = getGalleryEntity(gClass);
                 }
                 catch (Exception ex)
                 {
@@ -125,14 +125,15 @@ namespace TheGalleryWalk.Controllers
                 return returnFailedUserView();
             }
 
-            GalleryEntity gallery; 
+            GalleryEntity gallery;
+            GalleryParseClass galleryClass;
             try
             {
                 var query = from item in new ParseQuery<GalleryParseClass>()
                             where item.ObjectId == registerData.ParentGalleryParseID
                             select item;
-
-                gallery = getGalleryEntity(await query.FirstAsync());
+                galleryClass = await query.FirstAsync();
+                gallery = getGalleryEntity(galleryClass);
             }
 
             catch (Exception ex)
@@ -140,6 +141,7 @@ namespace TheGalleryWalk.Controllers
                 Debug.WriteLine("There was an error returning owned galleries base view :: " + ex);
                 gallery = new GalleryEntity();
                 returnFailedUserView();
+                galleryClass = new GalleryParseClass();// this is to silence a null error that couldn't happen
             }
 
             if (ModelState.IsValid)
@@ -156,6 +158,8 @@ namespace TheGalleryWalk.Controllers
                 };
 
                 await artwork.SaveAsync();
+                if (galleryClass.HasArtwork == 0) { galleryClass.HasArtwork = 1; await galleryClass.SaveAsync(); }
+
                 ViewBag.showForm = 0;
             }
 
