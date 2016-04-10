@@ -33,7 +33,7 @@ namespace TheGalleryWalk
                 ParseObject.RegisterSubclass<ArtistParseClass>();
 
                 ParseClient.Initialize(new ParseClient.Configuration {
-                    ApplicationId = "gallerywalk",
+                    ApplicationId = "gallerywalktest",
                     Server = "http://104.131.127.70:1337/parse/",
                 });
                Debug.WriteLine("Initalized Parse Client");
