@@ -102,6 +102,8 @@ namespace TheGalleryWalk.Controllers
                     ImageURL = fileUrl,
                     GalleryOwnerID = getUserId(),
                     FileOwnerId = getUserId(),
+                    HasArtwork = 0,
+                    IsBanned = 0
                 };
 
                 Debug.WriteLine("OWNER ID ON SAVED GALLERY OBJECT :: " + galleryEntity.GalleryOwnerID);
