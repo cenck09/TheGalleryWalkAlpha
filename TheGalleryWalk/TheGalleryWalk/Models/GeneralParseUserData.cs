@@ -23,6 +23,7 @@ namespace TheGalleryWalk.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
         [ParseFieldName("UserType")]
         public string UserType
         {

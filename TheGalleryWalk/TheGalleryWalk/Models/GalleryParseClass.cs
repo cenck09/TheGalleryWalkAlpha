@@ -51,19 +51,18 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
-
-        public GalleryEntity toEntityWithSelf()
+        [ParseFieldName("IsBanned")]
+        public int IsBanned
         {
-            return new GalleryEntity()
-            {
-                Name = this.Name,
-                EmailAddress = this.Email,
-                PhoneNumber = this.PhoneNumber,
-                ParseID = this.ObjectId,
-                GalleryOwnerID = this.GalleryOwnerID,
-                Website = this.Website,
-                Address = this.Address
-            };
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("HasArtwork")]
+        public int HasArtwork
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
         }
     }
 }
