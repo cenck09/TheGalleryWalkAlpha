@@ -10,14 +10,36 @@ namespace TheGalleryWalk.Controllers
 {
     public class BaseValidatorController : AsyncController
     {
-       
-        public async void setPageManagerForEntity(BaseEntity entity, ParseQuery<ParseObject> query)
+
+        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<GalleryParseClass> query)
         {
-            entity.PageManager.totalItemCount = await query.CountAsync();
-            entity.PageManager.totalPageCount = entity.PageManager.totalItemCount / entity.PageManager.pageItemCount;
-     
-            if ((entity.PageManager.totalItemCount % entity.PageManager.pageItemCount) != 0)
-            { entity.PageManager.totalPageCount++; }
+            manager.totalItemCount = await query.CountAsync();
+            setPageManager(manager);
+        }
+        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<ArtworkParseClass> query)
+        {
+            manager.totalItemCount = await query.CountAsync();
+            setPageManager(manager);
+        }
+        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<ArtistParseClass> query)
+        {
+            manager.totalItemCount = await query.CountAsync();
+            setPageManager(manager);
+        }
+        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<GeneralParseUser> query)
+        {
+            manager.totalItemCount = await query.CountAsync();
+            setPageManager(manager);
+        }
+        private void setPageManager(PageManager manager)
+        {
+            manager.totalPageCount = manager.totalItemCount / manager.pageItemCount;
+
+            if ((manager.totalItemCount % manager.pageItemCount) != 0)
+            { manager.totalPageCount++; }
+
+            for (int pageNum = 1; pageNum <= manager.totalPageCount; pageNum++)
+            {manager.pageNumberList.Add(new SelectListItem{Text = pageNum.ToString(), Value = pageNum.ToString()});}
         }
 
 

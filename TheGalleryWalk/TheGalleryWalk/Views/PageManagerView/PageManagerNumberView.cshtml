@@ -1,0 +1,33 @@
+﻿@using TheGalleryWalk.Models;
+@using System.Diagnostics;
+@model TheGalleryWalk.Models.PageManager
+
+<div style="width:60%; margin:auto; margin-top:10px; margin-bottom:10px;">
+    @{
+
+    <a style="color:black;" href="@Url.Action(Model.decrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-left"></span></a>
+        Debug.WriteLine("Model Page Count for number selector bar " + Model.totalPageCount);
+        if (Model.totalPageCount < 90)
+        {
+            for (int i = 1; i <= Model.totalPageCount; i++)
+            {
+                PageManager pgMn = (new PageManager()).copyPageManager(Model);
+                pgMn.currentPage = i;
+                if (Model.currentPage == i)
+                {
+                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController , pgMn)">@Html.Raw(i)</a>
+                }
+                else
+                {
+                    <a style="color:black;" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController , pgMn)">@Html.Raw(i)</a>
+                }
+            }
+        }
+        else
+        {
+
+        }
+
+    <a style="color:black;" href="@Url.Action( Model.incrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-right"></span></a>
+    }
+</div>

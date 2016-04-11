@@ -33,6 +33,7 @@ namespace TheGalleryWalk.Controllers
             return PartialView("~/Views/AddGallery/Index.cshtml");
         }
 
+
         [HttpPost]
         public async Task<ActionResult> AddGallery(GalleryEntity registerData, HttpPostedFileBase file)
         {
