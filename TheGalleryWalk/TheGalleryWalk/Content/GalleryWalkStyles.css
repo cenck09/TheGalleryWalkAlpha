@@ -198,7 +198,7 @@
     width:100%;
 }
 .menuGrade {
-    background-color: white;//rgba(10, 10, 21, 0.7);
+    background-color: white;
     color: black;
     box-shadow: rgba(0,0,0,0.4) 0px 0px 8px;
 
@@ -218,6 +218,7 @@
 .menuTitle{
     color:darkgray;
     font-family: "fertigo-pro",sans-serif;
+    max-width:150px;
 }
 
 .portalTitle{
