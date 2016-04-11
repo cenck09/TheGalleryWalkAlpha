@@ -38,7 +38,7 @@ namespace TheGalleryWalk.Controllers
         }
         private ParseQuery<GalleryParseClass> setQueryWithPageManager(ParseQuery<GalleryParseClass> query, PageManager pageManager)
         {
-            return query.Skip((pageManager.currentPage - 1)).Limit(pageManager.pageItemCount);
+            return query.Skip(((pageManager.currentPage - 1))*pageManager.pageItemCount).Limit(pageManager.pageItemCount);
         }
         private async Task setEntityArrayWithQuery(ParseQuery<GalleryParseClass> query, GalleryDirectoryManager directoryManager)
         {
