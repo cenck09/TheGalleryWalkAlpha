@@ -7,7 +7,7 @@
 
     <a style="color:black;" href="@Url.Action(Model.decrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-left"></span></a>
         Debug.WriteLine("Model Page Count for number selector bar " + Model.totalPageCount);
-        if (Model.totalPageCount < 90)
+        if (Model.totalPageCount < 6)
         {
             for (int i = 1; i <= Model.totalPageCount; i++)
             {
@@ -15,19 +15,60 @@
                 pgMn.currentPage = i;
                 if (Model.currentPage == i)
                 {
-                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController , pgMn)">@Html.Raw(i)</a>
+                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
                 }
                 else
                 {
-                    <a style="color:black;" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController , pgMn)">@Html.Raw(i)</a>
+                    <a style="color:black;" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
                 }
             }
         }
         else
         {
+            for (int i = 1; i <= Model.totalPageCount; i++)
+            {
+                PageManager pgMn = (new PageManager()).copyPageManager(Model);
+                pgMn.currentPage = i;
+                if (Model.currentPage == i)
+                {
+                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                }
+                else
+                {
+                    if (((3 >= i) || (i >= (Model.totalPageCount - 3)))  ||  (((i-1)<= Model.currentPage) && (Model.currentPage <= (i+1))))
+                    {
+                        <a style="color:black;" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                    }else if ( i < Model.currentPage){
+                        i = Model.currentPage - 2; // since i gets incremented once before looping back
+                        <p style="display:inline-block">...</p>
+                    }
+                    else if(i > Model.currentPage)
+                    {
+                        i = Model.totalPageCount - 3;
+                        <p style="display:inline-block">...</p>
+                    }
+                    else if (i < Model.totalPageCount)
+                    {
+                    }
 
+                }
+            }
         }
 
-    <a style="color:black;" href="@Url.Action( Model.incrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-right"></span></a>
+        <a style="color:black;" href="@Url.Action( Model.incrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-right"></span></a>
+
+        using (Html.BeginForm(Model.setPageMethodPost, Model.pageMethodController, FormMethod.Post, new { enctype = "multipart/form-data", id = "JumpToIndex" }))
+        {
+                <fieldset>
+                    <ol>
+                           @Html.DropDownListFor(model => model.currentPage, Model.pageNumberList, "-- Jump to Index --", new { @class = "formFieldInput" })   
+                    </ol>
+                    <div style="width:67px; color:black; text-align:center;">
+                        <button id="buttonText" name="submitForm" style="background-color:transparent; border:none;">Jump To Index</button> 
+                    </div>
+
+                 </fieldset>
+            }
+      
     }
 </div>

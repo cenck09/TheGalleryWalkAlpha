@@ -22,11 +22,12 @@ namespace TheGalleryWalk.Models
         public PageManager setDefaultValues()
         {
             currentPage = totalPageCount = totalItemCount = 1;
-            pageItemCount = 4;
+            pageItemCount = 1;
             incrementPageMethod = decrementPageMethod = pageMethodController = setPageMethodPost =  "";
             pageNumberList = new List<SelectListItem>();
             return this;
         }
+
         public PageManager copyPageManager(PageManager manager)
         {
             currentPage = manager.currentPage;
