@@ -11,37 +11,43 @@ namespace TheGalleryWalk.Controllers
     public class BaseValidatorController : AsyncController
     {
 
-        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<GalleryParseClass> query)
+        public async Task<PageManager> setPageManagerForQuery(PageManager manager, ParseQuery<GalleryParseClass> query)
         {
             manager.totalItemCount = await query.CountAsync();
-            setPageManager(manager);
+           return  setPageManager(manager);
         }
-        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<ArtworkParseClass> query)
+        public async Task<PageManager> setPageManagerForQuery(PageManager manager, ParseQuery<ArtworkParseClass> query)
         {
             manager.totalItemCount = await query.CountAsync();
-            setPageManager(manager);
+            return setPageManager(manager);
         }
-        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<ArtistParseClass> query)
+        public async Task<PageManager> setPageManagerForQuery(PageManager manager, ParseQuery<ArtistParseClass> query)
         {
             manager.totalItemCount = await query.CountAsync();
-            setPageManager(manager);
+            return setPageManager(manager);
         }
-        public async Task setPageManagerForQuery(PageManager manager, ParseQuery<GeneralParseUser> query)
+        public async Task<PageManager> setPageManagerForQuery(PageManager manager, ParseQuery<GeneralParseUser> query)
         {
             manager.totalItemCount = await query.CountAsync();
-            setPageManager(manager);
+            return setPageManager(manager);
         }
-        private void setPageManager(PageManager manager)
+        private PageManager setPageManager(PageManager manager)
         {
             manager.totalPageCount = manager.totalItemCount / manager.pageItemCount;
 
             if ((manager.totalItemCount % manager.pageItemCount) != 0)
             { manager.totalPageCount++; }
 
-            for (int pageNum = 1; pageNum <= manager.totalPageCount; pageNum++)
-            {manager.pageNumberList.Add(new SelectListItem{Text = pageNum.ToString(), Value = pageNum.ToString()});}
+            return setPageManagerList(manager);
         }
-
+        public PageManager setPageManagerList(PageManager manager)
+        {
+            if (manager.pageNumberList == null) manager.pageNumberList = new List<SelectListItem>();
+            if (manager.pageNumberList.Count != 0) return manager;
+            for (int pageNum = 1; pageNum <= manager.totalPageCount; pageNum++)
+            { manager.pageNumberList.Add(new SelectListItem { Text = pageNum.ToString(), Value = pageNum.ToString() }); }
+            return manager;
+        }
 
         private void setUserId(string userId) { Session["UserId"] = userId;}
         public string getUserId() { return Session["UserId"].ToString(); }

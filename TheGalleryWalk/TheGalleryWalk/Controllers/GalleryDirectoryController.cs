@@ -19,19 +19,14 @@ namespace TheGalleryWalk.Controllers
                    orderby item.Name ascending
                    select item;
         }
-        public async Task<ActionResult> GalleryDirectory()
-        {
-            PageManager pageManager = (new PageManager()).setDefaultValues();
-            await setPageManagerForQuery(pageManager, getQuery());
-
-            pageManager.setPageMethodPost = "SetGalleryDirectoryPage";
+        private PageManager setPageManagerCallBack(PageManager pageManager){
+            pageManager.setPageMethodPost = "PostGalleryDirectoryPage";
             pageManager.incrementPageMethod = "IncrementGalleryDirectoryPage";
             pageManager.decrementPageMethod = "DecrementGalleryDirectoryPage";
             pageManager.pageMethodController = "GalleryDirectory";
-
-            return await SetGalleryDirectoryPage(pageManager);
+            pageManager.setPageMethod = "SetGalleryDirectoryPage";
+            return pageManager;
         }
-
         private ActionResult viewWithUserLayout(GalleryDirectoryManager directoryManager)
         {
             if (userIsGalleryOwner())
@@ -56,6 +51,13 @@ namespace TheGalleryWalk.Controllers
             directoryManager.galleryEntities = galleries;
         }
 
+        public async Task<ActionResult> GalleryDirectory()
+        {
+            PageManager manager = (new PageManager()).setDefaultValues();
+            manager = await setPageManagerForQuery(manager, getQuery());
+            manager = setPageManagerCallBack(manager);
+            return await SetGalleryDirectoryPage(manager);
+        }
         public async Task<ActionResult> IncrementGalleryDirectoryPage(PageManager pageManager)
         {
             if (pageManager.currentPage < pageManager.totalPageCount)
@@ -72,10 +74,21 @@ namespace TheGalleryWalk.Controllers
         public async Task<ActionResult> SetGalleryDirectoryPage(PageManager pageManager)
         {
             GalleryDirectoryManager directoryManager = (new GalleryDirectoryManager()).setDefaults();
-            directoryManager.PageManager = pageManager;
+
+            directoryManager.PageManager.currentPage = pageManager.currentPage;
+            directoryManager.PageManager.totalPageCount = pageManager.totalPageCount;
+            directoryManager.PageManager.totalItemCount = pageManager.totalItemCount;
+
+            directoryManager.PageManager = setPageManagerList(directoryManager.PageManager);
+            directoryManager.PageManager = setPageManagerCallBack(directoryManager.PageManager);
 
             await setEntityArrayWithQuery(getQuery(), directoryManager);
+
             return viewWithUserLayout(directoryManager);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> PostGalleryDirectoryPage(PageManager pageManager)
+        { return await SetGalleryDirectoryPage(pageManager); }
     }   
 }
