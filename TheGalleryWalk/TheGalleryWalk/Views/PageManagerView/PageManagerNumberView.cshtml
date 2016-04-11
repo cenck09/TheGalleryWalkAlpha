@@ -15,11 +15,11 @@
                 pgMn.currentPage = i;
                 if (Model.currentPage == i)
                 {
-                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
                 }
                 else
                 {
-                    <a style="color:black;" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                    <a style="color:black;" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
                 }
             }
         }
@@ -31,13 +31,13 @@
                 pgMn.currentPage = i;
                 if (Model.currentPage == i)
                 {
-                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                    <a style="color:black; text-decoration:underline" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
                 }
                 else
                 {
                     if (((3 >= i) || (i >= (Model.totalPageCount - 3)))  ||  (((i-1)<= Model.currentPage) && (Model.currentPage <= (i+1))))
                     {
-                        <a style="color:black;" href="@Url.Action(pgMn.setPageMethodPost, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                        <a style="color:black;" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
                     }else if ( i < Model.currentPage){
                         i = Model.currentPage - 2; // since i gets incremented once before looping back
                         <p style="display:inline-block">...</p>
@@ -47,10 +47,6 @@
                         i = Model.totalPageCount - 3;
                         <p style="display:inline-block">...</p>
                     }
-                    else if (i < Model.totalPageCount)
-                    {
-                    }
-
                 }
             }
         }
@@ -60,8 +56,16 @@
         using (Html.BeginForm(Model.setPageMethodPost, Model.pageMethodController, FormMethod.Post, new { enctype = "multipart/form-data", id = "JumpToIndex" }))
         {
                 <fieldset>
-                    <ol>
-                           @Html.DropDownListFor(model => model.currentPage, Model.pageNumberList, "-- Jump to Index --", new { @class = "formFieldInput" })   
+                    <ol style="display:none;">
+
+                        @Html.TextBoxFor(model => model.totalPageCount, new { @Value = Model.totalPageCount })
+                    </ol>
+                    <ol style="display:none;">
+
+                        @Html.TextBoxFor(model => model.totalItemCount, new { @Value = Model.totalItemCount })
+                    </ol>
+                     <ol>
+                           @Html.DropDownListFor(model => model.currentPage, Model.pageNumberList, "-- Jump to Index --", new { @class = "" })   
                     </ol>
                     <div style="width:67px; color:black; text-align:center;">
                         <button id="buttonText" name="submitForm" style="background-color:transparent; border:none;">Jump To Index</button> 
@@ -69,6 +73,5 @@
 
                  </fieldset>
             }
-      
     }
 </div>
