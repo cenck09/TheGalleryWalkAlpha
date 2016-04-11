@@ -9,11 +9,9 @@ namespace TheGalleryWalk.Models
 {
     public class BaseEntity
     {
-
-        public string ParseID { get; set; }
-
-        [Key]
+       [Key]
         public int ID { get; set; }
+        public string ParseID { get; set; }
 
         [Required(ErrorMessage = "Please enter a name."),
               StringLength(30, MinimumLength = 2, ErrorMessage = "Please enter a name with more than one letter.")]
@@ -22,5 +20,8 @@ namespace TheGalleryWalk.Models
 
         [DisplayName("ImageURL")]
         public string ImageURL { get; set; }
+
+        public TheGalleryWalk.Models.PageManager PageManager { get; set; }
+
     }
 }

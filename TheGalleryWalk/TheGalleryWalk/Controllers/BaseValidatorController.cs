@@ -4,11 +4,22 @@ using System.Web.Mvc;
 using Parse;
 using TheGalleryWalk.Models;
 using System.Threading.Tasks;
+using System;
 
 namespace TheGalleryWalk.Controllers
 {
     public class BaseValidatorController : AsyncController
     {
+       
+        public async void setPageManagerForEntity(BaseEntity entity, ParseQuery<ParseObject> query)
+        {
+            entity.PageManager.totalItemCount = await query.CountAsync();
+            entity.PageManager.totalPageCount = entity.PageManager.totalItemCount / entity.PageManager.pageItemCount;
+     
+            if ((entity.PageManager.totalItemCount % entity.PageManager.pageItemCount) != 0)
+            { entity.PageManager.totalPageCount++; }
+        }
+
 
         private void setUserId(string userId) { Session["UserId"] = userId;}
         public string getUserId() { return Session["UserId"].ToString(); }
@@ -16,7 +27,7 @@ namespace TheGalleryWalk.Controllers
         public string getUserType() {return Session["UserType"].ToString(); }
 
 
-        public bool userIsArtist() { return ( verifyUser() && "ArtistUser".Equals(getUserType())); }
+        public bool userIsArtist() { return (verifyUser() && "ArtistUser".Equals(getUserType())); }
         public bool userIsGalleryOwner() { return (verifyUser() && "GalleryOwnerUser".Equals(getUserType())); }
         public bool userIsFileOwnerOfParseObject(ParseObject entity)
         {
@@ -46,6 +57,7 @@ namespace TheGalleryWalk.Controllers
                 MyFavoriteGalleries = new List<GalleryEntity>(),
                 GalleryEntities = new List<GalleryEntity>(),
                 ArtistEntities = new List<ArtistEntity>(),
+                PageManager = (new PageManager()).setDefaultValues(),
             };
         }
         public ArtistUserEntity getArtistUserEntity(GeneralParseUserData userData)
@@ -62,6 +74,7 @@ namespace TheGalleryWalk.Controllers
                 PermittedGalleries =  userData.AcceptedGalleryFollowers,
                 EmailAddress = userData.Email,
                 OwnersFollowingThisArtistUser = new List<GalleryOwnerEntity>(),
+                PageManager = (new PageManager()).setDefaultValues(),
             };
         }
         public ArtworkEntity getArtworkEntity(ArtworkParseClass artwork)
@@ -78,6 +91,7 @@ namespace TheGalleryWalk.Controllers
                 OwnershipState = "Unowned",
                 Style = string.IsNullOrEmpty(artwork.Style) ? "" : artwork.Style,
                 ShouldAddSharingOptions = false,
+                PageManager = (new PageManager()).setDefaultValues(),
             };
         }
         public GalleryEntity getGalleryEntity(GalleryParseClass gallery)
@@ -96,7 +110,8 @@ namespace TheGalleryWalk.Controllers
                 ImageURL = string.IsNullOrEmpty(gallery.ImageURL) ? "https://dl.dropboxusercontent.com/u/13628780/ArtworkPlaceholder.jpg" : gallery.ImageURL,
                 GalleryOwnerID = gallery.GalleryOwnerID,
                 Website = string.IsNullOrEmpty(gallery.Website) ? "" : gallery.Website,
-                ArtistUserEntities = new List<ArtistUserEntity>()
+                ArtistUserEntities = new List<ArtistUserEntity>(),
+                PageManager = (new PageManager()).setDefaultValues(),
             };
         }
         public ArtistEntity getArtistEntity(ArtistParseClass artist)
@@ -112,7 +127,7 @@ namespace TheGalleryWalk.Controllers
                 ArtworkEntities = new List<ArtworkEntity>(),
                 Description = string.IsNullOrEmpty(artist.Description) ? "" : artist.Description,
                 Style = string.IsNullOrEmpty(artist.Style) ? "" : artist.Style,
-                
+                PageManager = (new PageManager()).setDefaultValues(),
             };
         }
 
