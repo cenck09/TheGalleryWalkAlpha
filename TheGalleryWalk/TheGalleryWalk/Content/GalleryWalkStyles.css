@@ -72,10 +72,10 @@
 }
 
 .EntityImage{
-    border-radius: 5px;
-    float:left;
-    margin:10px;
+    width:auto;
+    height:auto;
 }
+
 .EntityInfo{
     display:block;
     color:white;
@@ -85,16 +85,32 @@
 }
 
 .GalleryInfoWindow{
-    background-color:rgba(73, 223, 189 ,1.0);
-    border-radius:5px;
+    background-color:transparent;
+    border-radius:0px;
     display:inline-block;
-    width:250px;
-    height:320px;
-    margin: 0 auto;
-    padding-top:30px;
+    max-width:300px;
+    max-height:300px;
+    margin: auto;
     box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
-    color:rgba(50, 50, 50, 0.7);
     cursor:pointer;
+    overflow:hidden;
+}
+
+.GalleryInfoWindowTitle{
+    text-shadow: 20px 20px 20px black;
+    background: black; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left top, black, transparent); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, black, transparent); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, black, transparent); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, black, transparent); /* Standard syntax (must be last) */  
+      color:white;
+    position:absolute; 
+    padding:10px;
+    width:inherit;
+    margin:0px;
+    padding-bottom:20px;
+    padding-right:20px;
+    border-bottom-right-radius:20px;
 }
 
 .GalleryInfoWindow:hover{
@@ -136,10 +152,10 @@
 }
 
 .WebsiteBody{
-    background-repeat: repeat;
-    background-image: url('Backgrounds/brushed_@2X.png');
+  //  background-repeat: repeat;
+  //  background-image: url('Backgrounds/brushed_@2X.png');
     //    background-attachment: fixed;
-
+    background-color:white;
 }
 
 .InfoViewHeader{
@@ -182,9 +198,9 @@
     width:100%;
 }
 .menuGrade {
-    background-color: rgba(10, 10, 21, 0.7);
-    color: white;
-    box-shadow: rgba(0,0,0,0.4) 0px 0px 5px;
+    background-color: white;//rgba(10, 10, 21, 0.7);
+    color: black;
+    box-shadow: rgba(0,0,0,0.4) 0px 0px 8px;
 
  /*   background: #07BCF8;  For browsers that do not support gradients */
 /*    background: -webkit-linear-gradient(#07BCF8, #047296);  For Safari 5.1 to 6.0 */
@@ -196,16 +212,16 @@
 
 .menuItem{
     cursor:pointer;
-    color:white;
+    color:black;
 }
 
 .menuTitle{
-    color:whitesmoke;
+    color:darkgray;
     font-family: "fertigo-pro",sans-serif;
 }
 
 .portalTitle{
-    color:whitesmoke;
+    color:darkgray;
     font-size:small;
     font-family: "fertigo-pro",sans-serif;
 }
