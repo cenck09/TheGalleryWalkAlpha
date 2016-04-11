@@ -172,6 +172,7 @@
     <Compile Include="Models\ArtworkParseClass.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BaseParseObject.cs" />
+    <Compile Include="Models\GalleryDirectoryManager.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
     <Compile Include="Models\GalleryParseClass.cs" />
     <Compile Include="Models\GeneralParseUser.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginDataPrecheck.cs" />
     <Compile Include="Models\GalleryOwnerEntity.cs" />
+    <Compile Include="Models\PageManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +261,7 @@
     <Content Include="Views\ArtistUserInfo\ArtistUserArtworkView.cshtml" />
     <Content Include="Views\GalleryDirectory\GalleryDirectory.cshtml" />
     <Content Include="Views\GalleryDirectory\GalleryPartialView.cshtml" />
+    <Content Include="Views\PageManagerView\PageManagerNumberView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
