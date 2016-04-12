@@ -43,57 +43,57 @@
 
 <div style="width:100%; margin:auto; margin-top:10px; margin-bottom:10px;">
     @{
-
+        if (Model.totalPageCount > 1) {
     <a class="number" href="@Url.Action(Model.decrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-left"></span></a>
-        Debug.WriteLine("Model Page Count for number selector bar " + Model.totalPageCount);
-        if (Model.totalPageCount < 11)
-        {
-            for (int i = 1; i <= Model.totalPageCount; i++)
+            Debug.WriteLine("Model Page Count for number selector bar " + Model.totalPageCount);
+            if (Model.totalPageCount < 11)
             {
-                PageManager pgMn = (new PageManager()).copyPageManager(Model);
-                pgMn.currentPage = i;
-                if (Model.currentPage == i)
+                for (int i = 1; i <= Model.totalPageCount; i++)
                 {
+                    PageManager pgMn = (new PageManager()).copyPageManager(Model);
+                    pgMn.currentPage = i;
+                    if (Model.currentPage == i)
+                    {
                     <a class="number" style="text-decoration:underline" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
-                }
-                else
-                {
+                    }
+                    else
+                    {
                     <a class="number" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                    }
                 }
             }
-        }
-        else
-        {
-            for (int i = 1; i <= Model.totalPageCount; i++)
+            else
             {
-                PageManager pgMn = (new PageManager()).copyPageManager(Model);
-                pgMn.currentPage = i;
-                if (Model.currentPage == i)
+                for (int i = 1; i <= Model.totalPageCount; i++)
                 {
+                    PageManager pgMn = (new PageManager()).copyPageManager(Model);
+                    pgMn.currentPage = i;
+                    if (Model.currentPage == i)
+                    {
                     <a class="number"  style="text-decoration:underline" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
-                }
-                else
-                {
-                    if (((3 >= i) || (i >= (Model.totalPageCount - 3)))  ||  (((i-2)<= Model.currentPage) && (Model.currentPage <= (i+2))))
-                    {
-                        <a class="number" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
-                    }else if ( i < Model.currentPage){
-                        i = Model.currentPage - 3; // since i gets incremented once before looping back
-                        <p class="number" style="display:inline-block">...</p>
                     }
-                    else if(i > Model.currentPage)
+                    else
                     {
-                        i = Model.totalPageCount - 3;
+                        if (((3 >= i) || (i >= (Model.totalPageCount - 3))) || (((i - 2) <= Model.currentPage) && (Model.currentPage <= (i + 2))))
+                        {
+                        <a class="number" href="@Url.Action(pgMn.setPageMethod, pgMn.pageMethodController, pgMn)">@Html.Raw(i)</a>
+                        } else if (i < Model.currentPage) {
+                            i = Model.currentPage - 3; // since i gets incremented once before looping back
                         <p class="number" style="display:inline-block">...</p>
+                        }
+                        else if (i > Model.currentPage)
+                        {
+                            i = Model.totalPageCount - 3;
+                        <p class="number" style="display:inline-block">...</p>
+                        }
                     }
                 }
             }
-        }
 
-        <a class="number" href="@Url.Action( Model.incrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-right"></span></a>
+        <a class="number" href="@Url.Action(Model.incrementPageMethod, Model.pageMethodController, Model)"><span class="glyphicon glyphicon-arrow-right"></span></a>
 
-        using (Html.BeginForm(Model.setPageMethodPost, Model.pageMethodController, FormMethod.Post, new { enctype = "multipart/form-data", id = "JumpToIndex" }))
-        {
+            using (Html.BeginForm(Model.setPageMethodPost, Model.pageMethodController, FormMethod.Post, new { enctype = "multipart/form-data", id = "JumpToIndex" }))
+            {
                 <fieldset>
                    <!-- <button class="jumpBoxButton" name="submitForm">Go to page</button> -->
                     <div style="text-align:center; margin:auto;">
@@ -102,10 +102,11 @@
                     </div>
                     <ol style="display:none;">@Html.TextBoxFor(model => model.totalPageCount, new { @Value = Model.totalPageCount })</ol>
                     <ol style="display:none;"> @Html.TextBoxFor(model => model.totalItemCount, new { @Value = Model.totalItemCount })</ol>
+                    <ol style="display:none;"> @Html.TextBoxFor(model => model.parseId, new { @Value = Model.parseId })</ol>
                  </fieldset>
-         }
-    }
-   
+                }
+            }
+        }
 </div>
 
 

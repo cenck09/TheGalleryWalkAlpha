@@ -25,7 +25,7 @@ namespace TheGalleryWalk.Models
         public PageManager setDefaultValues()
         {
             currentPage = totalPageCount = totalItemCount = 1;
-            pageItemCount = 10;
+            pageItemCount = 2;
             incrementPageMethod = decrementPageMethod = setPageMethod = pageMethodController  = parseId = setPageMethodPost =  "";
             pageNumberList = new List<SelectListItem>();
             return this;
