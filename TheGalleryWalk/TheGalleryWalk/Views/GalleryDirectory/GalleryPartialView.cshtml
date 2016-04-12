@@ -12,7 +12,7 @@
 {
     foreach (GalleryEntity item in Model)
     {
-        <a href="@Url.Action("GalleryView","Gallery", item)" style="margin:5px;">
+        <a href="@Url.Action("GalleryInformationView","GalleryInformation", item)" style="margin:5px;">
             <div class="GalleryInfoWindow">
                 <h6 class="GalleryInfoWindowTitle">@Html.Raw(item.Name)</h6>
                 <img src=@Url.Content(item.ImageURL) id="EntityImage" class="resize_fit_center" alt="Gallery">

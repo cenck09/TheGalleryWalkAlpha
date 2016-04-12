@@ -11,11 +11,9 @@
 </head>
 @if (Model != null)
 {
-
     Debug.WriteLine("Data is not null " + Model.Count());
     foreach (ArtworkEntity item in Model)
     {
-     
         <a href="@Url.Action("ArtworkView","Artwork", item)">
             <div class="GalleryInfoWindow ImageContainer" style="margin:10px">
                 <img src=@Url.Content(item.ImageURL) class="resize_fit_center" id="EntityImage" alt="demo Gallery" style="width:250px; border-radius:4px; height:250px;" />

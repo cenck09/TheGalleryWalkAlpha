@@ -159,6 +159,7 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\BaseValidatorController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
+    <Compile Include="Controllers\GalleryInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedArtistsController.cs" />
     <Compile Include="Controllers\OwnedGalleriesController.cs" />
@@ -262,14 +263,13 @@
     <Content Include="Views\GalleryDirectory\GalleryDirectory.cshtml" />
     <Content Include="Views\GalleryDirectory\GalleryPartialView.cshtml" />
     <Content Include="Views\PageManagerView\PageManagerNumberView.cshtml" />
+    <Content Include="Views\GalleryInformation\GalleryInformationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
     <Folder Include="obj\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\Async_SignOut\" />
-    <Folder Include="Views\BaseValidator\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
