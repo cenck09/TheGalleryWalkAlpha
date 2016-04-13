@@ -18,7 +18,7 @@
          <a  href="@Url.Action("ArtistView","Artist", item)">
             <div class="GalleryInfoWindow" style="margin:10px">
                 <img src=@Url.Content(item.ImageURL) alt="demo Gallery" style="width:200px; border-radius:4px; height:200px;" />
-                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(item.Name)</p>
+                <p style="margin-top:8px; color:rgb(85,85,85); text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(item.Name)</p>
             </div>
         </a>
     }
