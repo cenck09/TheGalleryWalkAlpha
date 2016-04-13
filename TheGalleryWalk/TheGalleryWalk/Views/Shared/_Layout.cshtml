@@ -26,18 +26,18 @@
                     <span class="icon-bar" style="background-color:white"></span>
                 </button>
                 <h4>
-                    <a class="navbar-nav menuTitle navbar-left" style="text-align:left;" href="@Url.Action("Index","Home")",  new { area = "" }>The <br/> Gallery Walk</a>
+                    <a class="navbar-nav menuTitle navbar-left" style="text-align:left;" href="@Url.Action("Index","Home")" , new { area="" }>The <br /> Gallery Walk</a>
                 </h4>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav GalleryNavBar menuItem navbar-nav">
-                    <li><a class="nav navbar-nav menuItem" style="color: rgb(85,85,85)" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Our Galleries</a></li>
-                    <li><a class="nav navbar-nav menuItem" style="color: rgb(85,85,85)" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">Our Artists</a></li>
+                    <li><a class="nav navbar-nav menuItem" style="color: #B9D3EE" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Our Galleries</a></li>
+                    <li><a class="nav navbar-nav menuItem" style="color: #B9D3EE" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">Our Artists</a></li>
                 </ul>
                 <ul class="nav navbar-nav menuItem navbar-right">
-                    @Html.ActionLink("The Artsy Portal", "Login", "Async_SignIn",null , new { @class = "navbar-brand portalTitle" })
+                    <li><a style="color: #B9D3EE" @Html.ActionLink("The Artsy Portal", "Login", "Async_SignIn", null, new { @class = "navbar-brand portalTitle" })</a></li>
                 </ul>
-              
+
             </div>
         </div>
     </div>

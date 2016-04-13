@@ -3953,8 +3953,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-brand {
-   font-family:"balzano-std";
-  float: left;
+  font-family:"balzano-std";
+  float: none;
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
