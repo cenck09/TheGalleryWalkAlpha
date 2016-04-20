@@ -8,7 +8,7 @@ Navigation Bar:
 
 - Enlarge Bar height : Make the bar larger to fit "The Gallery Walk" logo better
 
-- Update navigation bar for gallery and artist login: They should look like _Layout
+- Update navigation bar for gallery and artist login: They should look like _Layout by having only a gallery and artist directory
 
 - Text color : The menu buttons change to white when hovered over, 
 	they should get a blue highlight with an underline like "The Gallery Walk" button 
@@ -33,9 +33,32 @@ ________________________________________________________________________________
 
 Entity Collections:
 
-- Update the other controllers collections to use the new PageManager
+- Update the other controllers collections to use the new PageManager, the entity already has a PageManager in it's base
+	class, so you should have to configure it in the controller and create the page view in the cshmtl file.
+	check out the gallery directory and gallery information view to see how it's configured
 
 - Fix layout issues by enforcing an image size and cropping to maintain aspect ratio.
 	you can see the problem by changing the PageManager default page item size by
 	assigning pageItemCount in setDefaultValues of the PageManager Entity. This 
 	updates the number of entities displayed for all Collections using it
+	
+_________________________________________________________________________________________
+
+ Views:
+
+ - go through the artist and artwork information view and create one version that enables the logged in user 
+ 	to edit the artist or artwork, the logged in user should be the file owner, other users should be directed
+ 	to another information view that does not have the ability to edit.
+ 	* we need to figure out a nice way to present the editing options, they should be hidden until needed and appealing
+ 		when it is visible, the current way is just a place holder.
+	* Make sure there is a check for file owner before allowing updating.
+	
+ - Update the information views to place a larger focus on the images, the information for the entity should be below it.
+ 
+ - A Home view, maybe a nice collection of images cropped to form a clickable wall of random galleries, artist users
+ 	and artworks 
+ 	
+ - A new artist portal, the current one doesn't look nice.
+ 
+ - About us/contact view
+ 

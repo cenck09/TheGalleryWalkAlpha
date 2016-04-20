@@ -206,3 +206,11 @@ C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\
 C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.dll
 C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.pdb
 C:\Users\Nick\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\obj\Debug\TheGalleryWalk.csprojResolveAssemblyReference.cache
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\EntityFramework.dll
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\EntityFramework.SqlServer.dll
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\Parse.dll
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\Parse.NetFx45.dll
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\EntityFramework.xml
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\EntityFramework.SqlServer.xml
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\Parse.xml
+C:\Users\Owner\Documents\GitHub\TheGalleryWalk\TheGalleryWalk\TheGalleryWalk\bin\Parse.NetFx45.xml
