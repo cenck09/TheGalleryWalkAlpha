@@ -221,6 +221,12 @@
     max-width:150px;
 }
 
+.menuLi {
+    color: #B9D3EE; 
+    float: none; 
+    display: inline-block;
+}
+
 .portalTitle{
     color:darkgray;
     font-size:small;
@@ -234,5 +240,4 @@
     min-height:450px;
     min-width:300px;
 }
-
 

@@ -30,11 +30,11 @@
                 </h4>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav GalleryNavBar menuItem navbar-nav">
-                    <li><a class="nav navbar-nav menuItem" style="color: #B9D3EE" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Our Galleries</a></li>
-                    <li><a class="nav navbar-nav menuItem" style="color: #B9D3EE" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">Our Artists</a></li>
+                <ul class="nav GalleryNavBar menuItem navbar-nav" style="padding-top:5pt; text-align: center; float: none; display: inline-block;">
+                    <li><a class="nav navbar-nav menuItem menuLi" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Our Galleries</a></li>
+                    <li><a class="nav navbar-nav menuItem menuLi" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">Our Artists</a></li>
                 </ul>
-                <ul class="nav navbar-nav menuItem navbar-right">
+                <ul class="nav navbar-nav menuItem navbar-right" style="padding-top:5pt; float: none;">
                     <li><a style="color: #B9D3EE" @Html.ActionLink("The Artsy Portal", "Login", "Async_SignIn", null, new { @class = "navbar-brand portalTitle" })</a></li>
                 </ul>
 
