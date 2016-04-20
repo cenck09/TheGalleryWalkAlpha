@@ -14,7 +14,7 @@
     {
         <a href="@Url.Action("ArtistUserInfoView","ArtistUserInfo", item)">
             <div class="GalleryInfoWindow" style="margin:10px">
-                <img src=@Url.Content("https://dl.dropboxusercontent.com/u/13628780/profilePlaceholder.jpg") alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+                <img src=@Url.Content(item.ImageURL) alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
                 <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(item.Name)</p>
             </div>
         </a>
