@@ -3988,6 +3988,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   width: 22px;
   height: 2px;
   border-radius: 1px;
+  color: red;
 }
 
 .navbar-toggle .icon-bar + .icon-bar {
