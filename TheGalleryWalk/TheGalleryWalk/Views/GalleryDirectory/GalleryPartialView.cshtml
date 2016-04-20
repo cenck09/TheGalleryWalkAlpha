@@ -15,7 +15,7 @@
         <a href="@Url.Action("GalleryInformationView","GalleryInformation", item)" style="margin:5px;">
             <div class="GalleryInfoWindow">
                 <h6 class="GalleryInfoWindowTitle">@Html.Raw(item.Name)</h6>
-                <img src=@Url.Content(item.ImageURL) id="EntityImage" class="resize_fit_center" alt="Gallery">
+                <img src=@Url.Content(item.ImageURL) id="EntityImage" class="resize_fit_center" alt="Gallery"  style="width:auto; border-radius:4px; height:250px;">
             </div>
         </a>
 
