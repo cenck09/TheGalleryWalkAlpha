@@ -156,8 +156,8 @@
 
 .add-btn:hover{
    background-color:gray;
-   color:gray;
-   box-shadow: rgba(0,0,0,0) 0px 0px 0px;
+   color:white;
+   box-shadow: rgba(0,0,0,0.6) 0px 0px 8px;
 }
 
 .WebsiteBody{
