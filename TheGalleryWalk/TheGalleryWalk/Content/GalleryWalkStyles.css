@@ -42,6 +42,15 @@
     box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
 }
 
+.EntityInformationWindow {
+  width: 100%;
+  margin: 0 auto;
+}
+.EntityImage, .editButtonandForm, .galleryInfo {
+  width: 100px;
+  float: left;
+}
+
 #artistAddError{
     color:white;
     text-align:center;
