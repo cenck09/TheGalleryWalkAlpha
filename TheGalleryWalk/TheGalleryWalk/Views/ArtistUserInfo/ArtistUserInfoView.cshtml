@@ -20,8 +20,16 @@
 <div class="EntityInformationWindow" id="EntityInformationWindow">
 
     <div class="EntityImage">
-        <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width:auto; border-radius:4px; height:auto;" />
+        
+        <a href="@Url.Action("ArtistUserInfoView","ArtistUserInfo", item)">
+            <div class="GalleryInfoWindow" style="margin:10px">
+                <img src=@Url.Content(item.ImageURL) alt="demo Gallery" style="width:auto; border-radius:4px; height:auto;" />
+                <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(item.Name)</p>
+            </div>
+        </a>
     </div>
+
+
 
          <div id="remove" style="margin:20px; padding: 5px; display:none; background-color: aqua; width:200px; float:right; border-radius:5px;">
                 <a href="@Url.Action("unfollowArtist", "ArtistUserInfo", Model)">
