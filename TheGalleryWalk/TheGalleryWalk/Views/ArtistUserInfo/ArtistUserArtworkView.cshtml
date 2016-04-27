@@ -60,7 +60,7 @@
 
     <a href="@Url.Action("ArtworkView","Artwork", Model)">
         <div class="GalleryInfoWindow ImageContainer" style="margin:10px">
-             <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width:auto; border-radius:4px; height:150px;" />
+               <img src=@Url.Content(Model.ImageURL) class="resize_fit_center" id="EntityImage" alt="demo Gallery" style="width:auto; border-radius:4px; height:250px;" />
             <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(Model.Name)</p>
         </div>
     </a>
