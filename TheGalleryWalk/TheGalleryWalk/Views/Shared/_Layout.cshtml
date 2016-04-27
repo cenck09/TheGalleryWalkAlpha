@@ -20,10 +20,10 @@
         <div class="container">
             <div class="navbar-header">
                 <!-- This button is the hamburger icon -->
-                <button type="button" class="navbar-toggle menuItem" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar" style="background-color:darkgrey"></span>
-                    <span class="icon-bar" style="background-color:darkgrey"></span>
-                    <span class="icon-bar" style="background-color:darkgrey"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 <h4>
                     <a class="navbar-nav menuTitle navbar-left" style="text-align:left;" href="@Url.Action("Index","Home")",  new { area = "" }>The <br/> Gallery Walk</a>
@@ -34,8 +34,11 @@
                     <li class="menuLi"><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Our Galleries</a></li>
                     <li class="menuLi"><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">Our Artists</a></li>
                 </ul>
-                <ul class="nav navbar-nav menuItem navbar-right" style="padding-top:5px; text-align: center; float: none; padding-left:35%">
-                    @Html.ActionLink("The Artsy Portal", "Login", "Async_SignIn",null , new { @class = "navbar-brand portalTitle" })
+                <ul class="nav navbar-nav menuItem navbar-right" style="padding-top:5px; text-align: center; float: none;">
+                    <li style="text-align:center;display: inline-block;">
+                        @Html.ActionLink("The Artsy Portal", "Login", "Async_SignIn", null, new { @class = "navbar-brand portalTitle" })
+                    </li>
+                    
                 </ul>
               
             </div>  

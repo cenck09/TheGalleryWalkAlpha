@@ -251,3 +251,10 @@
     min-width:300px;
 }
 
+.navbar-header .navbar-toggle .icon-bar {
+    background-color: darkgrey;
+}
+
+.navbar-header .navbar-toggle:hover .icon-bar {
+    background-color: grey;
+}
