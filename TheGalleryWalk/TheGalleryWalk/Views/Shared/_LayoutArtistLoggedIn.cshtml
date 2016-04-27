@@ -18,7 +18,7 @@
 
 </head>
 <body class="WebsiteBody">
-    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center">
+    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center; border-width:10px;">
         <div class="container">
             <div class="navbar-header">
                 <!-- This button is the hamburger icon -->
@@ -27,15 +27,17 @@
                     <span class="icon-bar" style="background-color:darkgray"></span>
                     <span class="icon-bar" style="background-color:darkgray"></span>
                 </button>
-                @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand  menuTitle" })
+                <h4>
+                    <a class="navbar-nav menuTitle navbar-left" style="text-align:left;" href="@Url.Action("Index","Home")" , new { area="" }>The <br /> Gallery Walk</a>
+                </h4>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav GalleryNavBar menuItem navbar-nav" style="padding-top:5px; text-align: center; float: none; display: inline-block;">
                   <!--<li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Index","Home")">Home</a></li>
                     <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("About","Home")">About</a></li>
                     <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Contact","Home")">Contact</a></li>-->  
-                    <li><a class="menuItem" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Gallery Directory</a></li>
-                    <li><a class="menuItem" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">ArtistUser Directory</a></li>
+                    <li><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Gallery Directory</a></li>
+                    <li><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">ArtistUser Directory</a></li>
                 </ul>
                 <div class="nav navbar-nav menuItem navbar-right" style="padding-top:5px;">
                     <div class="dropdown">

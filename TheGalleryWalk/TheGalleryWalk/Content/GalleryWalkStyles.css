@@ -209,7 +209,7 @@
 .menuGrade {
     background-color: white;
     color: black;
-    box-shadow: rgba(0,0,0,0.4) 0px 0px 8px;
+    box-shadow: rgba(0,0,0,0.1) 0px 0px 8px;
 
  /*   background: #07BCF8;  For browsers that do not support gradients */
 /*    background: -webkit-linear-gradient(#07BCF8, #047296);  For Safari 5.1 to 6.0 */
@@ -225,6 +225,7 @@
 }
 
 .menuTitle{
+    white-space: nowrap;
     color:darkgray;
     font-family: "fertigo-pro",sans-serif;
     max-width:150px;
