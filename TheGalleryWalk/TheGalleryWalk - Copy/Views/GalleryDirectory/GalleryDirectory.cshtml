@@ -1,0 +1,31 @@
+﻿@using System.Diagnostics;
+@using TheGalleryWalk.Models;
+@using Parse;
+@model TheGalleryWalk.Models.GalleryDirectoryManager
+@{
+    ViewBag.Title = "GalleryDirectory";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="text-align:center;">
+  
+    @try
+    { Html.RenderPartial("~/Views/PageManagerView/PageManagerNumberView.cshtml", Model.PageManager); }
+    catch (Exception ex)
+    {  Debug.WriteLine("There was an error ::    " + ex);}
+    
+     @try
+     { Html.RenderPartial("~/Views/GalleryDirectory/GalleryPartialView.cshtml", Model.galleryEntities);}
+    catch (Exception ex)
+    { Debug.WriteLine("There was an error ::    " + ex);}
+
+    @try
+    { Html.RenderPartial("~/Views/PageManagerView/PageManagerNumberView.cshtml", Model.PageManager); }
+    catch (Exception ex)
+    { Debug.WriteLine("There was an error ::    " + ex); }
+
+
+
+</div>
+

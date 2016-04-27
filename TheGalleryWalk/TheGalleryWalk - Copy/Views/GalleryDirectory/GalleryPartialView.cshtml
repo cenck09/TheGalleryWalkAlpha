@@ -1,0 +1,23 @@
+﻿@using Parse;
+@using System.Threading.Tasks;
+@using System.Diagnostics;
+@using TheGalleryWalk.Models;
+@model IEnumerable<GalleryEntity>
+
+<head>
+    <link rel="stylesheet" href="~/Content/GalleryWalkStyles.css">
+</head>
+
+@if (Model != null)
+{
+    foreach (GalleryEntity item in Model)
+    {
+        <a href="@Url.Action("GalleryInformationView","GalleryInformation", item)" style="margin:5px;">
+            <div class="GalleryInfoWindow">
+                <h6 class="GalleryInfoWindowTitle">@Html.Raw(item.Name)</h6>
+                <img src=@Url.Content(item.ImageURL) id="EntityImage" class="resize_fit_center" alt="Gallery"  style="width:auto; border-radius:4px; height:250px;">
+            </div>
+        </a>
+
+    }
+}

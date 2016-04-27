@@ -1,0 +1,123 @@
+﻿@using System.Diagnostics;
+@using TheGalleryWalk.Models;
+@using Parse;
+@model TheGalleryWalk.Models.ArtistEntity
+
+@{
+    ViewBag.Title = "Owned_ArtistView";
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+
+<html>
+<head>
+</head>
+
+<body>
+
+
+
+
+
+    <div class="EntityInformationWindow" id="EntityInformationWindow">
+
+
+        <div class="EntityImage">
+
+            <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width: auto; border-radius: 4px; height: 250px;" />
+       
+        </div>
+
+        <div class ="editButtonandForm">
+            <div class="edit-btn" id="editBtn">
+                <h4>- Edit Artist - </h4>
+            </div>
+            <div class="edit-btn" id="cancelEditBtn" style="display: none;">
+                <h4>- Cancel - </h4>
+            </div>
+            <div id="editForm" style="display: none;">
+                @Html.Partial("~/Views/EditArtist/EditArtistPartialView.cshtml", model: Model);
+            </div>
+        </div>
+
+        <div id="galleryInfo" class ="galleryInfo">
+            <h3 class="EntityInfo">@Model.Name
+            </h3>
+            <h6 class="EntityInfo">@Model.Style
+            </h6>
+            <h6 class="EntityInfo">@Model.Description
+            </h6>
+        </div>
+    </div>
+
+
+
+    <span class="Divider"></span>
+
+    <div class="Info-header">
+        <h3>Displayed Artwork
+        </h3>
+    </div>
+
+    <div style="text-align: center;">
+        @try
+        {
+            Debug.WriteLine("Model Artwork entities :: " + Model.ArtworkEntities);
+            Html.RenderPartial("~/Views/Gallery/ArtworkPartialView.cshtml", Model.ArtworkEntities);
+           
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("There was an error ::    " + ex);
+        }
+    </div>
+
+
+ 
+
+</body>
+
+</html>
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+     
+        var showFormValue = @(ViewBag.showForm);
+
+        
+        document.getElementById("editBtn").onclick = function () { addEditForm() };
+        document.getElementById("cancelEditBtn").onclick = function () { removeEditForm() };
+
+        if(showFormValue == 3){
+            addEditForm();
+        }
+
+        
+        function removeEditForm() {
+            $('#editForm').hide();
+            $("#editBtn").show();
+            $("#cancelEditBtn").hide();
+            $("#galleryInfo").show()
+            
+        }
+
+        function addEditForm() {
+            //  $('#addGalleryForm').load(url);
+            $("#editForm").show();
+            $("#editBtn").hide();
+            $("#cancelEditBtn").show();
+            $("#galleryInfo").hide()
+
+            document.getElementById('editForm').scrollIntoView(true);
+        }
+
+    })
+
+</script>
+

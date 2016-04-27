@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script src="https://use.typekit.net/wrs6bwk.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - The Gallery Walk</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/GalleryWalkStyles.css">
+    
+  
+</head>
+<body class="WebsiteBody">
+    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center; border-width:10px;">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- This button is the hamburger icon -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h4>
+                    <a class="navbar-nav menuTitle navbar-left" style="text-align:left;" href="@Url.Action("Index","Home")" , new { area="" }>The <br /> Gallery Walk</a>
+                </h4>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav GalleryNavBar menuItem navbar-nav" style="padding-top:5px; text-align: center; float: none; display: inline-block;">
+                    <!--<li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Index","Home")">Home</a></li>
+                    <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("About","Home")">About</a></li>
+                    <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Contact","Home")">Contact</a></li>-->
+                    <li class="menuLi"><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Gallery Directory</a></li>
+                    <li class="menuLi"><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">ArtistUser Directory</a></li>
+               </ul>
+                <div class="nav navbar-nav menuItem navbar-right" style="padding-top:5px;">
+                    <div class="dropdown">
+                        <span class="glyphicon glyphicon-cog" style="height:50px; padding-top:11px;  font-size:23px; color:darkgrey;" data-toggle="dropdown"></span>
+                        <ul class="dropdown-menu menuGrade" role="menu" aria-labelledby="menu1">
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("OwnedArtists", "OwnedArtists", null, null, null)">My Artists</a></li>
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("OwnedGalleries", "OwnedGalleries", null, null,null)">My Galleries</a></li>
+
+
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("OwnedGalleries", "OwnedGalleries", null, null,null)">Account</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("SignOut" , "Async_SignOut")"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div>
+            @RenderBody()
+        </div>
+        <hr />
+
+    </div>
+    <div class="container body-content">
+
+    </div>
+    <style type="text/css">
+        #footer {
+            text-align: center;
+            bottom: 0;
+            height: 40px;
+            margin-top: 0;
+        }
+    </style>
+    <div id="footer">
+        <a class="menuItem menuTitle" href="@Url.Action("About","Home")">About us</a>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
+

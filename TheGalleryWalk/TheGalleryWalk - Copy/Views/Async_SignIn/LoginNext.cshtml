@@ -1,0 +1,88 @@
+﻿@model TheGalleryWalk.Models.LoginData
+
+@{
+    ViewBag.Title = "LoginNext";
+    string username = "";
+    if (IsPost)
+    {
+        username = Request["username"];
+    }
+    else {
+        Response.Redirect(Url.Action("Login"));
+    }
+}
+
+
+<div class="GalleryContent" style="padding-top:50px;">
+
+    @using (Html.BeginForm("LoginNext", "Async_SignIn", FormMethod.Post, new { id = "loginForm" }))
+    {
+        <fieldset class="RegisterForm">
+            <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
+                Login
+            </h3>
+
+            <ol class="formField">
+                @Html.LabelFor(model => model.EmailAddress, new { @class = "formFieldTitle" })
+                @Html.TextBoxFor(model => model.EmailAddress, String.Empty , new { @placeholder = ViewBag.Message, @readonly = true , @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.EmailAddress, String.Empty, new { @class = "errorMessage" })
+            </ol>
+            <ol class="formField">
+                @Html.LabelFor(model => model.Password, new { @class = "formFieldTitle" })
+                @Html.PasswordFor(model => model.Password, new { @class = "formFieldInput" })
+                @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "errorMessage" })
+            </ol>
+
+            <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
+                <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Login</button>
+            </div>
+
+        </fieldset>
+    }
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#submitButton').mouseenter(function(){
+                $(this).css({ "background-color": "white" });
+                $(this).find('#buttonText').css({ "color": "deepskyblue" });
+            }).mouseleave(function () {
+                $(this).css({ "background-color": "deepskyblue" });
+                $(this).find('#buttonText').css({ "color": "white" });
+
+            });
+        });
+
+    </script>
+</div>
+
+<!--
+<div class="GalleryContent">
+    <h1 style="margin:10px;padding:10px;">
+        Enter Password Page
+    </h1>
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    <text>Username: </text>
+                </td>
+                <td>
+                    <input type="text" value="@username" disabled />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <text>Password: </text>
+                </td>
+                <td>
+                    <input type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><input type="button" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+</div> -->

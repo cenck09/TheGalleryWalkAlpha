@@ -1,0 +1,23 @@
+﻿@using System.Diagnostics;
+@using TheGalleryWalk.Models;
+@using Parse;
+@model IEnumerable<ArtistUserEntity>
+@{
+    ViewBag.Title = "ArtistUserDirectory";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ArtistUserDirectory</h2>
+
+
+<div style="text-align:center;">
+    @try
+    {
+        Html.RenderPartial("~/Views/ArtistUserDirectory/ArtistUserPartialView.cshtml", Model);
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine("There was an error ::    " + ex);
+    }
+</div>
+

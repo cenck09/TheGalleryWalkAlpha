@@ -1,0 +1,89 @@
+﻿@using Parse;
+@using TheGalleryWalk.Models;
+
+@model TheGalleryWalk.Models.ArtistUserEntity
+@{
+    ViewBag.Title = "ArtistUserInfoView";
+}
+
+
+<div style="margin-top:50px; margin-left:50px; padding:10px;">
+
+    @if (ViewBag.AddedArtist == 1){ <div> You have added this artist </div>   }
+    @if (ViewBag.AddedArtist == 2){ <div> Failed to add artist </div>         }
+    @if (ViewBag.AddedArtist == 3){ <div> You have removed this artist </div> }
+    @if (ViewBag.AddedArtist == 4){ <div> Failed to remove the artist </div>  }
+
+</div>
+
+
+<div class="EntityInformationWindow" id="EntityInformationWindow">
+
+    <div class="EntityImage">
+        
+        <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width:auto; border-radius:4px; height:auto;" />
+    </div>
+
+
+
+         <div id="remove" style="margin:20px; padding: 5px; display:none; background-color: aqua; width:200px; float:right; border-radius:5px;">
+                <a href="@Url.Action("unfollowArtist", "ArtistUserInfo", Model)">
+                    - remove Artist -
+                </a>
+            </div>
+          <div id="add" style="margin:20px; padding: 5px; display:none; background-color: aqua; width:200px; float:right; border-radius:5px;">
+                <a href="@Url.Action("followArtist", "ArtistUserInfo", Model)">
+                    - add Artist -
+                </a>
+         </div>
+
+    <div id="galleryInfo">
+        <h3 class="EntityInfo">
+            @Model.Name
+        </h3>
+    </div>
+</div>
+
+
+
+<span class="Divider"></span>
+
+<div class="Info-header">
+    <h3>
+        Displayed Artwork
+    </h3>
+</div>
+
+<div style="text-align:center;">
+    @using System.Diagnostics;
+    @try
+    {
+        foreach (ArtworkEntity item in Model.ArtworkEntities)
+        {
+         @Html.Partial("~/Views/ArtistUserInfo/ArtistUserArtworkView.cshtml", item);
+        }
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine("There was an error ::    " + ex);
+    }
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      
+        var showFormValue = @(ViewBag.IsFollowing);
+
+        if(showFormValue == 1){
+            $("#remove").show();
+        }
+        if(showFormValue == 2){
+            $("#add").show();
+        }
+    })
+
+</script>
+
+
