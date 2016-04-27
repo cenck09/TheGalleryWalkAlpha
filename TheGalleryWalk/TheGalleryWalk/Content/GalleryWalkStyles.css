@@ -258,3 +258,8 @@
 .navbar-header .navbar-toggle:hover .icon-bar {
     background-color: grey;
 }
+
+.dropdown .glyphicon .glyphicon-cog {
+    color: darkgrey;
+    margin-right: 2px;
+}
