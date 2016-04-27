@@ -273,6 +273,7 @@
     <Folder Include="Content\demoImages\" />
     <Folder Include="obj\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\ArtistUserInfo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
