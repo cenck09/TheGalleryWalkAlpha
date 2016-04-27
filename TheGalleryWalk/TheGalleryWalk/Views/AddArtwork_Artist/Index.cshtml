@@ -14,7 +14,7 @@
 
 
 
-    @using (Html.BeginForm("AddArtwork", "Artist_OwnedArtwork", FormMethod.Post, new { id = "AddArtworkForm" }))
+    @using (Html.BeginForm("AddArtwork", "Artist_OwnedArtwork", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddArtworkForm" }))
     {
         <fieldset class="RegisterForm">
             <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
@@ -34,6 +34,10 @@
                 @Html.LabelFor(model => model.Description, new { @class = "formFieldTitle" })
                 @Html.TextBoxFor(model => model.Description, String.Empty, new { @class = "formFieldInput" })
                 @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @class = "errorMessage" })
+            </ol>
+
+            <ol>
+               <input type="file" name="file" id="file" style="text-align:center"/>
             </ol>
 
             <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
@@ -58,6 +62,27 @@
 
         });
 
+
+        $(function () {
+            var file;
+
+            // Set an event listener on the Choose File field.
+            $('#fileselect').bind("change", function (e) {
+                var files = e.target.files || e.dataTransfer.files;
+                // Our file var now holds the selected file
+                file = files[0];
+            });
+
+            // This function is called when the user clicks on Upload to Parse. It will create the REST API request to upload this image to Parse.
+            $('#submitButton').click(function () {
+
+            });
+
+        });
+
     </script>
+
+
+
 
 </div>

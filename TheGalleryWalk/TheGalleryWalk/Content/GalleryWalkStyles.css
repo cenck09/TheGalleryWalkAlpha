@@ -42,6 +42,15 @@
     box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
 }
 
+.EntityInformationWindow {
+  width: 100%;
+  margin: 0 auto;
+}
+.EntityImage, .editButtonandForm, .galleryInfo {
+  width: 100px;
+  float: left;
+}
+
 #artistAddError{
     color:white;
     text-align:center;
@@ -200,7 +209,7 @@
 .menuGrade {
     background-color: white;
     color: black;
-    box-shadow: rgba(0,0,0,0.4) 0px 0px 8px;
+    box-shadow: rgba(0,0,0,0.1) 0px 0px 8px;
 
  /*   background: #07BCF8;  For browsers that do not support gradients */
 /*    background: -webkit-linear-gradient(#07BCF8, #047296);  For Safari 5.1 to 6.0 */
@@ -216,9 +225,16 @@
 }
 
 .menuTitle{
+    white-space: nowrap;
     color:darkgray;
     font-family: "fertigo-pro",sans-serif;
     max-width:150px;
+}
+
+.menuLi {
+    color: #B9D3EE; 
+    float: none; 
+    display: inline-block;
 }
 
 .portalTitle{
@@ -235,4 +251,15 @@
     min-width:300px;
 }
 
+.navbar-header .navbar-toggle .icon-bar {
+    background-color: darkgrey;
+}
 
+.navbar-header .navbar-toggle:hover .icon-bar {
+    background-color: grey;
+}
+
+.dropdown .glyphicon .glyphicon-cog {
+    color: darkgrey;
+    margin-right: 2px;
+}

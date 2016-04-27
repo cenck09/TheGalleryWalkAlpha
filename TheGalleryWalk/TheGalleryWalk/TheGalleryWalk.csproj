@@ -159,6 +159,7 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\BaseValidatorController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
+    <Compile Include="Controllers\ArtistUserInformationController.cs" />
     <Compile Include="Controllers\GalleryInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnedArtistsController.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Models\ArtworkParseClass.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BaseParseObject.cs" />
+    <Compile Include="Models\ArtistUserDirectoryManager.cs" />
     <Compile Include="Models\GalleryDirectoryManager.cs" />
     <Compile Include="Models\GalleryEntity.cs" />
     <Compile Include="Models\GalleryParseClass.cs" />
@@ -254,22 +256,24 @@
     <Content Include="Views\Artist\ArtworkPartialView.cshtml" />
     <Content Include="Views\ArtistUserDirectory\ArtistUserDirectory.cshtml" />
     <Content Include="Views\ArtistUserDirectory\ArtistUserPartialView.cshtml" />
-    <Content Include="Views\ArtistUserInfo\ArtistUserInfoView.cshtml" />
+    <Content Include="Views\ArtsyPortal\ArtistUserInfo\ArtistUserInfoView.cshtml" />
     <Content Include="Views\EditGallery\EditGalleryPartialView.cshtml" />
     <Content Include="Views\EditArtist\EditArtistPartialView.cshtml" />
     <Content Include="Views\EditArtwork\EditArtworkPartialView.cshtml" />
     <Content Include="Views\Artist_Account\ArtistAccountView.cshtml" />
-    <Content Include="Views\ArtistUserInfo\ArtistUserArtworkView.cshtml" />
+    <Content Include="Views\ArtsyPortal\ArtistUserInfo\ArtistUserArtworkView.cshtml" />
     <Content Include="Views\GalleryDirectory\GalleryDirectory.cshtml" />
     <Content Include="Views\GalleryDirectory\GalleryPartialView.cshtml" />
     <Content Include="Views\PageManagerView\PageManagerNumberView.cshtml" />
     <Content Include="Views\GalleryInformation\GalleryInformationView.cshtml" />
+    <Content Include="Views\ArtistUserInformation\ArtistUserInformationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\demoImages\" />
     <Folder Include="obj\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\ArtistUserInfo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

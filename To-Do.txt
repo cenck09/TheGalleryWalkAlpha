@@ -1,0 +1,64 @@
+TO-DO List
+
+_________________________________________________________________________________________
+
+Navigation Bar:
+
+- Correct button alignment : "our galleries" & "our artists" should be centered and lower
+
+- Enlarge Bar height : Make the bar larger to fit "The Gallery Walk" logo better
+
+- Update navigation bar for gallery and artist login: They should look like _Layout by having only a gallery and artist directory
+
+- Text color : The menu buttons change to white when hovered over, 
+	they should get a blue highlight with an underline like "The Gallery Walk" button 
+
+- Nav Bar border : Remove the black line at the bottom of the bar in the live website
+
+- Fix the mobile dropdown menu alignment : The Artsy portal menu option is laying out 
+	to the left, it should be centered
+		
+- Update the hamburger icon colors : the hamburger icon should be borderless with 3 
+	dark grey bars that highlight to grey when hovered over
+		
+- Fix the right gear cog icon to a dark grey color
+
+- Move the "About us" link to the bottom of the page below the footer so it's out of the 
+	way
+
+
+*** These changes should be applied to all 3 layouts ***
+
+_________________________________________________________________________________________
+
+Entity Collections:
+
+- Update the other controllers collections to use the new PageManager, the entity already has a PageManager in it's base
+	class, so you should have to configure it in the controller and create the page view in the cshmtl file.
+	check out the gallery directory and gallery information view to see how it's configured
+
+- Fix layout issues by enforcing an image size and cropping to maintain aspect ratio.
+	you can see the problem by changing the PageManager default page item size by
+	assigning pageItemCount in setDefaultValues of the PageManager Entity. This 
+	updates the number of entities displayed for all Collections using it
+	
+_________________________________________________________________________________________
+
+ Views:
+
+ - go through the artist and artwork information view and create one version that enables the logged in user 
+ 	to edit the artist or artwork, the logged in user should be the file owner, other users should be directed
+ 	to another information view that does not have the ability to edit.
+ 	* we need to figure out a nice way to present the editing options, they should be hidden until needed and appealing
+ 		when it is visible, the current way is just a place holder.
+	* Make sure there is a check for file owner before allowing updating.
+	
+ - Update the information views to place a larger focus on the images, the information for the entity should be below it.
+ 
+ - A Home view, maybe a nice collection of images cropped to form a clickable wall of random galleries, artist users
+ 	and artworks 
+ 	
+ - A new artist portal, the current one doesn't look nice.
+ 
+ - About us/contact view
+ 

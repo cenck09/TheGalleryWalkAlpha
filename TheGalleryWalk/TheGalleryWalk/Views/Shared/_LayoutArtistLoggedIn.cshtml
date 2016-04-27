@@ -18,34 +18,36 @@
 
 </head>
 <body class="WebsiteBody">
-    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center">
+    <div class="navbar navbar-fixed-top navBar-FlatNav navbar-inverse menuGrade" style="text-align:center; border-width:10px;">
         <div class="container">
             <div class="navbar-header">
                 <!-- This button is the hamburger icon -->
-                <button type="button" class="navbar-toggle menuItem" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar" style="background-color:white"></span>
-                    <span class="icon-bar" style="background-color:white"></span>
-                    <span class="icon-bar" style="background-color:white"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("The Gallery Walk", "Index", "Home", new { area = "" }, new { @class = "navbar-brand  menuTitle" })
+                <h4>
+                    <a class="navbar-nav menuTitle navbar-left" style="text-align:left;" href="@Url.Action("Index","Home")" , new { area="" }>The <br /> Gallery Walk</a>
+                </h4>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav GalleryNavBar menuItem navbar-nav">
-                    <li><a class="menuItem" href="@Url.Action("Index","Home")">Home</a></li>
-                    <li><a class="menuItem" href="@Url.Action("About","Home")">About</a></li>
-                    <li><a class="menuItem" href="@Url.Action("Contact","Home")">Contact</a></li>
-                    <li><a class="menuItem" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Gallery Directory</a></li>
-                    <li><a class="menuItem" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">ArtistUser Directory</a></li>
+                <ul class="nav GalleryNavBar menuItem navbar-nav" style="padding-top:5px; text-align: center; float: none; display: inline-block;">
+                  <!--<li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Index","Home")">Home</a></li>
+                    <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("About","Home")">About</a></li>
+                    <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Contact","Home")">Contact</a></li>-->  
+                    <li><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("GalleryDirectory", "GalleryDirectory")">Gallery Directory</a></li>
+                    <li><a class="nav navbar-nav menuItem menuTitle" href="@Url.Action("ArtistUserDirectory", "ArtistUserDirectory")">ArtistUser Directory</a></li>
                 </ul>
-                <div class="nav navbar-nav menuItem navbar-right">
+                <div class="nav navbar-nav menuItem navbar-right" style="padding-top:5px;">
                     <div class="dropdown">
-                        <span class="glyphicon glyphicon-cog" style="height:50px; padding-top:11px;  font-size:23px;" data-toggle="dropdown"></span>
+                        <span class="glyphicon glyphicon-cog" style="height:50px; padding-top:11px;  font-size:23px; color:darkgrey;" data-toggle="dropdown"></span>
                         <ul class="dropdown-menu menuGrade" role="menu" aria-labelledby="menu1">
-                            <li><a class="menuItem" href="@Url.Action("Artist_OwnedArtwork", "Artist_OwnedArtwork", null, null, null)">My Artwork</a></li>
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Artist_OwnedArtwork", "Artist_OwnedArtwork", null, null, null)">My Artwork</a></li>
 
-                            <li><a class="menuItem" href="@Url.Action("artistAccountView", "Artist_Account", null, null,null)">Account</a></li> 
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("artistAccountView", "Artist_Account", null, null,null)">Account</a></li> 
                             <li role="presentation" class="divider"></li>
-                            <li><a class="menuItem" href="@Url.Action("SignOut" , "Async_SignOut")"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
+                            <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("SignOut" , "Async_SignOut")"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
 
                         </ul>
                     </div>
@@ -54,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="margin-top:20px;">
         <div>
             @RenderBody()
         </div>
@@ -62,7 +64,17 @@
 
     </div>
     <div class="container body-content">
-
+    </div>
+    <style type="text/css">
+        #footer {
+            text-align: center;
+            bottom: 0;
+            height: 40px;
+            margin-top: 0;
+        }
+    </style>
+    <div id="footer">
+        <a class="menuItem menuTitle" href="@Url.Action("About","Home")">About us</a>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

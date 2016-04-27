@@ -31,6 +31,11 @@ namespace TheGalleryWalk.Controllers
             manager.totalItemCount = await query.CountAsync();
             return setPageManager(manager);
         }
+        public async Task<PageManager> setPageManagerForQuery(PageManager manager, ParseQuery<GeneralParseUserData> query)
+        {
+            manager.totalItemCount = await query.CountAsync();
+            return setPageManager(manager);
+        }
         private PageManager setPageManager(PageManager manager)
         {
             manager.totalPageCount = manager.totalItemCount / manager.pageItemCount;

@@ -15,18 +15,20 @@
 
 <body>
 
+
+
+
+
     <div class="EntityInformationWindow" id="EntityInformationWindow">
+
 
         <div class="EntityImage">
 
-            <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width: 250px; border-radius: 4px; height: 250px;" />
-           
-           
-
-
+            <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width: auto; border-radius: 4px; height: 250px;" />
+       
         </div>
 
-        <div>
+        <div class ="editButtonandForm">
             <div class="edit-btn" id="editBtn">
                 <h4>- Edit Artist - </h4>
             </div>
@@ -38,7 +40,7 @@
             </div>
         </div>
 
-        <div id="galleryInfo">
+        <div id="galleryInfo" class ="galleryInfo">
             <h3 class="EntityInfo">@Model.Name
             </h3>
             <h6 class="EntityInfo">@Model.Style
@@ -71,12 +73,15 @@
     </div>
 
 
-
-
+ 
 
 </body>
 
 </html>
+
+
+
+
 
 
 <script type="text/javascript">
