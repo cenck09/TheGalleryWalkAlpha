@@ -41,7 +41,7 @@
                 </ul>
                 <div class="nav navbar-nav menuItem navbar-right" style="padding-top:5px;">
                     <div class="dropdown">
-                        <span class="glyphicon glyphicon-cog" style="height:50px; padding-top:11px;  font-size:23px;" data-toggle="dropdown"></span>
+                        <span class="glyphicon glyphicon-cog" style="height:50px; padding-top:11px;  font-size:23px; color:darkgrey;" data-toggle="dropdown"></span>
                         <ul class="dropdown-menu menuGrade" role="menu" aria-labelledby="menu1">
                             <li><a class="menuItem" style="color: rgb(85,85,85)" href="@Url.Action("Artist_OwnedArtwork", "Artist_OwnedArtwork", null, null, null)">My Artwork</a></li>
 
@@ -64,7 +64,17 @@
 
     </div>
     <div class="container body-content">
-
+    </div>
+    <style type="text/css">
+        #footer {
+            text-align: center;
+            bottom: 0;
+            height: 40px;
+            margin-top: 0;
+        }
+    </style>
+    <div id="footer">
+        <a class="menuItem menuTitle" href="@Url.Action("About","Home")">About us</a>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
