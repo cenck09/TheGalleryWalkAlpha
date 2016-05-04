@@ -280,6 +280,13 @@
     min-width:300px;
 }
 
+.GalleryContent2 {
+
+    min-height:150px;
+    max-width:300px;
+    min-width:100px;
+}
+
 .navbar-header .navbar-toggle .icon-bar {
     background-color: darkgrey;
 }
