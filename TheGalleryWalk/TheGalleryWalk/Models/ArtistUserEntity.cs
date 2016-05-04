@@ -37,6 +37,9 @@ namespace TheGalleryWalk.Models
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
 
+        [DisplayName("ImageFile")]
+        public string Image { get; set; }
+
         public int Enabled { get; set; }
         public ArtworkEntity ArtworkAdd { get; set; }
         public IList<ArtworkEntity> ArtworkEntities { get; set; }
