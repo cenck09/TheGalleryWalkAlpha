@@ -83,6 +83,8 @@ namespace TheGalleryWalk.Models
             set { SetProperty(value); }
         }
 
+      
+
 
     }
 }

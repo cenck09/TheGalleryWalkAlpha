@@ -37,7 +37,7 @@ namespace TheGalleryWalk.Models
         [DisplayName("Email")]
         public string EmailAddress { get; set; }
 
-        [DisplayName("ImageFile")]
+        [DisplayName("ImageURL")]
         public string Image { get; set; }
 
         public int Enabled { get; set; }

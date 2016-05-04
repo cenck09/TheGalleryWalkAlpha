@@ -79,6 +79,7 @@ namespace TheGalleryWalk.Controllers
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
                     Email = registerData.EmailAddress,
+                    ImageURL = fileUrl,
                     UserType = "ArtistUser"
                 };
 
