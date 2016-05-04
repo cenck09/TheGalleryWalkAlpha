@@ -206,6 +206,17 @@
     margin:auto;
     border-radius:5px;
 }
+
+.RegisterButtons{
+    box-shadow: rgba(0,0,0,0.2) 0px 0px 5px;
+    width:250px;
+    height:60px;
+    background-color:deepskyblue;
+    margin:auto;
+    border-radius:5px;
+}
+
+
 .formFieldTitle {
     color:ghostwhite;
     text-align:left;
