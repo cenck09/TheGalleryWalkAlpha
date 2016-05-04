@@ -12,9 +12,13 @@
 {
     if (Model.OwnershipState == "Owned")
     {
-        <a href="@Url.Action("removeArtworkFromGallery","ArtistUserInfo", Model)">
+
+
+        <div class="HostedArtWindow" id="HostedArtWindow">
+        <a href="@Url.Action("removeArtworkFromGallery","ArtistUserInfo", Model)" style="color:white; font-size:large; text-align:center;">
              Remove
         </a>
+        </div>
     }
     else if (Model.OwnershipState == "Unowned")
     {
@@ -22,10 +26,15 @@
         {
             if (Model.GalleryListForArtworkSharing.Count > 0)
             {
+
+
                 using (Html.BeginForm("addArtworkToGallery", "ArtistUserInfo", FormMethod.Post, new { id = "AddArtworkForm" }))
                 {
+
+
+                    <div class="ArtInformationWindow" id="ArtInformationWindow">
                     <fieldset>
-                        <h6 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
+                        <h6 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white; font-size:large;">
                             Add To Gallery
                         </h6>
                         <ol class="formField" style="display:none">
@@ -36,17 +45,22 @@
                         </ol>
 
                         <div class="formField">
-                            <p>Add to gallery</p>
-                            @Html.DropDownListFor(model => model.ParentGalleryParseID, Model.GalleryListForArtworkSharing, "-- Select Gallery --", new { @class = "formFieldInput" });
+                           
+                            @Html.DropDownListFor(model => model.ParentGalleryParseID, Model.GalleryListForArtworkSharing, "-- Select Gallery --", new { @class = "formFieldInput" })
                         </div>
 
                         <div id="submitButton" style="margin:auto; width:67px; margin-top:20px; color:white; margin-bottom:20px; text-align:center; border: 2px solid white; border-radius:5px;">
-                            <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white;">Submit</button> <!---->
+                            <!----> <button id="buttonText" name="submitForm" style="background-color:transparent; border:none; border-radius:5px; color:white; background-color:deepskyblue;">Submit</button> <!---->
                         </div>
 
                     </fieldset>
+                    </div>
 
                 }
+
+
+
+
             }
         }
         catch (Exception ex)
@@ -58,9 +72,11 @@
 }
 
 
+
+
     <a href="@Url.Action("ArtworkView","Artwork", Model)">
         <div class="GalleryInfoWindow ImageContainer" style="margin:10px">
-               <img src=@Url.Content(Model.ImageURL) class="resize_fit_center" id="EntityImage" alt="demo Gallery" style="width:auto; border-radius:4px; height:250px;" />
+               <img src=@Url.Content(Model.ImageURL) class="resize_fit_center" id="EntityImage" alt="demo Gallery" style="width:auto; border-radius:4px; height:80vh;" />
             <p style="margin-top:8px; color:white; text-shadow: 0px 0px 4px rgba(0,0,0,0.4)">@Html.Raw(Model.Name)</p>
         </div>
     </a>
@@ -70,10 +86,10 @@
         $(document).ready(function () {
 
             $('#submitButton').mouseenter(function(){
-                $(this).css({ "background-color": "white" });
-                $(this).find('#buttonText').css({ "color": "deepskyblue" });
+                $(this).css({ "background-color": "transparent" });
+                $(this).find('#buttonText').css({ "color": "black" });
             }).mouseleave(function () {
-                $(this).css({ "background-color": "deepskyblue" });
+                $(this).css({ "background-color": "transparent" });
                 $(this).find('#buttonText').css({ "color": "white" });
 
             });
