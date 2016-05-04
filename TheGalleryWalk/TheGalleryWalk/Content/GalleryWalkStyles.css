@@ -247,12 +247,14 @@
 
 .menuItem{
     cursor:pointer;
-    color:black;
+    color:darkgrey;
+    font-size:medium;
 }
 
 .menuTitle{
     white-space: nowrap;
-    color:darkgray;
+
+    font-size: large;
     font-family: "fertigo-pro",sans-serif;
     max-width:150px;
 }
@@ -261,11 +263,12 @@
     color: #B9D3EE; 
     float: none; 
     display: inline-block;
+    font-size: large;
 }
 
 .portalTitle{
-    color:darkgray;
-    font-size:small;
+    color:black;
+    font-size:large;
     font-family: "fertigo-pro",sans-serif;
 }
 
@@ -282,7 +285,7 @@
 }
 
 .navbar-header .navbar-toggle:hover .icon-bar {
-    background-color: grey;
+    background-color: black;
 }
 
 .dropdown .glyphicon .glyphicon-cog {
