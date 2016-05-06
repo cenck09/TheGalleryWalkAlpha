@@ -69,17 +69,11 @@ namespace TheGalleryWalk.Controllers
                 var fileUrl = parseFile.Url.ToString();
 
 
-
-
-
-
-
                 var user = new GeneralParseUser()
                 {
                     Username = registerData.EmailAddress,
                     Password = registerData.Password,
                     Email = registerData.EmailAddress,
-                    ImageURL = fileUrl,
                     UserType = "ArtistUser"
                 };
 
@@ -102,6 +96,7 @@ namespace TheGalleryWalk.Controllers
                     MyFavoriteArtists = new List<string>(),
                     HasArtwork = 0,
                     IsBanned = 0,
+                    ImageURL = fileUrl,
                     Email = user.Email,
                     AcceptedGalleryFollowers = new List<string>(),
                 };
