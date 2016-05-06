@@ -95,7 +95,7 @@ namespace TheGalleryWalk.Controllers
                     MyFavoriteGalleries = new List<string>(),
                     MyFavoriteArtists = new List<string>(),
                     HasArtwork = 0,
-                    IsBanned = 0,
+                    IsBanned = 1,
                     ImageURL = fileUrl,
                     Email = user.Email,
                     AcceptedGalleryFollowers = new List<string>(),

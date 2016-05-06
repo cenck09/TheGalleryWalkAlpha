@@ -15,7 +15,7 @@ namespace TheGalleryWalk.Controllers
         private ParseQuery<GalleryParseClass> getQuery()
         {
             return from item in new ParseQuery<GalleryParseClass>()
-                       //where item.HasArtwork == 1
+                   where item.IsBanned == 0
                    orderby item.Name ascending
                    select item;
         }
