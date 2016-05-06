@@ -8,7 +8,7 @@ using Parse;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Collections;
-
+using System.IO;
 
 namespace TheGalleryWalk.Controllers
 {
@@ -20,10 +20,54 @@ namespace TheGalleryWalk.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Signup(ArtistUserEntity registerData)
+        public async Task<ActionResult> Signup(ArtistUserEntity registerData, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+
+
+                byte[] data;
+
+                using (Stream inputStream = file.InputStream)
+                {
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
+                    {
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                    }
+                    data = memoryStream.ToArray();
+                }
+
+                var name = "photo.jpg";
+                var parseFile = new Parse.ParseFile(name, data);
+
+                try
+                {
+
+                    if (parseFile.IsDirty)
+                    {
+                        await parseFile.SaveAsync();
+                        Debug.WriteLine("Data to save");
+
+                    }
+                    else
+                    {
+                        Debug.WriteLine("No data to save");
+                    }
+
+                    Debug.WriteLine(parseFile.Url.ToString());
+
+
+                    Debug.WriteLine("IMAGE SAVED SUCCESSFULLY");
+                }
+                catch
+                {
+                    Debug.WriteLine("IMAGE COULD NOT BE SAVED");
+                }
+
+                var fileUrl = parseFile.Url.ToString();
+
 
                 var user = new GeneralParseUser()
                 {
@@ -51,7 +95,8 @@ namespace TheGalleryWalk.Controllers
                     MyFavoriteGalleries = new List<string>(),
                     MyFavoriteArtists = new List<string>(),
                     HasArtwork = 0,
-                    IsBanned = 0,
+                    IsBanned = 1,
+                    ImageURL = fileUrl,
                     Email = user.Email,
                     AcceptedGalleryFollowers = new List<string>(),
                 };

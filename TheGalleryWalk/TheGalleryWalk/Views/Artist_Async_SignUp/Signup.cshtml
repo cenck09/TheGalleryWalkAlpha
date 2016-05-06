@@ -9,7 +9,7 @@
 
 <div class="GalleryContent" style="padding-top:50px;">
    
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id ="SignUpForm" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data", id ="SignUpForm" }))
 {
     <fieldset class="RegisterForm">
         <h3 style="margin:auto;padding:15px; padding-top:15px; padding-left:15px; color:white;">
@@ -54,7 +54,7 @@
 
 }
 
-    <script type="text/javascript">
+  <script type="text/javascript">
 
         $(document).ready(function () {
 
@@ -66,27 +66,26 @@
                 $(this).find('#buttonText').css({ "color": "white" });
 
             });
-            
-        });
-
-
-        $(function () {
-            var file;
-
-            // Set an event listener on the Choose File field.
-            $('#fileselect').bind("change", function (e) {
-                var files = e.target.files || e.dataTransfer.files;
-                // Our file var now holds the selected file
-                file = files[0];
-            });
-
-            // This function is called when the user clicks on Upload to Parse. It will create the REST API request to upload this image to Parse.
-            $('#submitButton').click(function () {
-
-            });
 
         });
 
-    </script>
+  
+  $(function() {
+    var file;
+
+    // Set an event listener on the Choose File field.
+    $('#fileselect').bind("change", function(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      // Our file var now holds the selected file
+      file = files[0];
+    });
+
+    // This function is called when the user clicks on Upload to Parse. It will create the REST API request to upload this image to Parse.
+    $('#submitButton').click(function() {
+        
+    });
+
+  });
+</script>
 
 </div>

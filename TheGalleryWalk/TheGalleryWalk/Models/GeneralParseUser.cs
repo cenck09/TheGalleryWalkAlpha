@@ -15,5 +15,16 @@ namespace TheGalleryWalk.Models
                 get { return GetProperty<string>(); }
                 set { SetProperty(value); }
             }
+
+
+        [ParseFieldName("ImageURL")]
+        public string ImageURL
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
         }
+
+
+    }
+    
 }

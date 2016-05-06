@@ -23,22 +23,24 @@
         <img id="EntityImage" src=@Url.Content(Model.ImageURL) alt="demo Artist" style="width:auto; border-radius:4px; height:auto;" />
     </div>
 
-         <div id="remove" style="margin:20px; padding: 5px; display:none; background-color: aqua; width:200px; float:right; border-radius:5px;">
-                <a href="@Url.Action("unfollowArtist", "ArtistUserInfo", Model)">
-                    - remove Artist -
-                </a>
-            </div>
-          <div id="add" style="margin:20px; padding: 5px; display:none; background-color: aqua; width:200px; float:right; border-radius:5px;">
-                <a href="@Url.Action("followArtist", "ArtistUserInfo", Model)">
-                    - add Artist -
-                </a>
-         </div>
-
     <div id="galleryInfo">
         <h3 class="EntityInfo">
             @Model.Name
         </h3>
     </div>
+
+         <div id="remove" style="margin:20px; padding: 5px; display:none; background-color: lightblue; width:200px; float:right; border-radius:5px; text-align:center;">
+                <a href="@Url.Action("unfollowArtist", "ArtistUserInfo", Model)" style="color:aqua; font-size:large; text-align:center;">
+                    Remove Artist
+                </a>
+            </div>
+          <div id="add" style="margin:20px; padding: 5px; display:none; background-color: lightblue; width:200px; float:right; border-radius:5px; text-align:center;">
+                <a href="@Url.Action("followArtist", "ArtistUserInfo", Model)" style="color:aqua; font-size:large; text-align:center;">
+                    Add Artist
+                </a>
+         </div>
+
+    
 </div>
 
 
